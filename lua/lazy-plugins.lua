@@ -84,14 +84,24 @@ require("lazy").setup({
 			vim.keymap.set('n', '<leader>fs', builtin.grep_string)
 		end
     },
-	-- Git Blame
+	-- Git
+	{
+		'lewis6991/gitsigns.nvim',
+		config = function ()
+			require('gitsigns').setup({
+			})
+		end
+	},
+	{
+		'tpope/vim-fugitive'
+	},
 	{
 		"f-person/git-blame.nvim",
 		event = "VeryLazy",
 		opts = {
 			enabled = true,
 			message_template = "<author> - <summary> - <date>",
-			date_format = "%d-%m-%Y",
+			date_format = "%d/%m/%Y",
 		},
 
 	},
