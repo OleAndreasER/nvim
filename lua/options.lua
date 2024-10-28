@@ -31,3 +31,10 @@ vim.opt.termguicolors = true
 vim.g.mapleader = " "
 vim.keymap.set("n", "-", "<CMD>Oil<CR>")
 
+-- Autocmd
+--vim.api.nvim_create_autocmd("BufWritePost", {
+--	callback = function ()
+--		vim.lsp.buf.format()
+--	end
+--})
+
