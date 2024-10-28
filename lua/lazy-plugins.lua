@@ -30,9 +30,34 @@ require("lazy").setup({
 	{
 		'stevearc/oil.nvim',
 		opts = {},
-		dependencies = { { "echasnovski/mini.icons", opts = {} } },
 		config = function()
-			require("oil").setup()
+			require("oil").setup({
+				columns = {},
+				watch_for_changes = true,
+				keymaps = {
+					["<C-s>"] = { "actions.select", opts = { vertical = true } },
+					["<C-p>"] = "actions.preview",
+					["<C-l>"] = "actions.refresh",
+					["-"] = "actions.parent",
+					["g."] = "actions.toggle_hidden",
+				},
+				view_options = {
+					show_hidden = false,
+					-- This function defines what is considered a "hidden" file
+					is_hidden_file = function(name, bufnr)
+						return vim.startswith(name, ".")
+					end,
+					-- This function defines what will never be shown, even when `show_hidden` is set
+					is_always_hidden = function(name, bufnr)
+						return name == '.git'
+					end,
+					sort = {
+						{ "type", "asc" },
+						{ "name", "asc" },
+					},
+				},
+			})
+			vim.keymap.set("n", "-", "<CMD>Oil<CR>")
 		end,
 	},
 	-- Searching 
@@ -47,6 +72,17 @@ require("lazy").setup({
 			vim.keymap.set('n', '<leader>fs', builtin.grep_string)
 		end
     },
+	-- Git Blame
+	{
+		"f-person/git-blame.nvim",
+		event = "VeryLazy",
+		opts = {
+			enabled = true,
+			message_template = "<author> - <summary> - <date>",
+			date_format = "%d-%m-%Y",
+		},
+
+	},
 	-- Lua line
 	{
 		'nvim-lualine/lualine.nvim',
@@ -54,7 +90,7 @@ require("lazy").setup({
 		config = function()
 			require('lualine').setup({
 				options = {
-					icons_enabled = true,
+					icons_enabled = false,
 					theme = 'auto',
 					component_separators = { left = '', right = ''},
 					section_separators = { left = '', right = ''},
@@ -73,11 +109,11 @@ require("lazy").setup({
 				},
 				sections = {
 					lualine_a = {'mode'},
-					lualine_b = {'branch', 'diff', 'diagnostics'},
-					lualine_c = {'filename'},
-					lualine_x = {'encoding', 'fileformat', 'filetype'},
-					lualine_y = {'progress'},
-					lualine_z = {'location'}
+					lualine_b = {'branch', 'filename' },
+					lualine_c = {},
+					lualine_x = {'diff', 'diagnostics'},
+					lualine_y = {},
+					lualine_z = {}
 				},
 				inactive_sections = {
 					lualine_a = {},
@@ -93,6 +129,13 @@ require("lazy").setup({
 				extensions = {}
 			})
 		end,
+	},
+	-- Comment lines
+	{
+		'numToStr/Comment.nvim',
+		config = function ()
+			require('Comment')
+		end
 	},
 	-- Autocompletion
 	{
