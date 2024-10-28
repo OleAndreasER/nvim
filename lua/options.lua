@@ -29,8 +29,10 @@ vim.opt.termguicolors = true
 
 -- Keybinds
 vim.g.mapleader = " "
+ -- Close all windows except the top left window
+vim.keymap.set("n", "<leader>e", "<c-w><c-t><cmd>:only<cr>")
 
--- Autocmd
+-- -- Autocmd
 --vim.api.nvim_create_autocmd("BufWritePost", {
 --	callback = function ()
 --		vim.lsp.buf.format()
