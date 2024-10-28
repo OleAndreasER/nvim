@@ -173,9 +173,8 @@ require("lazy").setup({
 				window = {
 				},
 				mapping = cmp.mapping.preset.insert({
-					['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-					['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-					['<Tab>'] = cmp.mapping.confirm({
+					['<Tab>'] = cmp.mapping.select_next_item(cmp_select),
+					['<Enter>'] = cmp.mapping.confirm({
 						behavior = cmp.ConfirmBehavior.Insert,
 						select = true
 					}),
