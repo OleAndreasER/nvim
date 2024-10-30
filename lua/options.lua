@@ -33,7 +33,7 @@ vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>e", "<c-w><c-t><cmd>:only<cr>")
 
  -- Don't use scrolloff on mouse clicks
-vim.keymap.set("n", "<LeftMouse>", ":let temp=&so<cr>:let &so=0<cr><LeftMouse>:let &so=temp<cr>")
+vim.keymap.set("n", "<LeftMouse>", ":let temp=&so<cr>:let &so=0<cr><LeftMouse>:let &so=temp<cr>", {silent = true})
 
 -- -- Autocmd
 --vim.api.nvim_create_autocmd("BufWritePost", {

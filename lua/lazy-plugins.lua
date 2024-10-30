@@ -240,6 +240,17 @@ require("lazy").setup({
 						capabilities = capabilities
 					})
 				end,
+
+				['eslint'] = function()
+					local capabilities = require('cmp_nvim_lsp').default_capabilities()
+					require("lspconfig").eslint.setup({
+						capabilities = capabilities
+					})
+					vim.api.nvim_create_autocmd("BufWritePre", {
+						buffer = bufnr,
+						command = "EslintFixAll",
+					})
+				end
 			})
 		end,
 	},
