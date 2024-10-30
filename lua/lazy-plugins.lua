@@ -78,6 +78,11 @@ require("lazy").setup({
 		tag = '0.1.8',
 		dependencies = { 'nvim-lua/plenary.nvim', 'm-demare/attempt.nvim' },
 		config = function()
+			local actions = require('telescope.actions')
+			require('telescope').setup({
+				defaults = { color_devicons = false },
+			})
+			
 			local builtin = require('telescope.builtin')
 			vim.keymap.set('n', '<leader>tf', builtin.git_files)
 			vim.keymap.set('n', '<leader>tb', builtin.git_branches)
@@ -125,7 +130,6 @@ require("lazy").setup({
 	-- Lua line
 	{
 		'nvim-lualine/lualine.nvim',
-		dependencies = { 'nvim-tree/nvim-web-devicons' },
 		config = function()
 			require('lualine').setup({
 				options = {
