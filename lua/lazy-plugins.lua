@@ -140,7 +140,11 @@ require("lazy").setup({
 						'%=',
 						{
 							'filename',
-							symbols = { unnamed = '' }
+							symbols = {
+								unnamed = '',
+								modified = '●',
+								readonly = '',
+							},
 						},
 						'%='
 					},
@@ -150,7 +154,11 @@ require("lazy").setup({
 						'%=',
 						{
 							'filename',
-							symbols = { unnamed = '' }
+							symbols = {
+								unnamed = '',
+								modified = '●',
+								readonly = '',
+							},
 						},
 						'%='
 					},
