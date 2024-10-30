@@ -79,10 +79,16 @@ require("lazy").setup({
 		dependencies = { 'nvim-lua/plenary.nvim' },
 		config = function()
 			local builtin = require('telescope.builtin')
-			vim.keymap.set('n', '<leader>ff', builtin.git_files)
-			vim.keymap.set('n', '<leader>fc', builtin.git_branches)
-			vim.keymap.set('n', '<leader>fg', builtin.live_grep)
-			vim.keymap.set('n', '<leader>fs', builtin.grep_string)
+			vim.keymap.set('n', '<leader>tf', builtin.git_files)
+			vim.keymap.set('n', '<leader>tb', builtin.git_branches)
+			vim.keymap.set('n', '<leader>tg', builtin.live_grep)
+			vim.keymap.set('n', '<leader>tc', builtin.grep_string)
+			vim.keymap.set('n', '<leader>tt', builtin.builtin)
+			vim.keymap.set('n', '<leader>to', builtin.buffers)
+			vim.keymap.set('n', '<leader>td', builtin.lsp_definitions)
+			vim.keymap.set('n', '<leader>tD', builtin.lsp_type_definitions)
+			vim.keymap.set('n', '<leader>tr', builtin.lsp_references)
+
 			require('telescope').load_extension('attempt')
 		end
     },
