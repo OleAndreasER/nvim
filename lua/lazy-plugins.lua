@@ -250,8 +250,16 @@ require("lazy").setup({
 						buffer = bufnr,
 						command = "EslintFixAll",
 					})
-				end
+				end,
 			})
+		end,
+	},
+	{
+		"pmizio/typescript-tools.nvim",
+		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+		opts = {},
+		config = function()
+			vim.keymap.set('n', 'gs', ':TSToolsGoToSourceDefinition')
 		end,
 	},
 	-- Tree sitter
