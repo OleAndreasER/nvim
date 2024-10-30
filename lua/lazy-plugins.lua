@@ -22,7 +22,7 @@ require("lazy").setup({
 	  lazy = false,
 	  priority = 1000,
 	  config = function()
-		require('bamboo').setup{}
+		require('bamboo').setup()
 		require('bamboo').load()
 	  end,
 	},
@@ -76,7 +76,7 @@ require("lazy").setup({
     {
 		'nvim-telescope/telescope.nvim',
 		tag = '0.1.8',
-		dependencies = { 'nvim-lua/plenary.nvim' },
+		dependencies = { 'nvim-lua/plenary.nvim', 'm-demare/attempt.nvim' },
 		config = function()
 			local builtin = require('telescope.builtin')
 			vim.keymap.set('n', '<leader>tf', builtin.git_files)
@@ -88,6 +88,7 @@ require("lazy").setup({
 			vim.keymap.set('n', '<leader>td', builtin.lsp_definitions)
 			vim.keymap.set('n', '<leader>tD', builtin.lsp_type_definitions)
 			vim.keymap.set('n', '<leader>tr', builtin.lsp_references)
+			vim.keymap.set('n', '<leader>ta', function() vim.cmd('Telescope attempt') end)
 
 			require('telescope').load_extension('attempt')
 		end
@@ -130,41 +131,39 @@ require("lazy").setup({
 				options = {
 					icons_enabled = false,
 					theme = 'auto',
-					component_separators = { left = '', right = ''},
-					section_separators = { left = '', right = ''},
-					disabled_filetypes = {
-						statusline = {},
-						winbar = {},
-					},
-					ignore_focus = {},
+					component_separators = { left = '', right = ''},
 					always_divide_middle = true,
-					globalstatus = false,
-					refresh = {
-						statusline = 1000,
-						tabline = 1000,
-						winbar = 1000,
-					}
+					globalstatus = true,
+				},
+				winbar = {
+					lualine_c = {
+						'%=',
+						{
+							'filename',
+							symbols = { unnamed = '' }
+						},
+						'%='
+					},
+				},
+				inactive_winbar = {
+					lualine_c = {
+						'%=',
+						{
+							'filename',
+							symbols = { unnamed = '' }
+						},
+						'%='
+					},
 				},
 				sections = {
 					lualine_a = {'mode'},
-					lualine_b = {'branch', 'filename' },
+					lualine_b = {'branch' },
 					lualine_c = {},
-					lualine_x = {'diff', 'diagnostics'},
+					lualine_x = {},
 					lualine_y = {},
 					lualine_z = {}
 				},
-				inactive_sections = {
-					lualine_a = {},
-					lualine_b = {},
-					lualine_c = {'filename'},
-					lualine_x = {'location'},
-					lualine_y = {},
-					lualine_z = {}
-				},
-				tabline = {},
-				winbar = {},
-				inactive_winbar = {},
-				extensions = {}
+				extensions = { }
 			})
 		end,
 	},
@@ -264,9 +263,6 @@ require("lazy").setup({
 		"pmizio/typescript-tools.nvim",
 		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
 		opts = {},
-		config = function()
-			vim.keymap.set('n', 'gs', ':TSToolsGoToSourceDefinition')
-		end,
 	},
 	-- Tree sitter
 	{
@@ -318,13 +314,19 @@ require("lazy").setup({
 		'm-demare/attempt.nvim',
 		config = function()
 			local attempt = require('attempt')
-			attempt.setup()
+			attempt.setup({
+				ext_options = { '', 'js', 'ts' },
+				format_opts = { [''] = 'Note' },
+				run = {
+					js = { 'w !node' },
+					ts = { 'w !yarn tsx' },
+				}
+			})
 
-			vim.keymap.set('n', '<leader>an', attempt.new_select, {  })
+			vim.keymap.set('n', '<leader>an', attempt.new_select)
 			vim.keymap.set('n', '<leader>ai', attempt.new_input_ext)
 			vim.keymap.set('n', '<leader>ar', attempt.run)
 			vim.keymap.set('n', '<leader>ad', attempt.delete_buf)
-			vim.keymap.set('n', '<leader>al', 'Telescope attempt')
 		end,
 	}
 })
