@@ -20,7 +20,7 @@ vim.opt.wrap = false
 vim.opt.clipboard = "unnamedplus"
 
 -- Stay in the middle of the screen
-vim.opt.scrolloff = 999
+vim.opt.scrolloff = 9
 
 -- Show in a split search and replace
 vim.opt.inccommand = "split"
@@ -44,10 +44,6 @@ vim.keymap.set("x", "<leader>p", "\"_dP")
 vim.keymap.set("n", "<leader>d", "\"_d")
 vim.keymap.set("v", "<leader>d", "\"_d")
 
--- -- Autocmd
---vim.api.nvim_create_autocmd("BufWritePost", {
---	callback = function ()
---		vim.lsp.buf.format()
---	end
---})
+ -- Don't use scrolloff on mouse clicks
+vim.keymap.set("n", "<LeftMouse>", ":let temp=&so<cr>:let &so=0<cr><LeftMouse>:let &so=temp<cr>", {silent = true})
 

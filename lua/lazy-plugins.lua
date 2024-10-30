@@ -83,6 +83,7 @@ require("lazy").setup({
 			vim.keymap.set('n', '<leader>fc', builtin.git_branches)
 			vim.keymap.set('n', '<leader>fg', builtin.live_grep)
 			vim.keymap.set('n', '<leader>fs', builtin.grep_string)
+			require('telescope').load_extension('attempt')
 		end
     },
 	-- Git
@@ -239,7 +240,26 @@ require("lazy").setup({
 						capabilities = capabilities
 					})
 				end,
+
+				['eslint'] = function()
+					local capabilities = require('cmp_nvim_lsp').default_capabilities()
+					require("lspconfig").eslint.setup({
+						capabilities = capabilities
+					})
+					vim.api.nvim_create_autocmd("BufWritePre", {
+						buffer = bufnr,
+						command = "EslintFixAll",
+					})
+				end,
 			})
+		end,
+	},
+	{
+		"pmizio/typescript-tools.nvim",
+		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+		opts = {},
+		config = function()
+			vim.keymap.set('n', 'gs', ':TSToolsGoToSourceDefinition')
 		end,
 	},
 	-- Tree sitter
@@ -287,5 +307,19 @@ require("lazy").setup({
 			}
 		end,
 	},
+	-- Managing temp files/attempts
+	{
+		'm-demare/attempt.nvim',
+		config = function()
+			local attempt = require('attempt')
+			attempt.setup()
+
+			vim.keymap.set('n', '<leader>an', attempt.new_select, {  })
+			vim.keymap.set('n', '<leader>ai', attempt.new_input_ext)
+			vim.keymap.set('n', '<leader>ar', attempt.run)
+			vim.keymap.set('n', '<leader>ad', attempt.delete_buf)
+			vim.keymap.set('n', '<leader>al', 'Telescope attempt')
+		end,
+	}
 })
 
