@@ -15,6 +15,9 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+local standard_float_width = 70;
+local standard_float_height = 40;
+
 require("lazy").setup({
 	-- Color Scheme
 	{
@@ -31,25 +34,29 @@ require("lazy").setup({
 		'stevearc/oil.nvim',
 		opts = {},
 		config = function()
-			require("oil").setup({
+			local oil = require("oil")
+			oil.setup({
 				columns = {},
 				watch_for_changes = true,
 				keymaps = {
 					["<C-s>"] = { "actions.select", opts = { vertical = true } },
-					["<C-p>"] = "actions.preview",
-					["<C-l>"] = "actions.refresh",
 					["-"] = "actions.parent",
 					["g."] = "actions.toggle_hidden",
+					["<esc>"] = "actions.close"
 				},
+				float = {
+					border = "rounded",
+					max_width = standard_float_width,
+					max_height = standard_float_height,
+					win_options = {
+						winblend = 0,
+					},
+				},		
 				view_options = {
 					show_hidden = false,
-					-- This function defines what is considered a "hidden" file
-					is_hidden_file = function(name, bufnr)
-						return vim.startswith(name, ".")
-					end,
 					-- This function defines what will never be shown, even when `show_hidden` is set
 					is_always_hidden = function(name, bufnr)
-						return name == '.git'
+						return name == '.git' or name == '..' 
 					end,
 					sort = {
 						{ "type", "asc" },
@@ -57,23 +64,14 @@ require("lazy").setup({
 					},
 				},
 			})
-			vim.keymap.set("n", "-", "<CMD>Oil<CR>")
-		end,
-	},
-	-- Harpoon
-	{
-		"ThePrimeagen/harpoon",
-		branch = "harpoon2",
-		dependencies = { "nvim-lua/plenary.nvim" },
-		config = function ()
-			local harpoon = require("harpoon")
-			harpoon:setup()
-			vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)
-			vim.keymap.set("n", "<C-k>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+
+			vim.keymap.set("n", "-", function()
+				oil.open_float()
+			end)
 		end
 	},
 	-- Searching 
-    {
+	{
 		'nvim-telescope/telescope.nvim',
 		tag = '0.1.8',
 		dependencies = { 'nvim-lua/plenary.nvim', 'm-demare/attempt.nvim' },
@@ -81,23 +79,28 @@ require("lazy").setup({
 			local actions = require('telescope.actions')
 			require('telescope').setup({
 				defaults = { color_devicons = false },
+
 			})
-			
+			local function browse(x)
+				return '<cmd>Telescope ' .. x .. ' sort_mru=true sort_lastused=true initial_mode=normal<cr>'
+			end
+
 			local builtin = require('telescope.builtin')
 			vim.keymap.set('n', '<leader>tf', builtin.git_files)
 			vim.keymap.set('n', '<leader>tb', builtin.git_branches)
 			vim.keymap.set('n', '<leader>tg', builtin.live_grep)
 			vim.keymap.set('n', '<leader>tc', builtin.grep_string)
 			vim.keymap.set('n', '<leader>tt', builtin.builtin)
-			vim.keymap.set('n', '<leader>to', builtin.buffers)
+			vim.keymap.set('n', '<leader>to', browse('buffers'))
 			vim.keymap.set('n', '<leader>td', builtin.lsp_definitions)
 			vim.keymap.set('n', '<leader>tD', builtin.lsp_type_definitions)
-			vim.keymap.set('n', '<leader>tr', builtin.lsp_references)
-			vim.keymap.set('n', '<leader>ta', function() vim.cmd('Telescope attempt') end)
+			vim.keymap.set('n', '<leader>tr',  browse('lsp_references'))
+			vim.keymap.set('n', '<leader>ta', browse('attempt'))
+			vim.keymap.set('n', '<leader>te', browse('diagnostics'))
 
 			require('telescope').load_extension('attempt')
 		end
-    },
+	},
 	-- Git
 	{
 		'lewis6991/gitsigns.nvim',
@@ -109,12 +112,41 @@ require("lazy").setup({
 	{
 		'tpope/vim-fugitive',
 		config = function()
-			vim.keymap.set("n", "<leader>git", function ()
-				vim.api.nvim_cmd({
-					cmd = "Git",
-					mods = { vertical = true },
-				}, { output = false })
-			end)
+
+			-- Fugitive in float (https://www.reddit.com/r/neovim/comments/1ag5mk3/fugitive_change_window_to_popup/)
+			vim.api.nvim_create_user_command('FugitiveFloat', function()
+				ui = vim.api.nvim_list_uis()[1]
+
+				local width = 100
+				local height = standard_float_height
+
+				local win_config = {
+					relative = "editor",
+					width = width,
+					height = height,
+					col = (ui.width - width) / 2,
+					row = (ui.height - height) / 2,
+					style = 'minimal',
+					focusable = true,
+					border = 'rounded'
+				}
+
+				if not fugitive_float_bufnr then
+					fugitive_float_bufnr = vim.api.nvim_create_buf(false, true)
+					vim.api.nvim_open_win(fugitive_float_bufnr, true, win_config)
+					vim.cmd(':Gedit :')
+					vim.cmd('normal 5j')
+				elseif vim.api.nvim_win_get_buf(0) == fugitive_float_bufnr then
+					vim.api.nvim_command('hide')
+				else
+					print('1234')
+					vim.api.nvim_open_win(fugitive_float_bufnr, true, win_config)
+					vim.cmd(':Gedit :')
+					vim.cmd('normal 5j')
+				end
+			end, {})
+
+			vim.keymap.set("n", "<leader>g", '<cmd>FugitiveFloat<cr>')
 		end,
 	},
 	{
@@ -340,6 +372,31 @@ require("lazy").setup({
 			vim.keymap.set('n', '<leader>ar', attempt.run)
 			vim.keymap.set('n', '<leader>ad', attempt.delete_buf)
 		end,
-	}
+	},
+	-- Terminal
+	{
+		'akinsho/toggleterm.nvim',
+		version = "*",
+		config = function()
+			require("toggleterm").setup({
+				open_mapping = '<c-k>',
+				hide_numbers = true,
+				autochdir = false,
+				start_in_insert = true,
+				persist_size = true,
+				persist_mode = true,
+				direction = 'float',
+				shell = 'powershell',
+				auto_scroll = true,
+				float_opts = {
+					border = 'curved',
+					width = standard_float_width,
+					height = standard_float_height,
+					winblend = 0,
+					title_pos = 'left',
+				},
+			})
+		end,
+	},
 })
 

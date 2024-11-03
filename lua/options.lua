@@ -45,8 +45,8 @@ vim.keymap.set("n", "<leader>d", "\"_d")
 vim.keymap.set("v", "<leader>d", "\"_d")
  -- Don't use scrolloff on mouse clicks
 vim.keymap.set("n", "<LeftMouse>", ":let temp=&so<cr>:let &so=0<cr><LeftMouse>:let &so=temp<cr>", {silent = true})
+ -- Center
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
  -- Terminal
-vim.keymap.set("n", "<leader>c", function() vim.cmd('vsplit term://powershell') end)
 vim.keymap.set("t", "<esc>", "<C-\\><C-n>")
-
-
