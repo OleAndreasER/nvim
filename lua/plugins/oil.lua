@@ -1,10 +1,12 @@
 return {
 	'stevearc/oil.nvim',
-	opts = {},
+	dependencies = { 'nvim-tree/nvim-web-devicons' },
 	config = function()
 		local oil = require("oil")
 		oil.setup({
-			columns = {},
+			columns = {
+				"icon"
+			},
 			watch_for_changes = true,
 			keymaps = {
 				["<C-s>"] = { "actions.select", opts = { vertical = true } },
@@ -19,7 +21,18 @@ return {
 				win_options = {
 					winblend = 0,
 				},
-			},		
+				get_win_title = function ()
+					return ''
+				end,
+
+				-- Place at cursor
+				override = function(conf)
+					conf.col = 0
+					conf.row = 0
+					conf.relative = 'cursor'
+					return conf
+				end,
+			},
 			view_options = {
 				show_hidden = false,
 				-- This function defines what will never be shown, even when `show_hidden` is set
@@ -33,8 +46,6 @@ return {
 			},
 		})
 
-		vim.keymap.set("n", "-", function()
-			oil.open_float()
-		end)
+		vim.keymap.set("n", "-", oil.open_float)
 	end
 }
