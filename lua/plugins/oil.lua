@@ -27,8 +27,9 @@ return {
 
 				-- Place at cursor
 				override = function(conf)
-					conf.col = 0
-					conf.row = 0
+					local row, col = unpack(vim.api.nvim_win_get_position(0))
+					conf.col = col
+					conf.row = row
 					conf.relative = 'cursor'
 					return conf
 				end,

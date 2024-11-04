@@ -16,21 +16,7 @@ return {
 						'filename',
 						symbols = {
 							unnamed = '',
-							modified = '●',
-							readonly = '',
-						},
-					},
-					'%='
-				},
-			},
-			inactive_winbar = {
-				lualine_c = {
-					'%=',
-					{
-						'filename',
-						symbols = {
-							unnamed = '',
-							modified = '●',
+							modified = modifiedSymbol,
 							readonly = '',
 						},
 					},
