@@ -10,8 +10,8 @@ return {
 				entry_prefix = " ",
 
 				layout_config = {
-					width = 0.5,
-					height = 0.4,
+					width = 0.95,
+					height = 0.5,
 				},
 
 				results_title = false,

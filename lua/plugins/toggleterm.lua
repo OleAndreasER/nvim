@@ -14,8 +14,8 @@ return {
 			auto_scroll = true,
 			float_opts = {
 				border = 'curved',
-				width = standard_float_width,
-				height = standard_float_height,
+				width = 150,
+				height = 60,
 				winblend = 0,
 				title_pos = 'left',
 			},
