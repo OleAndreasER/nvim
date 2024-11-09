@@ -39,10 +39,6 @@ vim.g.mapleader = " "
 -- Move selected
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
--- No yank
--- vim.keymap.set("x", "<leader>p", "\"_dP")
--- vim.keymap.set("n", "<leader>d", "\"_d")
--- vim.keymap.set("v", "<leader>d", "\"_d")
 -- Don't use scrolloff on mouse clicks
 vim.keymap.set("n", "<LeftMouse>", ":let temp=&so<cr>:let &so=0<cr><LeftMouse>:let &so=temp<cr>", {silent = true})
 -- Center
