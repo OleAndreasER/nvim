@@ -9,9 +9,10 @@ return {
 				always_divide_middle = true,
 				globalstatus = true,
 			},
-			winbar = {
+			sections = {
+				lualine_a = {'mode'},
+				lualine_b = {'branch'},
 				lualine_c = {
-					'%=',
 					{
 						'filename',
 						symbols = {
@@ -20,13 +21,7 @@ return {
 							readonly = '',
 						},
 					},
-					'%='
 				},
-			},
-			sections = {
-				lualine_a = {'mode'},
-				lualine_b = {'branch' },
-				lualine_c = {},
 				lualine_x = {},
 				lualine_y = {},
 				lualine_z = {}

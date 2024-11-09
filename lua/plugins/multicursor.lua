@@ -6,28 +6,6 @@ return {
         mc.setup()
         local set = vim.keymap.set
 
-        -- Add or skip cursor above/below the main cursor.
-        set({"n", "v"}, "<up>", function() mc.lineAddCursor(-1) end)
-        set({ "n", "v" }, "<down>", function() mc.lineAddCursor(1) end)
-        set({ "n", "v" }, "<leader><up>", function() mc.lineSkipCursor(-1) end)
-        set({ "n", "v" }, "<leader><down>", function() mc.lineSkipCursor(1) end)
-
-        -- Add or skip adding a new cursor by matching word/selection
-        set({ "n", "v" }, "<leader>n", function() mc.matchAddCursor(1) end)
-        set({ "n", "v" }, "<leader>s", function() mc.matchSkipCursor(1) end)
-        set({ "n", "v" }, "<leader>N", function() mc.matchAddCursor(-1) end)
-        set({ "n", "v" }, "<leader>S", function() mc.matchSkipCursor(-1) end)
-
-        -- Add all matches in the document
-        set({"n", "v"}, "<leader>A", mc.matchAllAddCursors)
-
-        -- Rotate the main cursor.
-        set({"n", "v"}, "<left>", mc.nextCursor)
-        set({"n", "v"}, "<right>", mc.prevCursor)
-
-        -- Delete the main cursor.
-        set({"n", "v"}, "<leader>x", mc.deleteCursor)
-
         -- Add and remove cursors with control + left click.
         set("n", "<c-leftmouse>", mc.handleMouse)
 
@@ -50,18 +28,9 @@ return {
         -- bring back cursors if you accidentally clear them
         set("n", "<leader>gv", mc.restoreCursors)
 
-        -- Align cursor columns.
-        set("n", "<leader>a", mc.alignCursors)
-
-        -- Split visual selections by regex.
-        set("v", "S", mc.splitCursors)
-
         -- Append/insert for each line of visual selections.
         set("v", "I", mc.insertVisual)
         set("v", "A", mc.appendVisual)
-
-        -- match new cursors within visual selections by regex.
-        set("v", "M", mc.matchCursors)
 
         -- Jumplist support
         set({"v", "n"}, "<c-i>", mc.jumpForward)

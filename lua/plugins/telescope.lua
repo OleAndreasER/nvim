@@ -1,7 +1,13 @@
 return {
 	'nvim-telescope/telescope.nvim',
 	tag = '0.1.8',
-	dependencies = { 'nvim-lua/plenary.nvim', 'm-demare/attempt.nvim', 'nvim-tree/nvim-web-devicons' },
+	dependencies = {
+		'nvim-lua/plenary.nvim',
+		'm-demare/attempt.nvim',
+		'nvim-tree/nvim-web-devicons',
+		'BurntSushi/ripgrep',
+		'nvim-telescope/telescope-fzf-native.nvim'
+	},
 	config = function()
 		require('telescope').setup({
 			defaults = {
@@ -9,6 +15,18 @@ return {
 				selection_caret = " ",
 				entry_prefix = " ",
 
+				vimgrep_arguments = {
+					'rg',
+					'--color=never',
+					'--no-heading',
+					'--with-filename',
+					'--line-number',
+					'--column',
+					'--smart-case',
+					'--ignore-file',
+					'.gitignore'
+				},
+				
 				layout_config = {
 					width = 0.95,
 					height = 0.5,
@@ -20,8 +38,8 @@ return {
 					results = { " ", " ", "─", "│", "│", " ", "─", "╰" },
 					prompt = { "─", " ", " ", "│", "╭", "─", " ", "│" },
 					preview = { "─", "│", "─", "│", "┬", "╮", "╯", "┴" },
-				}
-
+				},
+				file_ignore_patters = { "node_modules", '.git' } 	
 			},
 		})
 
@@ -35,18 +53,7 @@ return {
 			return '<cmd>Telescope ' .. x .. ' sort_mru=true sort_lastused=true ' .. standardTheme .. '<cr>'
 		end
 
-		vim.keymap.set('n', '<leader>tf', search("git_files"))
-		vim.keymap.set('n', '<leader>tb', search("git_branches"))
-		vim.keymap.set('n', '<leader>tg', search("live_grep"))
-		vim.keymap.set('n', '<leader>tc', search("grep_string"))
-		vim.keymap.set('n', '<leader>tt', search("builtin"))
-		vim.keymap.set('n', '<leader>to', browse('buffers'))
-		vim.keymap.set('n', '<leader>td', search("lsp_definitions"))
-		vim.keymap.set('n', '<leader>tD', search("lsp_type_definitions"))
-		vim.keymap.set('n', '<leader>tr',  browse('lsp_references'))
-		vim.keymap.set('n', '<leader>ta', browse('attempt'))
-		vim.keymap.set('n', '<leader>te', browse('diagnostics'))
-
-		require('telescope').load_extension('attempt')
+		vim.keymap.set('n', '<leader>d', search("lsp_definitions"))
+		vim.keymap.set('n', '<leader>r',  browse('lsp_references'))
 	end
 }

@@ -4,6 +4,7 @@ vim.opt.tabstop = tab_spaces
 vim.opt.shiftwidth = tab_spaces
 vim.opt.softtabstop = tab_spaces
 vim.opt.smartindent = true
+vim.opt.autoindent = true
 
 -- Left numbering
 vim.opt.number = true
@@ -33,20 +34,29 @@ vim.opt.swapfile = false
 vim.opt.backup = false
 
 -- Keybinds
+
 vim.g.mapleader = " "
- -- Close all windows except the top left window
-vim.keymap.set("n", "<leader>e", "<c-w><c-t><cmd>:only<cr>")
- -- Move selected
+-- Move selected
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
- -- No yank
-vim.keymap.set("x", "<leader>p", "\"_dP")
-vim.keymap.set("n", "<leader>d", "\"_d")
-vim.keymap.set("v", "<leader>d", "\"_d")
- -- Don't use scrolloff on mouse clicks
+-- No yank
+-- vim.keymap.set("x", "<leader>p", "\"_dP")
+-- vim.keymap.set("n", "<leader>d", "\"_d")
+-- vim.keymap.set("v", "<leader>d", "\"_d")
+-- Don't use scrolloff on mouse clicks
 vim.keymap.set("n", "<LeftMouse>", ":let temp=&so<cr>:let &so=0<cr><LeftMouse>:let &so=temp<cr>", {silent = true})
- -- Center
+-- Center
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
- -- Terminal
-vim.keymap.set("t", "<esc>", "<C-\\><C-n>")
+-- Select all
+vim.keymap.set('n', "<C-a>", 'ggVG')
+-- Indent many lines
+vim.keymap.set('n', '==', '100==')
+-- LSP Hover
+vim.keymap.set('n', '<C-j>', function() vim.lsp.buf.hover() end)
+-- Split Window Movement
+vim.keymap.set('n', 'ø', '<C-w>l')
+vim.keymap.set('n', 'å', '<C-w>h')
+-- Indent on paste
+vim.cmd('nnoremap p p=`]')
+
