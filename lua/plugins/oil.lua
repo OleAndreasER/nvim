@@ -7,6 +7,7 @@ return {
 			columns = {
 				"icon"
 			},
+			default_file_explorer = false,
 			watch_for_changes = true,
 			keymaps = {
 				["<C-s>"] = { "actions.select", opts = { vertical = true } },
@@ -46,7 +47,6 @@ return {
 				},
 			},
 		})
-
-		vim.keymap.set("n", "-", oil.open_float)
+	--	vim.keymap.set("n", "-", oil.open_float)
 	end
 }

@@ -11,6 +11,5 @@ return {
 			}
 		})
 		require("onedarkpro").load()
-
 	end,
 }
