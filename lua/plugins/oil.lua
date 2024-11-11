@@ -35,7 +35,7 @@ return {
 				end,
 			},
 			view_options = {
-				show_hidden = false,
+				show_hidden = true,
 				-- This function defines what will never be shown, even when `show_hidden` is set
 				is_always_hidden = function(name, bufnr)
 					return name == '.git' or name == '..' 
