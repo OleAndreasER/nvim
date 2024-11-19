@@ -6,9 +6,10 @@ vim.opt.softtabstop = tab_spaces
 vim.opt.smartindent = true
 vim.opt.autoindent = true
 
--- Left numbering
-vim.opt.number = true
-vim.opt.relativenumber = true
+-- Left side 
+vim.opt.number = false
+vim.opt.relativenumber = false
+vim.opt.signcolumn = "yes"
 
 -- Split
 vim.opt.splitbelow = true
