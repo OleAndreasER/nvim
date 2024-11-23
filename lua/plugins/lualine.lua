@@ -3,11 +3,10 @@ return {
 	config = function()
 		require('lualine').setup({
 			options = {
-				icons_enabled = false,
+				icons_enabled = true,
 				theme = 'auto',
-				component_separators = { left = '', right = ''},
-				always_divide_middle = true,
-				globalstatus = true,
+				component_separators = { left = '', right = ''},
+				section_separators = { left = '', right = ''},
 			},
 			sections = {
 				lualine_a = {},
@@ -17,10 +16,16 @@ return {
 				lualine_y = {},
 				lualine_z = {}
 			},
+			inactive_sections = {
+				lualine_a = {},
+				lualine_b = {},
+				lualine_c = {},
+				lualine_x = {},
+				lualine_y = {},
+				lualine_z = {}
+			},
 			winbar = {
-				lualine_a = {'mode'},
-				lualine_b = {'branch'},
-				lualine_c = {
+				lualine_a = {
 					{
 						'filename',
 						symbols = {
@@ -30,6 +35,25 @@ return {
 						},
 					},
 				},
+				lualine_b = {},
+				lualine_c = {},
+				lualine_x = {'branch'},
+				lualine_y = {},
+				lualine_z = {}
+			},
+			inactive_winbar = {
+				lualine_a = {
+					{
+						'filename',
+						symbols = {
+							unnamed = '',
+							modified = modifiedSymbol,
+							readonly = '',
+						},
+					},
+				},
+				lualine_b = {},
+				lualine_c = {},
 				lualine_x = {},
 				lualine_y = {},
 				lualine_z = {}

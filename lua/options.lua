@@ -9,7 +9,7 @@ vim.opt.autoindent = true
 -- Left side 
 vim.opt.number = false
 vim.opt.relativenumber = false
-vim.opt.signcolumn = "yes"
+vim.opt.signcolumn = "yes:1"
 
 -- Split
 vim.opt.splitbelow = true
