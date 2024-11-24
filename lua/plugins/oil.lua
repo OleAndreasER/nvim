@@ -47,6 +47,6 @@ return {
 				},
 			},
 		})
-		vim.keymap.set("n", "<leader>-", oil.open_float)
+		vim.keymap.set("n", "-", oil.open_float)
 	end
 }
