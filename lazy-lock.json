@@ -8,7 +8,6 @@
   "cmp-nvim-lua": { "branch": "main", "commit": "f12408bdb54c39c23e67cab726264c10db33ada8" },
   "cmp-path": { "branch": "main", "commit": "91ff86cd9c29299a64f968ebb45846c485725f23" },
   "cmp_luasnip": { "branch": "master", "commit": "98d9cb5c2c38532bd9bdb481067b20fea8f32e90" },
-  "hop.nvim": { "branch": "master", "commit": "08ddca799089ab96a6d1763db0b8adc5320bf050" },
   "hover.nvim": { "branch": "main", "commit": "f8e162daccb2f117e19f3d5ad3647ac0cefb02e3" },
   "inc-rename.nvim": { "branch": "main", "commit": "8ba77017ca468f3029bf88ef409c2d20476ea66b" },
   "indent-blankline.nvim": { "branch": "master", "commit": "7871a88056f7144defca9c931e311a3134c5d509" },
@@ -37,5 +36,6 @@
   "toggleterm.nvim": { "branch": "main", "commit": "022ff5594acccc8d90d2e46dc43994f7722ebdf7" },
   "treesj": { "branch": "main", "commit": "03415ac60791d48e120a80d37e080744faf3ac15" },
   "typescript-tools.nvim": { "branch": "master", "commit": "346062e8cd06e82776b60785a040dfbbdcb6de77" },
-  "vim-fugitive": { "branch": "master", "commit": "320b18fba2a4f2fe3c8225c778c687e0d2620384" }
+  "vim-fugitive": { "branch": "master", "commit": "320b18fba2a4f2fe3c8225c778c687e0d2620384" },
+  "workspace-diagnostics.nvim": { "branch": "main", "commit": "573ff93c47898967efdfbc6587a1a39e3c2d365e" }
 }

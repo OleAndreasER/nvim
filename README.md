@@ -5,4 +5,4 @@ Windows TODO:
  - Windows Terminal json
  - choco install mingw
  - choco install fd
- - choco install rg
+ - choco install ripgrep

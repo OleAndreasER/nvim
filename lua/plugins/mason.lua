@@ -10,7 +10,7 @@ return {
 	},
 	{
 		"williamboman/mason-lspconfig.nvim",
-		dependencies = { "mason.nvim", "hrsh7th/nvim-cmp" },
+		dependencies = { "mason.nvim", "hrsh7th/nvim-cmp", "artemave/workspace-diagnostics.nvim" },
 		config = function()
 			require("mason-lspconfig").setup()
 			require("mason-lspconfig").setup_handlers({
@@ -32,6 +32,16 @@ return {
 						command = "EslintFixAll",
 					})
 				end,
+
+				['denols'] = function ()
+					local capabilities = require('cmp_nvim_lsp').default_capabilities()
+					require("lspconfig").denols.setup({
+						capabilities = capabilities,
+						on_attach = function (client, bufnr)
+							require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
+						end
+					})
+				end
 			})
 		end,
 	},

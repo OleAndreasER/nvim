@@ -45,15 +45,17 @@ vim.keymap.set("n", "<LeftMouse>", ":let temp=&so<cr>:let &so=0<cr><LeftMouse>:l
 -- Center
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set(
+	'c', '<CR>',
+	function() return vim.fn.getcmdtype() == '/' and '<CR>zzzv' or '<CR>' end,
+	{ expr = true }
+)
 -- Select all
 vim.keymap.set('n', "<C-a>", 'ggVG')
--- Indent many lines
-vim.keymap.set('n', '==', '100==')
 -- LSP Hover
 vim.keymap.set('n', '<C-j>', function() vim.lsp.buf.hover() end)
 -- Split Window Movement
 vim.keymap.set('n', 'ø', '<C-w>l')
 vim.keymap.set('n', 'å', '<C-w>h')
--- Indent on paste
-vim.cmd('nnoremap p p=`]')
 
