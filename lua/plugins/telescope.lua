@@ -61,7 +61,7 @@ return {
 			vim.keymap.set('n', '<leader>s', search('live_grep') )
 			vim.keymap.set('n', '<leader><leader>', browse('resume') )
 			vim.keymap.set('n', '<leader>b', search('git_branches'))
-			vim.keymap.set('n', '<leader>e', browse('diagnostics'))
+			vim.keymap.set('n', '<leader>e', browse('diagnostics severity=error'))
 			require("telescope").load_extension("zf-native")
 		end
 	},
