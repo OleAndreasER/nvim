@@ -11,10 +11,7 @@ return {
 			}
 		})
 
-		vim.keymap.set('n', '<leader>an', function()
-			attempt.new({})
-		end)
-		vim.keymap.set('n', '<leader>ai', attempt.new_input_ext)
+		vim.keymap.set('n', '<leader>an', attempt.new_input_ext)
 		vim.keymap.set('n', '<leader>ar', attempt.run)
 		vim.keymap.set('n', '<leader>ad', attempt.delete_buf)
 	end,
