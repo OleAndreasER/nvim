@@ -28,7 +28,7 @@ return {
 					})
 					vim.api.nvim_create_autocmd("BufWritePre", {
 						buffer = bufnr,
-						pattern = "*.ts",
+						pattern = "*.{ts,vue}",
 						command = "EslintFixAll",
 					})
 				end,
