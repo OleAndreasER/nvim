@@ -1,5 +1,3 @@
-
-
 return {
 	{
 		'nvim-telescope/telescope.nvim',
@@ -9,6 +7,9 @@ return {
 			'm-demare/attempt.nvim',
 			'nvim-tree/nvim-web-devicons',
 			"natecraddock/telescope-zf-native.nvim",
+			"tpope/vim-fugitive",
+			"tpope/vim-rhubarb",
+			"aaronhallaert/advanced-git-search.nvim",
 		},
 		config = function()
 			require('telescope').setup({
@@ -64,6 +65,8 @@ return {
 			vim.keymap.set('n', '<leader><leader>', browse('resume') )
 			vim.keymap.set('n', '<leader>b', search('git_branches'))
 			vim.keymap.set('n', '<leader>e', browse('diagnostics severity=error'))
+			vim.keymap.set('n', '<leader>l', browse('diagnostics severity=error'))
+			vim.keymap.set('n', '<leader>ag', ':Telescope advanced_git_search')
 
 			local pickers = require("telescope.pickers")
 			local finders = require("telescope.finders")
@@ -110,7 +113,9 @@ return {
 				}):find()
 			end)
 
+
 			require("telescope").load_extension("zf-native")
+			require("telescope").load_extension("advanced_git_search")
 		end
 	},
 }
