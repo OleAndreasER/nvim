@@ -32,6 +32,7 @@
   "oil.nvim": { "branch": "master", "commit": "add50252b5e9147c0a09d36480d418c7e2737472" },
   "onedarkpro.nvim": { "branch": "main", "commit": "44775f8206ee43b692e7f3dc894ddc47996ee523" },
   "plenary.nvim": { "branch": "master", "commit": "3707cdb1e43f5cea73afb6037e6494e7ce847a66" },
+  "snacks.nvim": { "branch": "main", "commit": "b100c937177536cf2aa634ddd2aa5b8a1dd23ace" },
   "telescope-zf-native.nvim": { "branch": "master", "commit": "5721be27df11a19b9cd95e6a4887f16f26599802" },
   "telescope.nvim": { "branch": "master", "commit": "a0bbec21143c7bc5f8bb02e0005fa0b982edc026" },
   "tiny-inline-diagnostic.nvim": { "branch": "main", "commit": "aa6a7045b3984be2b6581741dbe9200f1701f7f7" },
