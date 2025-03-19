@@ -10,6 +10,7 @@ return {
 				"vimdoc",
 				"query",
 				"markdown",
+				"vue",
 				"markdown_inline",
 				"javascript",
 				"typescript",
