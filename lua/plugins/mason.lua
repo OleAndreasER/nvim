@@ -10,22 +10,16 @@ return {
 	},
 	{
 		"williamboman/mason-lspconfig.nvim",
-		dependencies = { "mason.nvim", "hrsh7th/nvim-cmp", "artemave/workspace-diagnostics.nvim" },
+		dependencies = { "mason.nvim" },
 		config = function()
 			require("mason-lspconfig").setup()
 			require("mason-lspconfig").setup_handlers({
 				function(server_name)
-					local capabilities = require('cmp_nvim_lsp').default_capabilities()
-					require("lspconfig")[server_name].setup({
-						capabilities = capabilities
-					})
+					require("lspconfig")[server_name].setup({})
 				end,
 
 				['eslint'] = function()
-					local capabilities = require('cmp_nvim_lsp').default_capabilities()
-					require("lspconfig").eslint.setup({
-						capabilities = capabilities
-					})
+					require("lspconfig").eslint.setup({})
 					vim.api.nvim_create_autocmd("BufWritePre", {
 						buffer = bufnr,
 						pattern = "*.{ts,vue}",
@@ -34,19 +28,11 @@ return {
 				end,
 
 				['denols'] = function ()
-					local capabilities = require('cmp_nvim_lsp').default_capabilities()
-					require("lspconfig").denols.setup({
-						capabilities = capabilities,
-						on_attach = function (client, bufnr)
-							require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
-						end
-					})
+					require("lspconfig").denols.setup({})
 				end,
 
 				['ts_ls'] = function ()
-					local capabilities = require('cmp_nvim_lsp').default_capabilities()
 					require("lspconfig").ts_ls.setup({
-						capabilities = capabilities,
 						filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
 						init_options = {
 							plugins = {

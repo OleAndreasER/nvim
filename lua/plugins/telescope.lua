@@ -65,6 +65,7 @@ return {
 			vim.keymap.set('n', '<leader><leader>', browse('resume') )
 			vim.keymap.set('n', '<leader>b', search('git_branches'))
 			vim.keymap.set('n', '<leader>e', browse('diagnostics severity=error'))
+			vim.keymap.set('n', '<leader>/', browse('search_history'))
 			vim.keymap.set('n', '<leader>l', browse('diagnostics severity=error'))
 			vim.keymap.set('n', '<leader>ag', ':Telescope advanced_git_search')
 

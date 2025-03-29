@@ -34,6 +34,12 @@ vim.opt.termguicolors = true
 vim.opt.swapfile = false
 vim.opt.backup = false
 
+--diagnostic
+vim.diagnostic.config({
+	virtual_lines = { current_line = true },
+	signs = false
+})
+
 -- Keybinds
 
 vim.g.mapleader = " "
