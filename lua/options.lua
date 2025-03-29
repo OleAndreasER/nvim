@@ -36,7 +36,7 @@ vim.opt.backup = false
 
 --diagnostic
 vim.diagnostic.config({
-	virtual_lines = { current_line = true },
+	virtual_text = { current_line = true },
 	signs = false
 })
 
