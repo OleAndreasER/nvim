@@ -178,6 +178,9 @@ return {
 									const_len_filename = file
 								end
 
+								local len_line = 150
+								line = line:sub(1, len_line)
+
 								return const_len_filename .. '║' .. line, style
 							end
 
