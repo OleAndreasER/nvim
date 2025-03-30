@@ -63,7 +63,7 @@ return {
 							['<CR>'] = require('telescope.actions').git_switch_branch,
 						},
 					}
-				}
+				},
 			}
 		})
 
@@ -87,6 +87,7 @@ return {
 		vim.keymap.set({ 'n', 'v' }, '<leader>l', browse('diagnostics severity=error'))
 		vim.keymap.set({ 'n', 'v' }, '<leader>ag', ':Telescope advanced_git_search')
 		vim.keymap.set({ 'n', 'v' }, '<leader>G', browse('git_branch'))
+		vim.keymap.set({ 'n', 'v' }, "<leader>'", browse('recall'))
 		-- Quickfix
 		vim.keymap.set({ 'n', 'v' }, '<C-d>', '<CMD>cnext<CR>')
 		vim.keymap.set({ 'n', 'v' }, '<C-u>', '<CMD>cprevious<CR>')
