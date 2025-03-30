@@ -10,6 +10,7 @@ return {
 			"tpope/vim-fugitive",
 			"tpope/vim-rhubarb",
 			"aaronhallaert/advanced-git-search.nvim",
+			'mrloop/telescope-git-branch.nvim',
 		},
 		config = function()
 			require('telescope').setup({
@@ -61,7 +62,6 @@ return {
 			end
 
 			vim.keymap.set('n', '<leader>d', search("lsp_definitions"))
-			vim.keymap.set('n', '<leader>n', search("lsp_dynamic_workspace_symbols"))
 			vim.keymap.set('n', '<leader>f', search("find_files"))
 			vim.keymap.set('n', '<leader>r',  browse('lsp_references'))
 			vim.keymap.set('n', '<leader>o',  browse('buffers'))
@@ -73,6 +73,7 @@ return {
 			vim.keymap.set('n', '<leader>/', browse('search_history'))
 			vim.keymap.set('n', '<leader>l', browse('diagnostics severity=error'))
 			vim.keymap.set('n', '<leader>ag', ':Telescope advanced_git_search')
+			vim.keymap.set('n', '<leader>G', browse('git_branch'))
 			-- Quickfix
 			vim.keymap.set('n', '<C-d>', '<CMD>cnext<CR>')
 			vim.keymap.set('n', '<C-u>', '<CMD>cprevious<CR>')
@@ -122,9 +123,9 @@ return {
 				}):find()
 			end)
 
-
 			require("telescope").load_extension("zf-native")
 			require("telescope").load_extension("advanced_git_search")
+			require("telescope").load_extension("git_branch")
 		end
-	},
+},
 }
