@@ -69,4 +69,9 @@ vim.keymap.set('n', 'å', '<C-w>h')
 -- Run as command
 vim.keymap.set('n', '<leader>rl', ':r!<C-r><C-l>')
 vim.keymap.set('n', '<leader>ry', ':r!<C-r>"')
+-- Write
+vim.keymap.set({'v', 'n'}, '<leader>w', ':w<cr>', { silent = true })
+vim.keymap.set({'v', 'n'}, '<leader>W', ':wa<cr>', { silent = true })
+vim.keymap.set({'v', 'n'}, '<leader>q', ':q!<cr>', { silent = true })
+vim.keymap.set({'v', 'n'}, '<leader>Q', ':qa!<cr>', { silent = true })
 
