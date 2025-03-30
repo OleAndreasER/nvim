@@ -54,6 +54,8 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "*", "*zzzv")
 vim.keymap.set("n", "#", "#zzzv")
+vim.keymap.set("n", "G", "Gzzzv")
+
 vim.keymap.set(
 	'c', '<CR>',
 	function() return vim.fn.getcmdtype() == '/' and '<CR>zzzv' or '<CR>' end,
@@ -74,4 +76,6 @@ vim.keymap.set({'v', 'n'}, '<leader>w', ':w<cr>', { silent = true })
 vim.keymap.set({'v', 'n'}, '<leader>W', ':wa<cr>', { silent = true })
 vim.keymap.set({'v', 'n'}, '<leader>q', ':q!<cr>', { silent = true })
 vim.keymap.set({'v', 'n'}, '<leader>Q', ':qa!<cr>', { silent = true })
+-- Macros
+vim.keymap.set('n', '<leader>pc', 'oconsole.log( `<esc>pA`, <esc>pA );<esc>0')
 
