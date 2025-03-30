@@ -121,8 +121,16 @@ return {
 
 							if arguments ~= '' then
 								local location, second_part = arguments:match("([hra]?)(.*)")
-								local filetype = second_part:match("%.%a+")
+								local filetype = second_part:match("%..+")
 								local glob
+
+								if filetype ~= nil then
+									local parts = {}
+									for part in filetype:gmatch("([^%.]+)") do
+										table.insert(parts, part)
+									end
+									filetype = '.' .. '{' .. table.concat(parts, ',') .. '}'
+								end
 
 								if location == 'r' and filetype == nil then
 									glob = 'services/report-maker/**'
