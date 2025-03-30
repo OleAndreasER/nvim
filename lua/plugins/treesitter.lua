@@ -31,15 +31,6 @@ return {
 				enable = true,
 				additional_vim_regex_highlighting = false,
 			},
-			incremental_selection = {
-				enable = true,
-				keymaps = {
-					init_selection = "<Leader>ss",
-					scope_incremental = "<Leader>sc",
-					node_incremental = "<Leader>si",
-					node_decremental = "<Leader>sd",
-				}
-			}
 		}
 	end,
 }

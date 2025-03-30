@@ -44,6 +44,11 @@ return {
 					path_display = {
 						"tail"
 					},
+					mappings = {
+						i = {
+							["<C-q>"] = require('telescope.actions').send_to_qflist,
+						}
+					}
 				},
 			})
 
@@ -68,6 +73,9 @@ return {
 			vim.keymap.set('n', '<leader>/', browse('search_history'))
 			vim.keymap.set('n', '<leader>l', browse('diagnostics severity=error'))
 			vim.keymap.set('n', '<leader>ag', ':Telescope advanced_git_search')
+			-- Quickfix
+			vim.keymap.set('n', '<C-d>', '<CMD>cnext<CR>')
+			vim.keymap.set('n', '<C-u>', '<CMD>cprevious<CR>')
 
 			local pickers = require("telescope.pickers")
 			local finders = require("telescope.finders")

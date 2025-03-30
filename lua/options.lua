@@ -64,8 +64,6 @@ vim.keymap.set('n', '<C-j>', function() vim.lsp.buf.hover() end)
 -- Split Window Movement
 vim.keymap.set('n', 'ø', '<C-w>l')
 vim.keymap.set('n', 'å', '<C-w>h')
--- Quickfix
-vim.keymap.set('n', '<leader>c', '<CMD>copen<CR>')
 -- Run as command
 vim.keymap.set('n', '<leader>rl', ':r!<C-r><C-l>')
 vim.keymap.set('n', '<leader>ry', ':r!<C-r>"')
