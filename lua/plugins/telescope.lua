@@ -164,6 +164,8 @@ return {
 									"--line-number",
 									"--column",
 									"--smart-case",
+									'--ignore-file',
+									'.gitignore'
 								},
 							}
 						end,
