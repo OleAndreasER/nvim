@@ -22,7 +22,7 @@ return {
 					require("lspconfig").eslint.setup({})
 					vim.api.nvim_create_autocmd("BufWritePre", {
 						buffer = bufnr,
-						pattern = "*.{ts,vue}",
+						pattern = "*.{ts,js,vue}",
 						command = "EslintFixAll",
 					})
 				end,
