@@ -9,6 +9,9 @@ return {
 		"tpope/vim-rhubarb",
 		"aaronhallaert/advanced-git-search.nvim",
 		'mrloop/telescope-git-branch.nvim',
+		'nvim-telescope/telescope-project.nvim',
+		"smartpde/telescope-recent-files",
+        "Snikimonkd/telescope-git-conflicts.nvim",
 	},
 	config = function()
 		require('telescope').setup({
@@ -79,16 +82,17 @@ return {
 		vim.keymap.set({ 'n', 'v' }, '<leader>f', search("find_files"))
 		vim.keymap.set({ 'n', 'v' }, '<leader>r',  browse('lsp_references'))
 		vim.keymap.set({ 'n', 'v' }, '<leader>o',  browse('buffers'))
-		vim.keymap.set({ 'n', 'v' }, '<leader>h', search('help_tags'))
 		vim.keymap.set({ 'n', 'v' }, '<leader><leader>', browse('resume') )
-		vim.keymap.set({ 'n', 'v' }, '<leader>b', search('git_branches'))
 		vim.keymap.set({ 'n', 'v' }, '<leader>e', browse('diagnostics severity=error'))
-		vim.keymap.set({ 'n', 'v' }, '<leader>/', browse('search_history'))
+		vim.keymap.set({ 'n', 'v' }, '<leader>/', browse('project'))
 		vim.keymap.set({ 'n', 'v' }, '<leader>l', browse('diagnostics severity=error'))
 		vim.keymap.set({ 'n', 'v' }, '<leader>ag', ':Telescope advanced_git_search')
-		vim.keymap.set({ 'n', 'v' }, '<leader>G', browse('git_branch'))
+		vim.keymap.set({ 'n', 'v' }, '<leader>gs', browse('git_status'))
+		vim.keymap.set({ 'n', 'v' }, '<leader>gb', search('git_branches'))
+		vim.keymap.set({ 'n', 'v' }, '<leader>gc', browse('conflicts'))
 		vim.keymap.set({ 'n', 'v' }, "<leader>'", browse('recall'))
-		vim.keymap.set("x", "<C-s>", '"zy<Cmd>lua require("telescope.builtin").grep_string({search=vim.fn.getreg("z")})<CR>')
+		vim.keymap.set({ 'n', 'v' }, "<leader>y", browse('recent_files'))
+		vim.keymap.set("x", "<C-s>", '"zy<Cmd>lua require("telescope.builtin").grep_string({search=vim.fn.getreg("z")})<CR><c-q>')
 		-- Quickfix
 		vim.keymap.set({ 'n', 'v' }, '<C-x>', '<CMD>cnext<CR>')
 		vim.keymap.set({ 'n', 'v' }, '<C-z>', '<CMD>cprevious<CR>')
@@ -206,5 +210,8 @@ return {
 		require("telescope").load_extension("zf-native")
 		require("telescope").load_extension("advanced_git_search")
 		require("telescope").load_extension("git_branch")
+		require("telescope").load_extension("project")
+		require("telescope").load_extension("recent_files")
+        require("telescope").load_extension("conflicts")
 	end
 }

@@ -8,6 +8,7 @@ return {
 			options = {
 				severity = {
 					vim.diagnostic.severity.ERROR,
+					vim.diagnostic.severity.WARN,
 				},
 			}
 		})

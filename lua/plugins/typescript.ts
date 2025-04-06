@@ -131,3 +131,18 @@ const product: Product = {
     description: "A high-end gaming laptop"
 };
 
+const a = () => {
+	console.log('hello')
+}
+
+const b = () => {
+	a()
+}
+
+const c = () => {
+	b()
+}
+
+const d = () => {
+	a()
+}
