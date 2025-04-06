@@ -22,10 +22,11 @@ return {
 				},
 				attach_to_untracked = true,
 			})
-			vim.keymap.set({'n', 'v'}, '<leader>gp', ':Gitsigns preview_hunk_inline<cr>', { silent = true })
+			vim.keymap.set({'n', 'v'}, '<leader>go', ':Gitsigns preview_hunk_inline<cr>', { silent = true })
 			vim.keymap.set({'n', 'v'}, '<leader>ga', ':Gitsigns stage_buffer<cr>', { silent = true })
-			vim.keymap.set({'n', 'v'}, '<leader>gU', ':Gitsigns reset_buffer<cr>', { silent = true })
-			vim.keymap.set({'n', 'v'}, '<leader>gu', ':Gitsigns reset_hunk<cr>', { silent = true })
+			vim.keymap.set({'n', 'v'}, '<leader>gA', ':Gitsigns stage_hunk<cr>', { silent = true })
+			vim.keymap.set({'n', 'v'}, '<leader>gu', ':Gitsigns reset_buffer<cr>', { silent = true })
+			vim.keymap.set({'n', 'v'}, '<leader>gU', ':Gitsigns reset_hunk<cr>', { silent = true })
 			vim.keymap.set({'n', 'v'}, '<C-m>', function()
 				require('gitsigns').setqflist('all', {
 					open = false,
@@ -42,7 +43,10 @@ return {
 		'tpope/vim-fugitive',
 		config = function()
 			vim.keymap.set({'n', 'v'}, '<leader>gg', ':G commit<cr>', { silent = true })
-			vim.keymap.set({'n', 'v'}, '<leader>gs', ':Git<cr>', { silent = true })
+			vim.keymap.set({'n', 'v'}, '<leader>gP', ':G push<cr>', { silent = true })
+			vim.keymap.set({'n', 'v'}, '<leader>gm', ':G pull origin master<cr>', { silent = true })
+			vim.keymap.set({'n', 'v'}, '<leader>gp', ':G pull<cr>', { silent = true })
+			vim.keymap.set({'n', 'v'}, '<leader>gs', '<cmd>Ge :<cr>5j', { silent = true })
 		end,
 	}
 }
