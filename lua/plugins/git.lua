@@ -23,19 +23,20 @@ return {
 			})
 			vim.keymap.set({'n', 'v'}, '<leader>gp', ':Gitsigns preview_hunk_inline<cr>', { silent = true })
 			vim.keymap.set({'n', 'v'}, '<leader>ga', ':Gitsigns stage_buffer<cr>', { silent = true })
-			vim.keymap.set({'n', 'v'}, '<leader>g\'', function() require('gitsigns').setqflist('all') end, { silent = true })
+			vim.keymap.set({'n', 'v'}, '<leader>gU', ':Gitsigns reset_buffer<cr>', { silent = true })
+			vim.keymap.set({'n', 'v'}, '<leader>gu', ':Gitsigns reset_hunk<cr>', { silent = true })
+			vim.keymap.set({'n', 'v'}, '<leader>g\'', function()
+				require('gitsigns').setqflist('all', {
+					open = false,
+				})
+			end, { silent = true })
 			vim.keymap.set({'o', 'x'}, 'ih', '<Cmd>Gitsigns select_hunk<CR>')
 		end
 	},
 	{
 		'tpope/vim-fugitive',
 		config = function()
-
-			-- vim.keymap.set({ 'n', 'v' }, '<leader>ag', ':Telescope advanced_git_search')
-			-- vim.keymap.set({ 'n', 'v' }, '<leader>gs', browse('git_status'))
-			-- vim.keymap.set({ 'n', 'v' }, '<leader>gb', search('git_branches'))
-			-- vim.keymap.set({ 'n', 'v' }, '<leader>gc', browse('conflicts'))
-
+			vim.keymap.set({'n', 'v'}, '<leader>gg', ':G commit<cr>', { silent = true })
 		end,
 	}
 }
