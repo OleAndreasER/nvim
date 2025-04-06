@@ -25,6 +25,5 @@ return {
 		}
 	},
 	config = function()
-		vim.keymap.set({'v', 'n'}, '<leader>q', function() Snacks.bufdelete() end, { silent = true })
 	end,
 }

@@ -66,6 +66,7 @@ vim.keymap.set('n', '<C-b>', '<C-w>j')
 vim.keymap.set({'v', 'n'}, '<leader>w', ':w<cr>', { silent = true })
 vim.keymap.set({'v', 'n'}, '<leader>W', ':wa<cr>', { silent = true })
 vim.keymap.set({'v', 'n'}, '<leader>Q', ':wqa!<cr>', { silent = true })
+vim.keymap.set({'v', 'n'}, '<leader>q', ':q!<cr>', { silent = true })
 -- Highlights
 vim.keymap.set('n', 'dh', ':noh<cr>', { silent = true })
 -- Macros

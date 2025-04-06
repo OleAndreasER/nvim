@@ -10,6 +10,7 @@
   "mason.nvim": { "branch": "main", "commit": "fc98833b6da5de5a9c5b1446ac541577059555be" },
   "mini.completion": { "branch": "main", "commit": "9e6aa17fef2e86d3f33666a7843b942791cc1c1f" },
   "mini.icons": { "branch": "main", "commit": "86a633f0dffcfd80110bac86681dbf4b5c37ba5c" },
+  "mini.operators": { "branch": "main", "commit": "c6d87731f1a2c849888754347ffc5a1395bf2977" },
   "multicursor.nvim": { "branch": "1.0", "commit": "7d3b16fbd86d0de77f7dc25bf2b923796eb37537" },
   "neoscroll.nvim": { "branch": "master", "commit": "f957373912e88579e26fdaea4735450ff2ef5c9c" },
   "noice.nvim": { "branch": "main", "commit": "0427460c2d7f673ad60eb02b35f5e9926cf67c59" },
