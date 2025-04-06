@@ -17,6 +17,7 @@ return {
 					delete       = { text = '_' },
 					topdelete    = { text = '‾' },
 					changedelete = { text = '~' },
+
 					untracked    = { text = '┆' },
 				},
 				attach_to_untracked = true,
@@ -25,10 +26,14 @@ return {
 			vim.keymap.set({'n', 'v'}, '<leader>ga', ':Gitsigns stage_buffer<cr>', { silent = true })
 			vim.keymap.set({'n', 'v'}, '<leader>gU', ':Gitsigns reset_buffer<cr>', { silent = true })
 			vim.keymap.set({'n', 'v'}, '<leader>gu', ':Gitsigns reset_hunk<cr>', { silent = true })
-			vim.keymap.set({'n', 'v'}, '<leader>g\'', function()
+			vim.keymap.set({'n', 'v'}, '<C-m>', function()
 				require('gitsigns').setqflist('all', {
 					open = false,
 				})
+			end, { silent = true })
+			vim.keymap.set({'n', 'v'}, '<leader>gn', function()
+				require('gitsigns').nav_hunk('next')
+				require('gitsigns').preview_hunk_inline()
 			end, { silent = true })
 			vim.keymap.set({'o', 'x'}, 'ih', '<Cmd>Gitsigns select_hunk<CR>')
 		end
