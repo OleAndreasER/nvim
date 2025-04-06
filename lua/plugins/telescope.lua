@@ -87,7 +87,6 @@ return {
 		vim.keymap.set({ 'n', 'v' }, '<leader>/', browse('project'))
 		vim.keymap.set({ 'n', 'v' }, '<leader>l', browse('diagnostics severity=error'))
 		vim.keymap.set({ 'n', 'v' }, '<leader>ag', ':Telescope advanced_git_search')
-		vim.keymap.set({ 'n', 'v' }, '<leader>gs', browse('git_status'))
 		vim.keymap.set({ 'n', 'v' }, '<leader>gb', search('git_branches'))
 		vim.keymap.set({ 'n', 'v' }, '<leader>gc', browse('conflicts'))
 		vim.keymap.set({ 'n', 'v' }, "<leader>'", browse('recall'))
