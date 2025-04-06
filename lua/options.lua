@@ -34,14 +34,6 @@ vim.opt.termguicolors = true
 vim.opt.swapfile = false
 vim.opt.backup = false
 
---diagnostic
-vim.diagnostic.config({
-	virtual_text = { current_line = true },
-	signs = false
-})
-
--- Keybinds
-
 vim.g.mapleader = " "
 -- Move selected
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")

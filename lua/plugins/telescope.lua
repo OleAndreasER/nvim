@@ -88,9 +88,10 @@ return {
 		vim.keymap.set({ 'n', 'v' }, '<leader>ag', ':Telescope advanced_git_search')
 		vim.keymap.set({ 'n', 'v' }, '<leader>G', browse('git_branch'))
 		vim.keymap.set({ 'n', 'v' }, "<leader>'", browse('recall'))
+		vim.keymap.set("x", "<C-s>", '"zy<Cmd>lua require("telescope.builtin").grep_string({search=vim.fn.getreg("z")})<CR>')
 		-- Quickfix
-		vim.keymap.set({ 'n', 'v' }, '<C-d>', '<CMD>cnext<CR>')
-		vim.keymap.set({ 'n', 'v' }, '<C-u>', '<CMD>cprevious<CR>')
+		vim.keymap.set({ 'n', 'v' }, '<C-x>', '<CMD>cnext<CR>')
+		vim.keymap.set({ 'n', 'v' }, '<C-z>', '<CMD>cprevious<CR>')
 
 		-- Custom grep
 		vim.keymap.set("n", "<leader>s", function(opts)
