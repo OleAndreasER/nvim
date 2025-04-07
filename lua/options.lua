@@ -72,4 +72,4 @@ vim.keymap.set('n', 'dh', ':noh<cr>', { silent = true })
 -- Macros
 vim.keymap.set('n', '<leader>pc', 'oconsole.log( `<esc>pA`, <esc>pA );<esc>0')
 -- Alternate file
-vim.keymap.set({'v', 'n'}, '<C-c>', ':e#<cr>zzzv')
+vim.keymap.set({'v', 'n'}, '<C-c>', ':e#<cr>zzzv', { silent = true })
