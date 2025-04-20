@@ -7,7 +7,7 @@ return {
 				theme = 'auto',
 				component_separators = { left = '', right = ''},
 				section_separators = { left = '', right = ''},
-				disabled_filetypes = { 'neo-tree' },
+				disabled_filetypes = { },
 			},
 			sections = {
 				lualine_a = {},
@@ -61,5 +61,14 @@ return {
 			},
 			extensions = { }
 		})
+
+		vim.api.nvim_set_hl(0, "lualine_c_normal", {
+			fg = "",
+			bg = "",
+			italic = false,
+			underline = false,
+			sp = "",
+		})
+
 	end,
 }

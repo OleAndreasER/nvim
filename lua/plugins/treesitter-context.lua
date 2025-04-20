@@ -21,5 +21,14 @@ return {
 			zindex = 20,
 			mode = 'cursor',
 		})
+
+		vim.api.nvim_set_hl(0, "TreesitterContext", {
+			fg = "",
+			bg = "",
+			italic = false,
+			underline = false,
+			sp = "",
+		})
+
 	end,
 };

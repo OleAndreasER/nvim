@@ -73,3 +73,7 @@ vim.keymap.set('n', 'dh', ':noh<cr>', { silent = true })
 vim.keymap.set('n', '<leader>pc', 'oconsole.log( `<esc>pA`, <esc>pA );<esc>0')
 -- Alternate file
 vim.keymap.set({'v', 'n'}, '<C-c>', ':e#<cr>zzzv', { silent = true })
+-- Don't leave visual
+vim.keymap.set('v', '>', '>gv', { silent = true })
+vim.keymap.set('v', '<', '<gv', { silent = true })
+
