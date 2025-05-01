@@ -1,5 +1,6 @@
 return {
 	'nvim-lualine/lualine.nvim',
+	dependencies = "chrisgrieser/nvim-recorder",
 	config = function()
 		require('lualine').setup({
 			options = {
@@ -36,7 +37,7 @@ return {
 						},
 					},
 				},
-				lualine_b = {},
+				lualine_b = { require("recorder").recordingStatus },
 				lualine_c = {},
 				lualine_x = {'branch'},
 				lualine_y = {},
