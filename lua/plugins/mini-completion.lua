@@ -16,15 +16,6 @@ return {
 				process_items = nil,
 				snippet_insert = nil,
 			},
-			fallback_action = '<C-n>',
-
-			mappings = {
-				force_twostep = '<C-Space>',
-				force_fallback = '<A-Space>',
-
-				scroll_down = '<C-f>',
-				scroll_up = '<C-b>',
-			},
 
 			set_vim_settings = true,
 		})

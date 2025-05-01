@@ -61,7 +61,7 @@ vim.keymap.set('n', '<C-j>', function() vim.lsp.buf.hover() end)
 vim.keymap.set('n', 'ø', '<C-w>l')
 vim.keymap.set('n', 'å', '<C-w>h')
 vim.keymap.set('n', '<C-g>', '<C-w>k')
-vim.keymap.set('n', '<C-b>', '<C-w>j')
+--vim.keymap.set('n', '<C-b>', '<C-w>j')
 -- Write
 vim.keymap.set({'v', 'n'}, '<leader>w', ':w<cr>', { silent = true })
 vim.keymap.set({'v', 'n'}, '<leader>W', ':wa<cr>', { silent = true })
@@ -73,4 +73,3 @@ vim.keymap.set('n', 'dh', ':noh<cr>', { silent = true })
 vim.keymap.set('n', '<leader>pc', 'oconsole.log( `<esc>pA`, <esc>pA );<esc>0')
 -- Alternate file
 vim.keymap.set({'v', 'n'}, '<C-c>', ':e#<cr>zzzv', { silent = true })
-
