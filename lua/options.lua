@@ -46,8 +46,8 @@ vim.keymap.set("n", "#", "#zzzv")
 vim.keymap.set("n", "G", "Gzzzv")
 
 vim.keymap.set(
-	'c', '<CR>',
-	function() return vim.fn.getcmdtype() == '/' and '<CR>zzzv' or '<CR>' end,
+	'c', '<cr>',
+	function() return vim.fn.getcmdtype() == '/' and '<cr>zzzv' or '<cr>' end,
 	{ expr = true }
 )
 -- Select all
