@@ -75,6 +75,12 @@ function update_quickfix_display()
 	for i, hl in ipairs(icon_hls) do
 		vim.api.nvim_buf_add_highlight(qfbuffer, nsqfbuffer, hl, i, 1, 2)
 	end
+
+	local current_entry_index = vim.fn.getqflist({ idx = 0 }).idx
+	if current_entry_index ~= 0 then
+		vim.api.nvim_buf_add_highlight(qfbuffer, nsqfbuffer, "Underlined", current_entry_index, 6, -1)
+	end
+
 end
 
 update_quickfix_display()

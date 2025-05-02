@@ -99,8 +99,8 @@ return {
 		vim.keymap.set({ 'n', 'v' }, "<leader>y", browse('recent_files'))
 		vim.keymap.set("x", "<C-s>", '"zy<Cmd>lua require("telescope.builtin").grep_string({search=vim.fn.getreg("z")})<CR><c-q>')
 		-- Quickfix
-		vim.keymap.set({ 'n', 'v' }, '<C-x>', '<CMD>cnext<CR>')
-		vim.keymap.set({ 'n', 'v' }, '<C-z>', '<CMD>cprevious<CR>')
+		vim.keymap.set({ 'n', 'v' }, '<C-x>', '<CMD>cnext<CR><CMD>lua update_quickfix_display()<CR>')
+		vim.keymap.set({ 'n', 'v' }, '<C-z>', '<CMD>cprevious<CR><CMD>lua update_quickfix_display()<CR>')
 
 		-- Custom grep
 		vim.keymap.set("n", "<leader>s", function(opts)
