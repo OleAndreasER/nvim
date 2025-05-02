@@ -1,3 +1,9 @@
+
+local function populate_quickfix(bufnr)
+	require('telescope.actions').send_to_qflist(bufnr)
+	vim.defer_fn(update_quickfix_display, 100)
+end
+
 return {
 	'nvim-telescope/telescope.nvim',
 	tag = '0.1.8',
@@ -49,10 +55,10 @@ return {
 				mappings = {
 					i = {
 						-- Send but don't open quickfix
-						["<C-q>"] = require('telescope.actions').send_to_qflist,
+						["<C-q>"] = populate_quickfix,
 					},
 					n = {
-						["<C-q>"] = require('telescope.actions').send_to_qflist,
+						["<C-q>"] = populate_quickfix,
 					}
 				}
 			},

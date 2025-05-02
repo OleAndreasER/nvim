@@ -43,6 +43,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 	end
 })
 
+
 Snacks.win({
 	buf = buffer,
 	position = "left",
@@ -50,4 +51,37 @@ Snacks.win({
 	enter = false,
 })
 
+-- Quickfix filenames
+local qfbuffer = vim.api.nvim_create_buf(false, true)
+local nsqfbuffer = vim.api.nvim_create_namespace("qfbuffer")
+
+function update_quickfix_display()
+	local icon_hls = {}
+	local filenames = { 'Quickfix' }
+	for _, item in ipairs(vim.fn.getqflist()) do
+		local filename = vim.fn.bufname(item.bufnr)
+		if filename ~= "" then
+			local modified = vim.fn.fnamemodify(filename, ":t")
+			local icon, hl = MiniIcons.get('file', modified)
+			local formatted_line = ' ' .. icon .. ' ' .. modified
+			table.insert(filenames, formatted_line)
+			table.insert(icon_hls, hl)
+		end
+	end
+
+	vim.api.nvim_buf_set_lines(qfbuffer, 0, -1, false, filenames)
+
+	vim.api.nvim_buf_add_highlight(qfbuffer, nsqfbuffer, "Title", 0, 0, -1)
+	for i, hl in ipairs(icon_hls) do
+		vim.api.nvim_buf_add_highlight(qfbuffer, nsqfbuffer, hl, i, 1, 2)
+	end
+end
+
+update_quickfix_display()
+
+Snacks.win({
+	buf = qfbuffer,
+	position = "left",
+	enter = false,
+})
 
