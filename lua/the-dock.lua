@@ -1,3 +1,4 @@
+-- Recent buffer split
 local buffer = vim.api.nvim_create_buf(false, true)
 local ns = vim.api.nvim_create_namespace("recent-buffers-split")
 
@@ -54,18 +55,28 @@ Snacks.win({
 -- Quickfix filenames
 local qfbuffer = vim.api.nvim_create_buf(false, true)
 local nsqfbuffer = vim.api.nvim_create_namespace("qfbuffer")
-
+local scrolloff = 6
 function update_quickfix_display()
 	local icon_hls = {}
-	local filenames = { 'Quickfix' }
-	for _, item in ipairs(vim.fn.getqflist()) do
-		local filename = vim.fn.bufname(item.bufnr)
-		if filename ~= "" then
-			local modified = vim.fn.fnamemodify(filename, ":t")
-			local icon, hl = MiniIcons.get('file', modified)
-			local formatted_line = ' ' .. icon .. ' ' .. modified
-			table.insert(filenames, formatted_line)
-			table.insert(icon_hls, hl)
+	local qflist = vim.fn.getqflist()
+
+	local title = vim.fn.getqflist({title = 1}).title
+	if title == '' then title = 'Quickfix' end
+	
+	local filenames = { '[' .. table.getn(qflist) .. '] ' .. title }
+
+	local current_entry_index = vim.fn.getqflist({ idx = 0 }).idx
+
+	for i, item in ipairs(qflist) do
+		if i > current_entry_index - scrolloff then
+			local filename = vim.fn.bufname(item.bufnr)
+			if filename ~= "" then
+				local modified = vim.fn.fnamemodify(filename, ":t")
+				local icon, hl = MiniIcons.get('file', modified)
+				local formatted_line = ' ' .. icon .. ' ' .. modified
+				table.insert(filenames, formatted_line)
+				table.insert(icon_hls, hl)
+			end
 		end
 	end
 
@@ -76,9 +87,12 @@ function update_quickfix_display()
 		vim.api.nvim_buf_add_highlight(qfbuffer, nsqfbuffer, hl, i, 1, 2)
 	end
 
-	local current_entry_index = vim.fn.getqflist({ idx = 0 }).idx
 	if current_entry_index ~= 0 then
-		vim.api.nvim_buf_add_highlight(qfbuffer, nsqfbuffer, "Underlined", current_entry_index, 6, -1)
+		local line_index = current_entry_index
+		if current_entry_index >= scrolloff then line_index = scrolloff end
+
+		vim.api.nvim_buf_add_highlight(qfbuffer, nsqfbuffer, "Special", line_index, 6, -1)
+		vim.api.nvim_buf_add_highlight(qfbuffer, nsqfbuffer, "Underlined", line_index, 6, -1)
 	end
 
 end

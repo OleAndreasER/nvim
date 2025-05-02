@@ -1,6 +1,6 @@
 
-local function populate_quickfix(bufnr)
-	require('telescope.actions').send_to_qflist(bufnr)
+local function populate_quickfix(args)
+	require('telescope.actions').send_to_qflist(args)
 	vim.defer_fn(update_quickfix_display, 100)
 end
 
@@ -89,7 +89,6 @@ return {
 		vim.keymap.set({ 'n', 'v' }, '<leader>r',  browse('lsp_references'))
 		vim.keymap.set({ 'n', 'v' }, '<leader>o',  browse('buffers'))
 		vim.keymap.set({ 'n', 'v' }, '<leader><leader>', browse('resume') )
-		vim.keymap.set({ 'n', 'v' }, '<leader>e', browse('diagnostics severity=error'))
 		vim.keymap.set({ 'n', 'v' }, '<leader>/', browse('project'))
 		vim.keymap.set({ 'n', 'v' }, '<leader>l', browse('diagnostics severity=error'))
 		vim.keymap.set({ 'n', 'v' }, '<leader>ag', ':Telescope advanced_git_search')
@@ -98,7 +97,7 @@ return {
 		vim.keymap.set({ 'n', 'v' }, "<leader>'", browse('recall'))
 		vim.keymap.set({ 'n', 'v' }, "<leader>y", browse('recent_files'))
 		vim.keymap.set("x", "<C-s>", '"zy<Cmd>lua require("telescope.builtin").grep_string({search=vim.fn.getreg("z")})<CR><c-q>')
-		-- Quickfix
+		-- Quickfix (I think there was a reason to put this here I don't remember)
 		vim.keymap.set({ 'n', 'v' }, '<C-x>', '<CMD>cnext<CR><CMD>lua update_quickfix_display()<CR>')
 		vim.keymap.set({ 'n', 'v' }, '<C-z>', '<CMD>cprevious<CR><CMD>lua update_quickfix_display()<CR>')
 

@@ -35,9 +35,6 @@ vim.opt.swapfile = false
 vim.opt.backup = false
 
 vim.g.mapleader = " "
--- Move selected
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 -- Don't use scrolloff on mouse clicks
 vim.keymap.set("n", "<LeftMouse>", ":let temp=&so<cr>:let &so=0<cr><LeftMouse>:let &so=temp<cr>", {silent = true})
 -- Center
@@ -69,7 +66,13 @@ vim.keymap.set({'v', 'n'}, '<leader>Q', ':wqa!<cr>', { silent = true })
 vim.keymap.set({'v', 'n'}, '<leader>q', ':q!<cr>', { silent = true })
 -- Highlights
 vim.keymap.set('n', 'dh', ':noh<cr>', { silent = true })
--- Macros
+-- Macro commands
 vim.keymap.set('n', '<leader>pc', 'oconsole.log( `<esc>pA`, <esc>pA );<esc>0')
--- Alternate file
-vim.keymap.set({'v', 'n'}, '<C-c>', ':e#<cr>zzzv', { silent = true })
+-- Diagnostics
+vim.keymap.set({'v','n'}, '<leader>e', function ()
+	vim.diagnostic.setqflist({
+		open = false,
+		severity = vim.diagnostic.severity.ERROR,
+	})
+	update_quickfix_display()
+end, { silent = true } )

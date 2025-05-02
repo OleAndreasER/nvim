@@ -20,9 +20,8 @@ vim.api.nvim_set_hl(0, "TelescopeSelectionCaret", { link = "TelescopeNormal" })
 vim.api.nvim_set_hl(0, "TelescopePromptCounter", { link = "TelescopeNormal" })
 
 vim.api.nvim_set_hl(0, "Search", {
-	fg = "",
-	bg = "",
-	underline= true,
+	fg = "#000000",
+	bg = "#FFFFFF",
 })
 vim.api.nvim_set_hl(0, "CurSearch", { link = "Search" })
 vim.api.nvim_set_hl(0, "IncSearch", { link = "Search" })
