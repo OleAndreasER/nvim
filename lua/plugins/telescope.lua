@@ -54,7 +54,6 @@ return {
 				},
 				mappings = {
 					i = {
-						-- Send but don't open quickfix
 						["<C-q>"] = populate_quickfix,
 					},
 					n = {
@@ -87,14 +86,11 @@ return {
 		vim.keymap.set({ 'n', 'v' }, '<leader>d', search("lsp_definitions"))
 		vim.keymap.set({ 'n', 'v' }, '<leader>f', search("find_files"))
 		vim.keymap.set({ 'n', 'v' }, '<leader>r',  browse('lsp_references'))
-		vim.keymap.set({ 'n', 'v' }, '<leader>o',  browse('buffers'))
 		vim.keymap.set({ 'n', 'v' }, '<leader><leader>', browse('resume') )
 		vim.keymap.set({ 'n', 'v' }, '<leader>/', browse('project'))
-		vim.keymap.set({ 'n', 'v' }, '<leader>l', browse('diagnostics severity=error'))
 		vim.keymap.set({ 'n', 'v' }, '<leader>ag', ':Telescope advanced_git_search')
 		vim.keymap.set({ 'n', 'v' }, '<leader>b', search('git_branches'))
 		vim.keymap.set({ 'n', 'v' }, "<leader>'", browse('recall'))
-		vim.keymap.set({ 'n', 'v' }, "<leader>y", browse('recent_files'))
 		vim.keymap.set("x", "<C-s>", '"zy<Cmd>lua require("telescope.builtin").grep_string({search=vim.fn.getreg("z")})<cr><c-q>')
 		-- Quickfix (I think there was a reason to put this here I don't remember)
 		vim.keymap.set({ 'n', 'v' }, '<C-x>', '<cmd>cnext<cr><cmd>lua update_quickfix_display()<cr>')
