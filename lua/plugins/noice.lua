@@ -27,6 +27,26 @@ return {
 				inc_rename = true,
 				lsp_doc_border = true,
 			},
+			cmdline = {
+				view = "cmdline_popup",
+				format= {
+					cmdline = { conceal = false },
+					search_down = { conceal = false },
+					search_up = { conceal = false },
+					filter = { conceal = false },
+					lua = { conceal = false },
+					help = { conceal = false },
+					input = { conceal = false },
+				}
+			},
+			views = {
+				cmdline_popup = {
+					position = {
+						row = "40%",
+						col = "50%",
+					},
+				},
+			}
 		})
 	end
 }
