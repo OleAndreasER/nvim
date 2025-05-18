@@ -10,15 +10,13 @@ return {
 	},
 	config = function()
 		require("cmp").setup({
-			snippet = {
-			},
-			window = {
-			},
+			snippet = {},
+			window = {},
 			mapping = require("cmp").mapping.preset.insert({
-				['<Tab>'] = require("cmp").mapping.select_next_item({ behavior = require("cmp").SelectBehavior.Select }),
-				['<Enter>'] = require("cmp").mapping.confirm({
+				["<Tab>"] = require("cmp").mapping.select_next_item({ behavior = require("cmp").SelectBehavior.Select }),
+				["<Enter>"] = require("cmp").mapping.confirm({
 					behavior = require("cmp").ConfirmBehavior.Insert,
-					select = true
+					select = true,
 				}),
 			}),
 			sources = require("cmp").config.sources({

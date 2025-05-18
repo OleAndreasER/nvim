@@ -23,7 +23,7 @@ return {
 		input = { enabled = false },
 		picker = {
 			layout = {
-				preset = 'dropdown_main_preview',
+				preset = "dropdown_main_preview",
 				cycle = false,
 			},
 			layouts = {
@@ -37,7 +37,13 @@ return {
 						height = 0.4,
 						border = "none",
 						box = "vertical",
-						{ win = "input", height = 1, border = "rounded", title = "{title} {live} {flags}", title_pos = "center" },
+						{
+							win = "input",
+							height = 1,
+							border = "rounded",
+							title = "{title} {live} {flags}",
+							title_pos = "center",
+						},
 						{ win = "list", border = "hpad" },
 						{ win = "preview", title = "{preview}", border = "rounded" },
 					},
@@ -71,7 +77,13 @@ return {
 						height = 0.6,
 						border = "none",
 						box = "vertical",
-						{ win = "input", height = 1, border = "rounded", title = "{title} {live} {flags}", title_pos = "center" },
+						{
+							win = "input",
+							height = 1,
+							border = "rounded",
+							title = "{title} {live} {flags}",
+							title_pos = "center",
+						},
 						{ win = "list", border = "hpad" },
 						{ win = "preview", title = "{preview}", border = "rounded" },
 					},
@@ -125,7 +137,7 @@ return {
 
 						vim.cmd("vert help " .. item.text)
 					end
-				end
+				end,
 			},
 		},
 		notifier = { enabled = true },
@@ -137,41 +149,91 @@ return {
 		indent = {
 			animate = { enabled = false },
 			scope = { enabled = false },
-		}
+		},
 	},
+
 	keys = {
-		{ "<leader>s", function() Snacks.picker.grep({
-			layout = 'ivy_split',
-			finder = "grep",
-			regex = false,
-			format = "file",
-			show_empty = true,
-			live = true,
-			supports_live = true,
-			hidden = true,
-			ignored = true,
-			exclude = exclude,
-		}) end },
+		{
+			"<leader>s",
+			function()
+				Snacks.picker.grep({
+					layout = "ivy_split",
+					finder = "grep",
+					regex = false,
+					format = "file",
+					show_empty = true,
+					live = true,
+					supports_live = true,
+					hidden = true,
+					ignored = true,
+					exclude = exclude,
+				})
+			end,
+		},
 
-		{ "<leader>f", function() Snacks.picker.files({
-			finder = "files",
-			format = "file",
-			show_empty = true,
-			hidden = true,
-			ignored = true,
-			follow = false,
-			supports_live = true,
-			exclude = exclude,
-		}) end },
+		{
+			"<leader>f",
+			function()
+				Snacks.picker.files({
+					finder = "files",
+					format = "file",
+					show_empty = true,
+					hidden = true,
+					ignored = true,
+					follow = false,
+					supports_live = true,
+					exclude = exclude,
+				})
+			end,
+		},
 
-
-		{ "<leader>G", function() Snacks.picker.git_status({ focus = 'list' }) end },
-		{ "<leader>b", function() Snacks.picker.git_branches({ layout = 'wide_dropdown_main_preview' }) end },
-		{ "<leader>/", function() Snacks.picker.lines() end },
-		{ "<leader>h", function() Snacks.picker.help() end },
-		{ "<leader><space>", function() Snacks.picker.resume() end },
-		{ "<leader>d", function() Snacks.picker.lsp_definitions({ focus = 'list'}) end },
-		{ "<leader>r", function() Snacks.picker.lsp_references({ focus = 'list' }) end },
-		{ "<leader>l", function() Snacks.picker.lazy() end },
+		{
+			"<leader>G",
+			function()
+				Snacks.picker.git_status({ focus = "list" })
+			end,
+		},
+		{
+			"<leader>b",
+			function()
+				Snacks.picker.git_branches({ layout = "wide_dropdown_main_preview" })
+			end,
+		},
+		{
+			"<leader>/",
+			function()
+				Snacks.picker.lines()
+			end,
+		},
+		{
+			"<leader>h",
+			function()
+				Snacks.picker.help()
+			end,
+		},
+		{
+			"<leader><space>",
+			function()
+				Snacks.picker.resume()
+			end,
+		},
+		{
+			"<leader>d",
+			function()
+				Snacks.picker.lsp_definitions({ focus = "list" })
+			end,
+		},
+		{
+			"<leader>r",
+			function()
+				Snacks.picker.lsp_references({ focus = "list" })
+			end,
+		},
+		{
+			"<leader>l",
+			function()
+				Snacks.picker.lazy()
+			end,
+		},
 	},
 }

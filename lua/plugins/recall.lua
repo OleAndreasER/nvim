@@ -1,9 +1,9 @@
 return {
-	'fnune/recall.nvim',
-	config = function ()
+	"fnune/recall.nvim",
+	config = function()
 		require("recall").setup({
 			sign = "",
-			sign_highlight = '',
+			sign_highlight = "",
 			telescope = {
 				autoload = true,
 				mappings = {
@@ -19,6 +19,5 @@ return {
 		vim.keymap.set("n", "dm", ":RecallClear<cr>", { noremap = true, silent = true })
 		vim.keymap.set("n", "'", ":RecallNext<cr>", { noremap = true, silent = true })
 		vim.keymap.set("n", '"', ":RecallPrevious<cr>", { noremap = true, silent = true })
-	end
+	end,
 }
-

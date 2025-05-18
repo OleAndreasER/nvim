@@ -1,21 +1,20 @@
 return {
-	'echasnovski/mini.operators',
+	"echasnovski/mini.operators",
 	version = false,
-	config = function ()
-		require('mini.operators').setup({
+	config = function()
+		require("mini.operators").setup({
 
 			-- Multiply (duplicate) text
 			multiply = {
-				prefix = 'M',
+				prefix = "M",
 				func = nil,
 			},
 
 			-- Replace text with register
 			replace = {
-				prefix = 'R',
+				prefix = "R",
 				reindent_linewise = true,
 			},
-
 		})
-	end
+	end,
 }

@@ -1,14 +1,14 @@
 return {
-	'nvim-lualine/lualine.nvim',
+	"nvim-lualine/lualine.nvim",
 	dependencies = "chrisgrieser/nvim-recorder",
 	config = function()
-		require('lualine').setup({
+		require("lualine").setup({
 			options = {
 				icons_enabled = true,
-				theme = 'auto',
-				component_separators = { left = '', right = ''},
-				section_separators = { left = '', right = ''},
-				disabled_filetypes = { },
+				theme = "auto",
+				component_separators = { left = "", right = "" },
+				section_separators = { left = "", right = "" },
+				disabled_filetypes = {},
 			},
 			sections = {
 				lualine_a = {},
@@ -16,7 +16,7 @@ return {
 				lualine_c = {},
 				lualine_x = {},
 				lualine_y = {},
-				lualine_z = {}
+				lualine_z = {},
 			},
 			inactive_sections = {
 				lualine_a = {},
@@ -24,33 +24,33 @@ return {
 				lualine_c = {},
 				lualine_x = {},
 				lualine_y = {},
-				lualine_z = {}
+				lualine_z = {},
 			},
 			winbar = {
 				lualine_a = {
 					{
-						'filename',
+						"filename",
 						symbols = {
-							unnamed = '',
+							unnamed = "",
 							modified = modifiedSymbol,
-							readonly = '',
+							readonly = "",
 						},
 					},
 				},
 				lualine_b = { require("recorder").recordingStatus },
 				lualine_c = {},
-				lualine_x = {'branch'},
+				lualine_x = { "branch" },
 				lualine_y = {},
-				lualine_z = {}
+				lualine_z = {},
 			},
 			inactive_winbar = {
 				lualine_a = {
 					{
-						'filename',
+						"filename",
 						symbols = {
-							unnamed = '',
+							unnamed = "",
 							modified = modifiedSymbol,
-							readonly = '',
+							readonly = "",
 						},
 					},
 				},
@@ -58,9 +58,9 @@ return {
 				lualine_c = {},
 				lualine_x = {},
 				lualine_y = {},
-				lualine_z = {}
+				lualine_z = {},
 			},
-			extensions = { }
+			extensions = {},
 		})
 
 		vim.api.nvim_set_hl(0, "lualine_c_normal", {
@@ -70,6 +70,5 @@ return {
 			underline = false,
 			sp = "",
 		})
-
 	end,
 }

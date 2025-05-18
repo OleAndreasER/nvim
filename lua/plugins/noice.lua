@@ -1,8 +1,7 @@
 return {
 	"folke/noice.nvim",
 	event = "VeryLazy",
-	opts = {
-	},
+	opts = {},
 	dependencies = {
 		"MunifTanjim/nui.nvim",
 		-- OPTIONAL:
@@ -29,7 +28,7 @@ return {
 			},
 			cmdline = {
 				view = "cmdline_popup",
-				format= {
+				format = {
 					cmdline = { conceal = false },
 					search_down = { conceal = false },
 					search_up = { conceal = false },
@@ -37,7 +36,7 @@ return {
 					lua = { conceal = false },
 					help = { conceal = false },
 					input = { conceal = false },
-				}
+				},
 			},
 			views = {
 				cmdline_popup = {
@@ -46,7 +45,7 @@ return {
 						col = "50%",
 					},
 				},
-			}
+			},
 		})
-	end
+	end,
 }

@@ -1,11 +1,11 @@
 return {
-	'stevearc/oil.nvim',
-	dependencies = { 'nvim-tree/nvim-web-devicons' },
+	"stevearc/oil.nvim",
+	dependencies = { "nvim-tree/nvim-web-devicons" },
 	config = function()
 		local oil = require("oil")
 		oil.setup({
 			columns = {
-				"icon"
+				"icon",
 			},
 			default_file_explorer = false,
 			watch_for_changes = true,
@@ -13,7 +13,7 @@ return {
 				["<C-s>"] = { "actions.select", opts = { vertical = true } },
 				["-"] = "actions.parent",
 				["g."] = "actions.toggle_hidden",
-				["<esc>"] = "actions.close"
+				["<esc>"] = "actions.close",
 			},
 			float = {
 				border = "rounded",
@@ -22,8 +22,8 @@ return {
 				win_options = {
 					winblend = 0,
 				},
-				get_win_title = function ()
-					return ''
+				get_win_title = function()
+					return ""
 				end,
 
 				-- Place at cursor
@@ -31,7 +31,7 @@ return {
 					local row, col = unpack(vim.api.nvim_win_get_position(0))
 					conf.col = col
 					conf.row = row
-					conf.relative = 'cursor'
+					conf.relative = "cursor"
 					return conf
 				end,
 			},
@@ -39,7 +39,7 @@ return {
 				show_hidden = true,
 				-- This function defines what will never be shown, even when `show_hidden` is set
 				is_always_hidden = function(name, bufnr)
-					return name == '.git' or name == '..' 
+					return name == ".git" or name == ".."
 				end,
 				sort = {
 					{ "type", "asc" },
@@ -48,5 +48,5 @@ return {
 			},
 		})
 		vim.keymap.set("n", "-", oil.open_float)
-	end
+	end,
 }

@@ -1,15 +1,15 @@
 return {
-	'nvim-treesitter/nvim-treesitter-context',
+	"nvim-treesitter/nvim-treesitter-context",
 	config = function()
-		require('treesitter-context').setup({
+		require("treesitter-context").setup({
 			enable = true,
 			max_lines = 0,
-			trim_scope = 'outer',
+			trim_scope = "outer",
 			patterns = {
 				default = {
-					'class',
-					'function',
-					'method',
+					"class",
+					"function",
+					"method",
 					-- 'for', -- These won't appear in the context
 					-- 'while',
 					-- 'if',
@@ -19,7 +19,7 @@ return {
 			},
 			exact_patterns = {},
 			zindex = 20,
-			mode = 'cursor',
+			mode = "cursor",
 		})
 
 		vim.api.nvim_set_hl(0, "TreesitterContext", {
@@ -29,6 +29,5 @@ return {
 			underline = false,
 			sp = "",
 		})
-
 	end,
-};
+}

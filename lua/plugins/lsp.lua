@@ -18,7 +18,7 @@ return {
 					require("lspconfig")[server_name].setup({})
 				end,
 
-				['eslint'] = function()
+				["eslint"] = function()
 					require("lspconfig").eslint.setup({})
 					vim.api.nvim_create_autocmd("BufWritePre", {
 						buffer = bufnr,
@@ -27,25 +27,23 @@ return {
 					})
 				end,
 
-				['denols'] = function ()
-					require("lspconfig").denols.setup({})
-				end,
-
-				['ts_ls'] = function ()
+				["ts_ls"] = function()
 					require("lspconfig").ts_ls.setup({
-						filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+						filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
 						init_options = {
 							plugins = {
 								-- https://github.com/vuejs/language-tools
 								{
-									name = '@vue/typescript-plugin',
-									location = require('mason-registry').get_package('vue-language-server'):get_install_path() .. '/node_modules/@vue/language-server',
-									languages = { 'vue' },
+									name = "@vue/typescript-plugin",
+									location = require("mason-registry")
+										.get_package("vue-language-server")
+										:get_install_path() .. "/node_modules/@vue/language-server",
+									languages = { "vue" },
 								},
-							}
-						}
+							},
+						},
 					})
-				end
+				end,
 			})
 		end,
 	},
