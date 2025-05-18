@@ -1,4 +1,9 @@
 return {
-	"brenoprata10/nvim-highlight-colors",
-    opts = {},
+	'norcalli/nvim-colorizer.lua',
+	config = function ()
+		require('colorizer').setup({
+			'css',
+			'scss'
+		})
+	end
 }
