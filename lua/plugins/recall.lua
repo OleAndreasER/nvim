@@ -4,15 +4,6 @@ return {
 		require("recall").setup({
 			sign = "",
 			sign_highlight = "",
-			telescope = {
-				autoload = true,
-				mappings = {
-					unmark_selected_entry = {
-						normal = "d",
-						insert = "",
-					},
-				},
-			},
 			wshada = false,
 		})
 		vim.keymap.set("n", "m", ":RecallToggle<cr>", { noremap = true, silent = true })

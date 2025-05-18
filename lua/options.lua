@@ -6,7 +6,7 @@ vim.opt.softtabstop = tab_spaces
 vim.opt.smartindent = true
 vim.opt.autoindent = true
 
--- Left side 
+-- Left side
 vim.opt.number = false
 vim.opt.relativenumber = false
 vim.opt.signcolumn = "yes:1"
@@ -34,14 +34,10 @@ vim.opt.termguicolors = true
 vim.opt.swapfile = false
 vim.opt.backup = false
 
-
 -- Keymaps
 --
--- Available: 
+-- Available:
 -- s
--- ;
--- ' " (taken but can be different)
--- m (taken but can be different)
 -- H
 -- L
 -- X
@@ -57,37 +53,40 @@ vim.keymap.set("n", "*", "*zzzv")
 vim.keymap.set("n", "#", "#zzzv")
 vim.keymap.set("n", "G", "Gzzzv")
 
-vim.keymap.set(
-	'c', '<cr>',
-	function() return vim.fn.getcmdtype() == '/' and '<cr>zzzv' or '<cr>' end,
-	{ expr = true }
-)
--- Select all
-vim.keymap.set('n', "<C-a>", 'ggVG')
+vim.keymap.set("c", "<cr>", function()
+	return vim.fn.getcmdtype() == "/" and "<cr>zzzv" or "<cr>"
+end, { expr = true })
 -- LSP Hover
-vim.keymap.set('n', '<C-j>', function() vim.lsp.buf.hover() end)
+vim.keymap.set("n", "<C-j>", function()
+	vim.lsp.buf.hover()
+end)
 -- Split Window Movement
-vim.keymap.set('n', 'ø', '<C-w>l')
-vim.keymap.set('n', 'å', '<C-w>h')
-vim.keymap.set('n', '<C-g>', '<C-w>k')
+vim.keymap.set("n", "ø", "<C-w>l")
+vim.keymap.set("n", "å", "<C-w>h")
+vim.keymap.set("n", "<C-g>", "<C-w>k")
 --vim.keymap.set('n', '<C-b>', '<C-w>j')
 -- Write
-vim.keymap.set({'v', 'n'}, '<leader>w', ':w<cr>', { silent = true })
-vim.keymap.set({'v', 'n'}, '<leader>W', ':wa<cr>', { silent = true })
-vim.keymap.set({'v', 'n'}, '<leader>Q', ':wqa!<cr>', { silent = true })
-vim.keymap.set({'v', 'n'}, '<leader>q', ':q!<cr>', { silent = true })
+vim.keymap.set({ "v", "n" }, "<leader>w", ":w<cr>", { silent = true })
+vim.keymap.set({ "v", "n" }, "<leader>W", ":wa<cr>", { silent = true })
+vim.keymap.set({ "v", "n" }, "<leader>Q", ":wqa!<cr>", { silent = true })
+vim.keymap.set({ "v", "n" }, "<leader>q", ":q!<cr>", { silent = true })
 -- Highlights
-vim.keymap.set('n', 'dh', ':noh<cr>', { silent = true })
+vim.keymap.set("n", "dh", ":noh<cr>", { silent = true })
 -- Macro commands
-vim.keymap.set('n', '<leader>pc', 'oconsole.log( `<esc>pA`, <esc>pA );<esc>0')
+vim.keymap.set("n", "<leader>pc", "oconsole.log( `<esc>pA`, <esc>pA );<esc>0")
 -- Diagnostics
-vim.keymap.set({'v','n'}, '<leader>e', function ()
+vim.keymap.set({ "v", "n" }, "<leader>e", function()
 	vim.diagnostic.setqflist({
 		open = false,
 		severity = vim.diagnostic.severity.ERROR,
 	})
 	update_quickfix_display()
-end, { silent = true } )
+end, { silent = true })
 -- Qflist
-vim.keymap.set({ 'n', 'v' }, '<C-x>', '<cmd>cnext<cr><cmd>lua update_quickfix_display()<cr>')
-vim.keymap.set({ 'n', 'v' }, '<C-z>', '<cmd>cprevious<cr><cmd>lua update_quickfix_display()<cr>')
+vim.keymap.set({ "n", "v" }, "<C-x>", "<cmd>cnext<cr><cmd>lua update_quickfix_display()<cr>")
+vim.keymap.set({ "n", "v" }, "<C-z>", "<cmd>cprevious<cr><cmd>lua update_quickfix_display()<cr>")
+--Buffer g "textobject"
+vim.keymap.set("n", "yig", ":%y<cr>", { silent = true })
+vim.keymap.set("n", "yag", ":%y<cr>", { silent = true })
+vim.keymap.set("n", "vag", "ggVG", { silent = true })
+vim.keymap.set("n", "vig", "ggVG", { silent = true })
