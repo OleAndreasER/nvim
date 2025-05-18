@@ -5,14 +5,7 @@ return {
 		attempt.setup({
 			ext_options = { "", "js", "ts" },
 			format_opts = { [""] = "Note" },
-			run = {
-				js = { "w !node" },
-				ts = { "w !yarn tsx" },
-			},
 		})
-
-		vim.keymap.set("n", "<leader>an", attempt.new_input_ext)
-		vim.keymap.set("n", "<leader>ar", attempt.run)
-		vim.keymap.set("n", "<leader>ad", attempt.delete_buf)
+		vim.keymap.set("n", "<leader>a", attempt.new_input_ext)
 	end,
 }
