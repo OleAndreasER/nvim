@@ -11,18 +11,18 @@ vim.api.nvim_create_autocmd("BufEnter", {
 			table.insert(rjumplist, jumplist[1][i])
 		end
 
-		local lines = { 'Recent files' }
-		
-		local icon_hls = { }
+		local lines = { "Recent files" }
 
-		local current_index = # jumplist[1] - jumplist[2]
+		local icon_hls = {}
+
+		local current_index = #jumplist[1] - jumplist[2]
 
 		-- TODO ?
 
 		-- local current_file = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":t")
 		-- if current_index == 0 then
 		-- 	local current_icon, current_hl  = MiniIcons.get('file', current_file)
-		-- 	local current_formatted_line = ' ' .. current_icon .. ' ' .. current_file 
+		-- 	local current_formatted_line = ' ' .. current_icon .. ' ' .. current_file
 		-- 	table.insert(lines, current_formatted_line)
 		-- 	table.insert(icon_hls, current_hl)
 		-- end
@@ -30,19 +30,26 @@ vim.api.nvim_create_autocmd("BufEnter", {
 		local previous_bufnr = -1
 		local file_current_index = 0
 		for i, entry in ipairs(rjumplist) do
-			if (previous_bufnr == entry.bufnr) then
+			if previous_bufnr == entry.bufnr then
 				goto continue
 			end
 			if i < current_index then
 				file_current_index = file_current_index + 1
 			end
 			previous_bufnr = entry.bufnr
-		    local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(entry.bufnr), ":t")
 
-			local icon, hl = MiniIcons.get('file', filename)
-			local formatted_line = ' ' .. icon .. ' ' .. filename
-			table.insert(lines, formatted_line)
+			local path = vim.api.nvim_buf_get_name(entry.bufnr)
+			local filename = ""
+			if path:find("^fugitive") then
+				filename = "Git status"
+			else
+				filename = vim.fn.fnamemodify(path, ":t")
+			end
+
+			local icon, hl = MiniIcons.get("file", filename)
+			local filename_line = " " .. icon .. " " .. filename
 			table.insert(icon_hls, hl)
+			table.insert(lines, filename_line)
 
 			::continue::
 		end
@@ -55,9 +62,8 @@ vim.api.nvim_create_autocmd("BufEnter", {
 		for i, hl in ipairs(icon_hls) do
 			vim.api.nvim_buf_add_highlight(buffer, ns, hl, i, 1, 2)
 		end
-	end
+	end,
 })
-
 
 Snacks.win({
 	buf = buffer,
@@ -74,10 +80,12 @@ function update_quickfix_display()
 	local icon_hls = {}
 	local qflist = vim.fn.getqflist()
 
-	local title = vim.fn.getqflist({title = 1}).title
-	if title == '' then title = 'Quickfix' end
-	
-	local filenames = { '[' .. table.getn(qflist) .. '] ' .. title }
+	local title = vim.fn.getqflist({ title = 1 }).title
+	if title == "" then
+		title = "Quickfix"
+	end
+
+	local filenames = { "[" .. table.getn(qflist) .. "] " .. title }
 
 	local current_entry_index = vim.fn.getqflist({ idx = 0 }).idx
 
@@ -86,8 +94,8 @@ function update_quickfix_display()
 			local filename = vim.fn.bufname(item.bufnr)
 			if filename ~= "" then
 				local modified = vim.fn.fnamemodify(filename, ":t")
-				local icon, hl = MiniIcons.get('file', modified)
-				local formatted_line = ' ' .. icon .. ' ' .. modified
+				local icon, hl = MiniIcons.get("file", modified)
+				local formatted_line = " " .. icon .. " " .. modified
 				table.insert(filenames, formatted_line)
 				table.insert(icon_hls, hl)
 			end
@@ -103,12 +111,13 @@ function update_quickfix_display()
 
 	if current_entry_index ~= 0 then
 		local line_index = current_entry_index
-		if current_entry_index >= scrolloff then line_index = scrolloff end
+		if current_entry_index >= scrolloff then
+			line_index = scrolloff
+		end
 
 		vim.api.nvim_buf_add_highlight(qfbuffer, nsqfbuffer, "Special", line_index, 6, -1)
 		vim.api.nvim_buf_add_highlight(qfbuffer, nsqfbuffer, "Underlined", line_index, 6, -1)
 	end
-
 end
 
 update_quickfix_display()
@@ -118,4 +127,3 @@ Snacks.win({
 	position = "left",
 	enter = false,
 })
-
