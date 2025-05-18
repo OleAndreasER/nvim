@@ -1,0 +1,41 @@
+return {
+	"hrsh7th/nvim-cmp",
+	dependencies = {
+		"hrsh7th/cmp-nvim-lsp",
+		"hrsh7th/cmp-nvim-lua",
+		"hrsh7th/cmp-buffer",
+		"hrsh7th/cmp-path",
+		"hrsh7th/cmp-cmdline",
+		"saadparwaiz1/cmp_luasnip",
+	},
+	config = function()
+		require("cmp").setup({
+			snippet = {
+			},
+			window = {
+			},
+			mapping = require("cmp").mapping.preset.insert({
+				['<Tab>'] = require("cmp").mapping.select_next_item({ behavior = require("cmp").SelectBehavior.Select }),
+				['<Enter>'] = require("cmp").mapping.confirm({
+					behavior = require("cmp").ConfirmBehavior.Insert,
+					select = true
+				}),
+			}),
+			sources = require("cmp").config.sources({
+				{ name = "nvim_lsp" },
+				{ name = "nvim_lua" },
+			}, {
+				{ name = "buffer" },
+				{ name = "path" },
+			}),
+		})
+		require("cmp").setup.cmdline(":", {
+			mapping = require("cmp").mapping.preset.cmdline(),
+			sources = require("cmp").config.sources({
+				{ name = "path" },
+			}, {
+				{ name = "cmdline" },
+			}),
+		})
+	end,
+}
