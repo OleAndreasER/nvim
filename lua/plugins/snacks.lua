@@ -43,6 +43,44 @@ return {
 						{ win = "preview", title = "{preview}", border = "rounded" },
 					},
 				},
+				ivy_split = {
+					preview = "main",
+					layout = {
+						box = "vertical",
+						backdrop = false,
+						width = 0,
+						height = 0.6,
+						position = "bottom",
+						border = "top",
+						title = " {title} {live} {flags}",
+						title_pos = "left",
+						{ win = "input", height = 1, border = "bottom" },
+						{
+							box = "horizontal",
+							{ win = "list", border = "none" },
+							{ win = "preview", title = "{preview}", width = 0.6, border = "left" },
+						},
+					},
+				},
+				wide_dropdown_main_preview = {
+					preview = "main",
+					layout = {
+						backdrop = false,
+						row = 1,
+						width = 0.2,
+						min_width = 80,
+						height = 0.6,
+						border = "none",
+						box = "vertical",
+						{ win = "input", height = 1, border = "rounded", title = "{title} {live} {flags}", title_pos = "center" },
+						{ win = "list", border = "hpad" },
+						{ win = "preview", title = "{preview}", border = "rounded" },
+					},
+				},
+			},
+			main = {
+				file = false,
+				current = true,
 			},
 			formatters = {
 				file = {
@@ -50,16 +88,45 @@ return {
 					filename_only = true,
 				},
 			},
-			matcher = {
-				fuzzy = true,
-				smartcase = false,
-				ignorecase = false,
-				sort_empty = false,
-				filename_bonus = true,
-				file_pos = true,
-				cwd_bonus = false,
-				frecency = false,
-				history_bonus = false,
+			actions = {
+				-- Override to not open qflist, to jump to first, and to update the sidebar qflist display
+				qflist = function(picker)
+					picker:close()
+					local sel = picker:selected()
+					local items = #sel > 0 and sel or picker:items()
+					local qf = {}
+					for _, item in ipairs(items) do
+						qf[#qf + 1] = {
+							filename = Snacks.picker.util.path(item),
+							bufnr = item.buf,
+							lnum = item.pos and item.pos[1] or 1,
+							col = item.pos and item.pos[2] + 1 or 1,
+							end_lnum = item.end_pos and item.end_pos[1] or nil,
+							end_col = item.end_pos and item.end_pos[2] + 1 or nil,
+							text = item.line or item.comment or item.label or item.name or item.detail or item.text,
+							pattern = item.search,
+							valid = true,
+						}
+						vim.fn.setqflist(qf)
+						update_quickfix_display()
+						vim.cmd("cfirst")
+					end
+				end,
+				-- Override to always open help in vertical split
+				help = function(picker, item, action)
+					if item then
+						picker:close()
+						local file = Snacks.picker.util.path(item) or ""
+						if package.loaded.lazy then
+							local plugin = file:match("/([^/]+)/doc/")
+							if plugin and require("lazy.core.config").plugins[plugin] then
+								require("lazy").load({ plugins = { plugin } })
+							end
+						end
+
+						vim.cmd("vert help " .. item.text)
+					end
+				end
 			},
 		},
 		notifier = { enabled = true },
@@ -68,7 +135,6 @@ return {
 		scroll = { enabled = false },
 		statuscolumn = { enabled = false },
 		words = { enabled = false },
-
 		indent = {
 			animate = { enabled = false },
 			scope = { enabled = false },
@@ -86,8 +152,6 @@ return {
 			hidden = true,
 			ignored = true,
 			exclude = exclude,
-			smartcase = false,
-			ignorecase = false,
 		}) end },
 
 		{ "<leader>f", function() Snacks.picker.files({
@@ -101,28 +165,14 @@ return {
 			exclude = exclude,
 		}) end },
 
-		{ "<leader>b", function() Snacks.picker.git_branches({
-			all = false,
-			finder = "git_branches",
-			format = "git_branch",
-			preview = "git_log",
-			confirm = "git_checkout",
-			win = {input = {keys = {}}},
-			on_show = function(picker) for i, item in ipairs(picker:items()) do if item.current then picker.list:view(i) Snacks.picker.actions.list_scroll_center(picker) break end end end,
-		}) end },
 
-		{ "<leader>G", function() Snacks.picker.git_status({
-			finder = "git_status",
-			format = "git_status",
-			preview = "git_status",
-			win = { input = { keys = { ["-"] = { "git_stage", mode = { "n", "i" } } } } },
-		}) end },
-
+		{ "<leader>G", function() Snacks.picker.git_status({ focus = 'list' }) end },
+		{ "<leader>b", function() Snacks.picker.git_branches({ layout = 'wide_dropdown_main_preview' }) end },
 		{ "<leader>/", function() Snacks.picker.lines() end },
 		{ "<leader>h", function() Snacks.picker.help() end },
 		{ "<leader><space>", function() Snacks.picker.resume() end },
-		{ "<leader>d", function() Snacks.picker.lsp_definitions() end },
-		{ "<leader>r", function() Snacks.picker.lsp_references() end },
+		{ "<leader>d", function() Snacks.picker.lsp_definitions({ focus = 'list'}) end },
+		{ "<leader>r", function() Snacks.picker.lsp_references({ focus = 'list' }) end },
 		{ "<leader>l", function() Snacks.picker.lazy() end },
 	},
 }

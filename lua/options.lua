@@ -88,3 +88,6 @@ vim.keymap.set({'v','n'}, '<leader>e', function ()
 	})
 	update_quickfix_display()
 end, { silent = true } )
+-- Qflist
+vim.keymap.set({ 'n', 'v' }, '<C-x>', '<cmd>cnext<cr><cmd>lua update_quickfix_display()<cr>')
+vim.keymap.set({ 'n', 'v' }, '<C-z>', '<cmd>cprevious<cr><cmd>lua update_quickfix_display()<cr>')

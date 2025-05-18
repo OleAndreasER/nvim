@@ -93,8 +93,6 @@ return {
 		-- vim.keymap.set({ 'n', 'v' }, "<leader>'", browse('recall'))
 		-- vim.keymap.set("x", "<C-s>", '"zy<Cmd>lua require("telescope.builtin").grep_string({search=vim.fn.getreg("z")})<cr><c-q>')
 		-- Quickfix (I think there was a reason to put this here I don't remember)
-		-- vim.keymap.set({ 'n', 'v' }, '<C-x>', '<cmd>cnext<cr><cmd>lua update_quickfix_display()<cr>')
-		-- vim.keymap.set({ 'n', 'v' }, '<C-z>', '<cmd>cprevious<cr><cmd>lua update_quickfix_display()<cr>')
 
 		-- Custom grep
 		-- vim.keymap.set("n", "<leader>s", function(opts)
