@@ -106,7 +106,7 @@ return {
 			finder = "git_branches",
 			format = "git_branch",
 			preview = "git_log",
-			confirm = "git_switch",
+			confirm = "git_checkout",
 			win = {input = {keys = {}}},
 			on_show = function(picker) for i, item in ipairs(picker:items()) do if item.current then picker.list:view(i) Snacks.picker.actions.list_scroll_center(picker) break end end end,
 		}) end },
