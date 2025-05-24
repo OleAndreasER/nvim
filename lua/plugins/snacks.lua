@@ -26,6 +26,9 @@ return {
 				preset = "dropdown_main_preview",
 				cycle = false,
 			},
+			matcher = {
+				frecency = true,
+			},
 			layouts = {
 				dropdown_main_preview = {
 					preview = "main",
