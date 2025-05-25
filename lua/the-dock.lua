@@ -1,17 +1,24 @@
 -- Recent buffers
-local buffer = vim.api.nvim_create_buf(false, true)
+local recent_files_buffer = vim.api.nvim_create_buf(false, true)
+vim.b[recent_files_buffer].should_not_be_enterable = true
+vim.api.nvim_buf_set_name(recent_files_buffer, "Recent files")
 local ns = vim.api.nvim_create_namespace("recent-buffers")
 
 vim.api.nvim_create_autocmd("BufEnter", {
 	pattern = "*",
 	callback = function()
+		local buf = vim.api.nvim_get_current_buf()
+		if vim.b[buf].should_not_be_enterable then
+			return
+		end
+
 		local jumplist = vim.fn.getjumplist()
 		local rjumplist = {}
 		for i = #jumplist[1], 1, -1 do
 			table.insert(rjumplist, jumplist[1][i])
 		end
 
-		local lines = { "Recent files" }
+		local lines = {}
 
 		local icon_hls = {}
 
@@ -54,28 +61,23 @@ vim.api.nvim_create_autocmd("BufEnter", {
 			::continue::
 		end
 
-		vim.api.nvim_buf_set_lines(buffer, 0, -1, false, lines)
-		vim.api.nvim_buf_add_highlight(buffer, ns, "Title", 0, 0, -1)
-		vim.api.nvim_buf_add_highlight(buffer, ns, "Underlined", 1 + file_current_index, 6, -1)
-		vim.api.nvim_buf_add_highlight(buffer, ns, "Special", 1 + file_current_index, 6, -1)
+		vim.api.nvim_buf_set_lines(recent_files_buffer, 0, -1, false, lines)
+		vim.api.nvim_buf_add_highlight(recent_files_buffer, ns, "Underlined", file_current_index, 6, -1)
+		vim.api.nvim_buf_add_highlight(recent_files_buffer, ns, "Special", file_current_index, 6, -1)
 
 		for i, hl in ipairs(icon_hls) do
-			vim.api.nvim_buf_add_highlight(buffer, ns, hl, i, 1, 2)
+			vim.api.nvim_buf_add_highlight(recent_files_buffer, ns, hl, i - 1, 1, 2)
 		end
 	end,
 })
 
-Snacks.win({
-	buf = buffer,
-	position = "left",
-	width = 0.12,
-	enter = false,
-})
-
 -- Quickfix filenames
-local qfbuffer = vim.api.nvim_create_buf(false, true)
+local qf_buffer = vim.api.nvim_create_buf(false, true)
+vim.b[qf_buffer].should_not_be_enterable = true
+vim.api.nvim_buf_set_name(qf_buffer, "Quickfix")
 local nsqfbuffer = vim.api.nvim_create_namespace("qfbuffer")
-local scrolloff = 6
+
+local scrolloff = 20
 function update_quickfix_display()
 	local icon_hls = {}
 	local qflist = vim.fn.getqflist()
@@ -85,7 +87,9 @@ function update_quickfix_display()
 		title = "Quickfix"
 	end
 
-	local filenames = { "[" .. table.getn(qflist) .. "] " .. title }
+	vim.api.nvim_buf_set_name(qf_buffer, "[" .. table.getn(qflist) .. "] " .. title )
+
+	local filenames = { }
 
 	local current_entry_index = vim.fn.getqflist({ idx = 0 }).idx
 
@@ -102,11 +106,10 @@ function update_quickfix_display()
 		end
 	end
 
-	vim.api.nvim_buf_set_lines(qfbuffer, 0, -1, false, filenames)
+	vim.api.nvim_buf_set_lines(qf_buffer, 0, -1, false, filenames)
 
-	vim.api.nvim_buf_add_highlight(qfbuffer, nsqfbuffer, "Title", 0, 0, -1)
 	for i, hl in ipairs(icon_hls) do
-		vim.api.nvim_buf_add_highlight(qfbuffer, nsqfbuffer, hl, i, 1, 2)
+		vim.api.nvim_buf_add_highlight(qf_buffer, nsqfbuffer, hl, i - 1, 1, 2)
 	end
 
 	if current_entry_index ~= 0 then
@@ -115,15 +118,40 @@ function update_quickfix_display()
 			line_index = scrolloff
 		end
 
-		vim.api.nvim_buf_add_highlight(qfbuffer, nsqfbuffer, "Special", line_index, 6, -1)
-		vim.api.nvim_buf_add_highlight(qfbuffer, nsqfbuffer, "Underlined", line_index, 6, -1)
+		vim.api.nvim_buf_add_highlight(qf_buffer, nsqfbuffer, "Special", line_index - 1, 6, -1)
+		vim.api.nvim_buf_add_highlight(qf_buffer, nsqfbuffer, "Underlined", line_index - 1, 6, -1)
 	end
 end
 
 update_quickfix_display()
 
 Snacks.win({
-	buf = qfbuffer,
+	buf = recent_files_buffer,
 	position = "left",
+	width = 0.12,
 	enter = false,
 })
+
+Snacks.win({
+	buf = qf_buffer,
+	position = "left",
+	width = 0.12,
+	enter = false,
+})
+
+vim.schedule(function()
+	vim.cmd("wincmd l")
+end)
+
+-- Don't allow sidebar to be entered
+vim.api.nvim_create_autocmd("WinEnter", {
+	callback = function()
+		local buf = vim.api.nvim_get_current_buf()
+		if vim.b[buf].should_not_be_enterable then
+			vim.schedule(function()
+				vim.cmd("wincmd l")
+			end)
+		end
+	end
+})
+

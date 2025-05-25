@@ -12,7 +12,7 @@ return {
 			shell = "powershell",
 			auto_scroll = true,
 			direction = "horizontal",
-			size = 80,
+			size = 60,
 			-- Unused but good float opts
 			float_opts = {
 				border ='single',

@@ -8,7 +8,7 @@ return {
 				theme = "auto",
 				component_separators = { left = "", right = "" },
 				section_separators = { left = "", right = "" },
-				disabled_filetypes = { 'toggleterm' },
+				disabled_filetypes = {},
 			},
 			sections = {
 				lualine_a = {},
@@ -70,5 +70,10 @@ return {
 			underline = false,
 			sp = "",
 		})
+
+		vim.api.nvim_set_hl(0, "lualine_a_inactive", {
+			link = "Title",
+		})
+
 	end,
 }
