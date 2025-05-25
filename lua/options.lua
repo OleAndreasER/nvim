@@ -90,3 +90,5 @@ vim.keymap.set("n", "yig", ":%y<cr>", { silent = true })
 vim.keymap.set("n", "yag", ":%y<cr>", { silent = true })
 vim.keymap.set("n", "vag", "ggVG", { silent = true })
 vim.keymap.set("n", "vig", "ggVG", { silent = true })
+-- Terminal
+vim.keymap.set('t', '<esc>', "<C-\\><C-n>", { silent = true })
