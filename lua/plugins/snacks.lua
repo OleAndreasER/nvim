@@ -151,6 +151,12 @@ return {
 				end,
 			},
 		},
+		terminal = {
+			shell = 'powershell',
+			win = {
+				height = 50,
+			}
+		},
 		notifier = { enabled = true },
 		quickfile = { enabled = false },
 		scope = { enabled = false },
@@ -245,6 +251,13 @@ return {
 			function()
 				Snacks.picker.lazy()
 			end,
+		},
+		{
+			"<c-k>",
+			function()
+				Snacks.terminal.toggle()
+			end,
+			mode = { "n", "t" }
 		},
 	},
 }
