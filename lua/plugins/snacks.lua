@@ -22,6 +22,14 @@ return {
 		explorer = { enabled = false },
 		input = { enabled = false },
 		picker = {
+			win = {
+				preview = {
+					wo = {
+						number = false,
+						relativenumber = false,
+					},
+				},
+			},
 			layout = {
 				preset = "dropdown_main_preview",
 				cycle = false,
