@@ -64,6 +64,7 @@ end)
 vim.keymap.set("n", "ø", "<C-w>l")
 vim.keymap.set("n", "å", "<C-w>h")
 vim.keymap.set("n", "<C-g>", "<C-w>k")
+vim.keymap.set({ "v", "n" }, "<leader>v", ":vs<cr>", { silent = true })
 --vim.keymap.set('n', '<C-b>', '<C-w>j')
 -- Write
 vim.keymap.set({ "v", "n" }, "<leader>w", ":w<cr>", { silent = true })
