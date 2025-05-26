@@ -64,12 +64,14 @@ end)
 vim.keymap.set("n", "ø", "<C-w>l")
 vim.keymap.set("n", "å", "<C-w>h")
 vim.keymap.set("n", "<C-g>", "<C-w>k")
+vim.keymap.set({ "v", "n" }, "<leader>v", ":vs<cr>", { silent = true })
 --vim.keymap.set('n', '<C-b>', '<C-w>j')
 -- Write
 vim.keymap.set({ "v", "n" }, "<leader>w", ":w<cr>", { silent = true })
 vim.keymap.set({ "v", "n" }, "<leader>W", ":wa<cr>", { silent = true })
 vim.keymap.set({ "v", "n" }, "<leader>Q", ":wqa!<cr>", { silent = true })
 vim.keymap.set({ "v", "n" }, "<leader>q", ":q!<cr>", { silent = true })
+vim.keymap.set({ "v", "n" }, "<leader>x", "<cmd>wa<cr><cmd>qa<cr>", { silent = true })
 -- Highlights
 vim.keymap.set("n", "dh", ":noh<cr>", { silent = true })
 -- Macro commands
@@ -90,3 +92,5 @@ vim.keymap.set("n", "yig", ":%y<cr>", { silent = true })
 vim.keymap.set("n", "yag", ":%y<cr>", { silent = true })
 vim.keymap.set("n", "vag", "ggVG", { silent = true })
 vim.keymap.set("n", "vig", "ggVG", { silent = true })
+-- Terminal
+vim.keymap.set('t', '<esc>', "<C-\\><C-n>", { silent = true })

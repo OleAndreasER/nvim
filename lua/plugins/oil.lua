@@ -17,7 +17,7 @@ return {
 				["<esc>"] = "actions.close",
 			},
 			float = {
-				border = "rounded",
+				border = "single",
 				max_width = standard_float_width,
 				max_height = standard_float_height,
 				win_options = {

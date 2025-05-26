@@ -25,9 +25,20 @@ return {
 		explorer = { enabled = false },
 		input = { enabled = false },
 		picker = {
+			win = {
+				preview = {
+					wo = {
+						number = false,
+						relativenumber = false,
+					},
+				},
+			},
 			layout = {
 				preset = "dropdown_main_preview",
 				cycle = false,
+			},
+			matcher = {
+				frecency = true,
 			},
 			layouts = {
 				dropdown_main_preview = {
@@ -143,6 +154,12 @@ return {
 				end,
 			},
 		},
+		terminal = {
+			shell = 'powershell',
+			win = {
+				height = 50,
+			}
+		},
 		notifier = { enabled = true },
 		quickfile = { enabled = false },
 		scope = { enabled = false },
@@ -237,6 +254,13 @@ return {
 			function()
 				Snacks.picker.lazy()
 			end,
+		},
+		{
+			"<c-k>",
+			function()
+				Snacks.terminal.toggle()
+			end,
+			mode = { "n", "t" }
 		},
 	},
 }

@@ -70,5 +70,10 @@ return {
 			underline = false,
 			sp = "",
 		})
+
+		vim.api.nvim_set_hl(0, "lualine_a_inactive", {
+			link = "Title",
+		})
+
 	end,
 }
