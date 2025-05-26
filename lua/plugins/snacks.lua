@@ -4,12 +4,15 @@ local exclude = {
 	".next/",
 	".vite/",
 	".git/",
+	".yarn/",
 	".gitlab/",
 	"build/",
 	"target/",
 	"package-lock.json",
 	"pnpm-lock.yaml",
 	"yarn.lock",
+	"translations.json",
+	"reports/*.html"
 }
 
 return {
