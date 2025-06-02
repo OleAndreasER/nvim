@@ -10,6 +10,7 @@ local exclude = {
 	"target/",
 	"package-lock.json",
 	"pnpm-lock.yaml",
+	".pnpm-store/",
 	"yarn.lock",
 	"translations.json",
 	"reports/*.html"
