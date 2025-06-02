@@ -34,6 +34,8 @@ vim.opt.termguicolors = true
 vim.opt.swapfile = false
 vim.opt.backup = false
 
+vim.opt.shell = 'powershell'
+
 -- Keymaps
 --
 -- Available:
