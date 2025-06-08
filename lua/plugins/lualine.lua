@@ -8,7 +8,9 @@ return {
 				theme = "auto",
 				component_separators = { left = "", right = "" },
 				section_separators = { left = "", right = "" },
-				disabled_filetypes = {},
+				disabled_filetypes = {
+					'better_term'
+				},
 			},
 			sections = {
 				lualine_a = {},
@@ -36,6 +38,9 @@ return {
 							readonly = "",
 						},
 					},
+
+					-- For debugging
+					-- 'bo:filetype'
 				},
 				lualine_b = { require("recorder").recordingStatus },
 				lualine_c = {},

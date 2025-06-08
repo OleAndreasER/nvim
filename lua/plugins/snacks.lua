@@ -10,6 +10,7 @@ local exclude = {
 	"target/",
 	"package-lock.json",
 	"pnpm-lock.yaml",
+	".pnpm-store/",
 	"yarn.lock",
 	"translations.json",
 	"reports/*.html"
@@ -159,12 +160,7 @@ return {
 				end,
 			},
 		},
-		terminal = {
-			shell = 'powershell',
-			win = {
-				height = 50,
-			}
-		},
+		terminal = { enabled = false },
 		notifier = { enabled = true },
 		quickfile = { enabled = false },
 		scope = { enabled = false },
@@ -259,13 +255,6 @@ return {
 			function()
 				Snacks.picker.lazy()
 			end,
-		},
-		{
-			"<C-e>",
-			function()
-				Snacks.terminal.toggle()
-			end,
-			mode = { "n", "t" }
 		},
 	},
 }
