@@ -11,7 +11,7 @@ return {
 			default_file_explorer = false,
 			watch_for_changes = true,
 			keymaps = {
-				["<C-s>"] = { "actions.select", opts = { vertical = true } },
+				["<C-r>"] = { "actions.select", opts = { vertical = true } },
 				["-"] = "actions.parent",
 				["g."] = "actions.toggle_hidden",
 				["<esc>"] = "actions.close",

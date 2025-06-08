@@ -46,8 +46,8 @@ vim.g.mapleader = " "
 -- Don't use scrolloff on mouse clicks
 vim.keymap.set("n", "<LeftMouse>", ":let temp=&so<cr>:let &so=0<cr><LeftMouse>:let &so=temp<cr>", { silent = true })
 -- Center
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set("n", "<C-n>", "<C-d>zz")
+vim.keymap.set("n", "<C-w>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "*", "*zzzv")
 vim.keymap.set("n", "#", "#zzzv")
@@ -57,13 +57,13 @@ vim.keymap.set("c", "<cr>", function()
 	return vim.fn.getcmdtype() == "/" and "<cr>zzzv" or "<cr>"
 end, { expr = true })
 -- LSP Hover
-vim.keymap.set("n", "<C-j>", function()
+vim.keymap.set("n", "<C-d>", function()
 	vim.lsp.buf.hover()
 end)
 -- Split Window Movement
 vim.keymap.set("n", "ø", "<C-w>l")
 vim.keymap.set("n", "å", "<C-w>h")
-vim.keymap.set("n", "<C-g>", "<C-w>k")
+vim.keymap.set("n", "<C-k>", "<C-w>k")
 vim.keymap.set({ "v", "n" }, "<leader>v", ":vs<cr>", { silent = true })
 --vim.keymap.set('n', '<C-b>', '<C-w>j')
 -- Write
@@ -85,8 +85,8 @@ vim.keymap.set({ "v", "n" }, "<leader>e", function()
 	update_quickfix_display()
 end, { silent = true })
 -- Qflist
-vim.keymap.set({ "n", "v" }, "<C-x>", "<cmd>cnext<cr><cmd>lua update_quickfix_display()<cr>")
-vim.keymap.set({ "n", "v" }, "<C-z>", "<cmd>cprevious<cr><cmd>lua update_quickfix_display()<cr>")
+vim.keymap.set({ "n", "v" }, "<C-'>", "<cmd>cnext<cr><cmd>lua update_quickfix_display()<cr>")
+vim.keymap.set({ "n", "v" }, "<C-x>", "<cmd>cprevious<cr><cmd>lua update_quickfix_display()<cr>")
 --Buffer g "textobject"
 vim.keymap.set("n", "yig", ":%y<cr>", { silent = true })
 vim.keymap.set("n", "yag", ":%y<cr>", { silent = true })

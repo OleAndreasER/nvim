@@ -32,6 +32,11 @@ return {
 						relativenumber = false,
 					},
 				},
+				input = {
+					keys = {
+						["<c-f>"] = { "qflist", mode = { "i", "n" } },
+					}
+				}
 			},
 			layout = {
 				preset = "dropdown_main_preview",
@@ -256,7 +261,7 @@ return {
 			end,
 		},
 		{
-			"<c-k>",
+			"<C-e>",
 			function()
 				Snacks.terminal.toggle()
 			end,
