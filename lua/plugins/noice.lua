@@ -2,6 +2,9 @@ return {
 	"folke/noice.nvim",
 	event = "VeryLazy",
 	opts = {},
+	enabled = function()
+		return not vim.g.neovide
+	end,
 	dependencies = {
 		"MunifTanjim/nui.nvim",
 	},
