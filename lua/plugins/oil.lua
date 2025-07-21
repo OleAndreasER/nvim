@@ -9,12 +9,17 @@ return {
 				"icon",
 			},
 			default_file_explorer = false,
-			watch_for_changes = true,
+			watch_for_changes = false,
+			use_default_keymaps = false,
 			keymaps = {
-				["<C-r>"] = { "actions.select", opts = { vertical = true } },
+				["<CR>"] = "actions.select",
 				["-"] = "actions.parent",
-				["g."] = "actions.toggle_hidden",
-				["<esc>"] = "actions.close",
+				-- ["<esc>"] = "actions.close",
+			},
+			lsp_file_methods = {
+				enabled = true,
+				timeout_ms = 10000,
+				autosave_changes = true,
 			},
 			float = {
 				border = "single",
@@ -48,6 +53,6 @@ return {
 				},
 			},
 		})
-		vim.keymap.set("n", "-", oil.open_float)
+		vim.keymap.set("n", "-", "<cmd>Oil<cr>")
 	end,
 }
