@@ -45,10 +45,16 @@ vim.api.nvim_create_autocmd("BufEnter", {
 			end
 			previous_bufnr = entry.bufnr
 
-			local path = vim.api.nvim_buf_get_name(entry.bufnr)
+			local path = ""
+			if vim.api.nvim_buf_is_valid(entry.bufnr) then
+				path = vim.api.nvim_buf_get_name(entry.bufnr)
+			end
+
 			local filename = ""
 			if path:find("^fugitive") then
 				filename = "Git status"
+			elseif path:find("^oil") then
+				filename = "Oil"
 			else
 				filename = vim.fn.fnamemodify(path, ":t")
 			end

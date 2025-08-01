@@ -10,7 +10,6 @@ return {
 				section_separators = { left = " ", right = "" },
 				disabled_filetypes = {
 					'better_term',
-					'oil'
 				},
 			},
 			sections = {
@@ -33,6 +32,7 @@ return {
 				lualine_a = {
 					{
 						"filename",
+						draw_empty = true,
 						symbols = {
 							unnamed = "",
 							modified = modifiedSymbol,
@@ -53,6 +53,7 @@ return {
 				lualine_a = {
 					{
 						"filename",
+						draw_empty = true,
 						symbols = {
 							unnamed = "",
 							modified = modifiedSymbol,
@@ -66,7 +67,39 @@ return {
 				lualine_y = {},
 				lualine_z = {},
 			},
-			extensions = {},
+			extensions = {
+				{ -- Oil
+					filetypes = { 'oil' },
+					winbar = {
+						lualine_a = {
+							{
+								function()
+									local ok, oil pcall(require, 'oil')
+									if ok then
+										return vim.fn.fnamemodify(oil.get_current_dir(), ':~')
+									else
+										return ''
+									end
+								end,
+							},
+						},
+					},
+					inactive_winbar = {
+						lualine_a = {
+							{
+								function()
+									local ok, oil pcall(require, 'oil')
+									if ok then
+										return vim.fn.fnamemodify(oil.get_current_dir(), ':~')
+									else
+										return ''
+									end
+								end,
+							},
+						},
+					},
+				},
+			},
 		})
 
 		vim.api.nvim_set_hl(0, "lualine_c_normal", {
