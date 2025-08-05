@@ -17,6 +17,7 @@ return {
 					behavior = require("cmp").ConfirmBehavior.Insert,
 					select = true,
 				}),
+				['<C-Space>'] = require("cmp").mapping.complete(),
 			}),
 			sources = require("cmp").config.sources({
 				{ name = "nvim_lsp" },
