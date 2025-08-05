@@ -21,10 +21,11 @@ return {
 				timeout_ms = 10000,
 				autosave_changes = true,
 			},
+			-- Unused right now, but good settings
 			float = {
 				border = "single",
-				max_width = standard_float_width,
-				max_height = standard_float_height,
+				max_width = 70,
+				max_height = 40,
 				win_options = {
 					winblend = 0,
 				},

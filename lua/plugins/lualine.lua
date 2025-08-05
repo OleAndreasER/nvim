@@ -35,7 +35,7 @@ return {
 						draw_empty = true,
 						symbols = {
 							unnamed = "",
-							modified = modifiedSymbol,
+							modified = '●',
 							readonly = "",
 						},
 					},
@@ -56,7 +56,7 @@ return {
 						draw_empty = true,
 						symbols = {
 							unnamed = "",
-							modified = modifiedSymbol,
+							modified = '●',
 							readonly = "",
 						},
 					},
