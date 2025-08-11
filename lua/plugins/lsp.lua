@@ -23,7 +23,7 @@ return {
 					vim.api.nvim_create_autocmd("BufWritePre", {
 						buffer = bufnr,
 						pattern = "*.{ts,js,vue}",
-						command = "EslintFixAll",
+						command = "silent! EslintFixAll",
 					})
 				end,
 
