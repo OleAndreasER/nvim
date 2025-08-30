@@ -2,6 +2,7 @@ local current_terminal_bufname = 'Terminal 1'
 
 return {
 	'CRAG666/betterTerm.nvim',
+	commit = '0d1c4e1',
 	keys = {
 		{
 			mode = { 'n', 't', 'i' },
