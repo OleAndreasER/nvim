@@ -4,12 +4,14 @@ return {
 	},
 	{
 		"williamboman/mason.nvim",
+        branch = 'v1.x',
 		config = function()
 			require("mason").setup()
 		end,
 	},
 	{
 		"williamboman/mason-lspconfig.nvim",
+        branch = 'v1.x',
 		dependencies = { "mason.nvim" },
 		config = function()
 			require("mason-lspconfig").setup()

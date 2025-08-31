@@ -89,6 +89,7 @@ end, { silent = true })
 -- Qflist
 vim.keymap.set({ "n", "v" }, "<C-'>", "<cmd>cnext<cr><cmd>lua update_quickfix_display()<cr>")
 vim.keymap.set({ "n", "v" }, "<C-x>", "<cmd>cprevious<cr><cmd>lua update_quickfix_display()<cr>")
+vim.keymap.set({ "n" }, "dq", ":cexpr []<cr><cmd>lua update_quickfix_display()<cr>", { silent = true })
 --Buffer g "textobject"
 vim.keymap.set("n", "yag", ":%y<cr>", { silent = true })
 vim.keymap.set("n", "cag", ":%d<cr>i", { silent = true })
@@ -96,6 +97,7 @@ vim.keymap.set("n", "dag", ":%d<cr>", { silent = true })
 vim.keymap.set("n", "vag", "ggVG", { silent = true })
 -- Terminal
 vim.keymap.set('t', '<esc>', "<C-\\><C-n>", { silent = true })
--- BS
+-- Ctrl-V paste
 vim.keymap.set('i' , '<C-m>', '<C-r>+')
+vim.keymap.set("c", '<C-m>', '<C-r>+')
 

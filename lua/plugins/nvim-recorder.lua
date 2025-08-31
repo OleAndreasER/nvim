@@ -9,6 +9,11 @@ return {
 			mapping = {
 				startStopRecording = "q",
 				playMacro = "Q",
+				switchSlot = nil,
+				editMacro = "cq",
+				deleteAllMacros = nil,
+				yankMacro = nil,
+				addBreakPoint = nil,
 			},
 		})
 	end,
