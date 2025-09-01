@@ -2,7 +2,7 @@ return {
 	{
 		"tpope/vim-fugitive",
 		config = function()
-			vim.keymap.set({ "n", "v" }, "<leader>c", "<cmd>G commit<cr>", { silent = true })
+			vim.keymap.set("n", "<leader>c", [[:G commit -m ""<left>]])
 		end,
 	},
 	{
