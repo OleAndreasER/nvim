@@ -16,6 +16,7 @@
   "mini.icons": { "branch": "main", "commit": "f9a177c11daa7829389b7b6eaaec8b8a5c47052d" },
   "mini.operators": { "branch": "main", "commit": "57c9daf96e0278ebac07bc57fe2f60cf360e5eea" },
   "neovim-ayu": { "branch": "master", "commit": "cc78e880cce5dfc1187d144ed7251c746feff259" },
+  "nightblossom": { "branch": "main", "commit": "340a4fdefbf2d01de04e2c00eba4133e490402f2" },
   "nvim-cmp": { "branch": "main", "commit": "b5311ab3ed9c846b585c0c15b7559be131ec4be9" },
   "nvim-colorizer.lua": { "branch": "master", "commit": "a065833f35a3a7cc3ef137ac88b5381da2ba302e" },
   "nvim-lspconfig": { "branch": "master", "commit": "5f550bbb4d58bb2bfbbed4633fc69c3f0eccaf3a" },

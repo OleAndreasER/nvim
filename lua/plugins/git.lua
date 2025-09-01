@@ -15,10 +15,8 @@ return {
 				actions.goto_file_edit()
 				vim.cmd('tabonly')
 			end
-			local close = function()
-				vim.cmd('tabclose')
-			end
 
+			-- Toggle diffview
 			vim.keymap.set({ "n", "v" }, '<leader>g', function()
 				if next(require("diffview.lib").views) == nil then
 					vim.cmd('DiffviewOpen')
@@ -26,6 +24,18 @@ return {
 					vim.cmd('DiffviewClose')
 				end
 			end)
+
+			vim.opt.diffopt = {
+				"internal",
+				"filler",
+				"closeoff",
+				"context:10",
+				"algorithm:histogram",
+				"linematch:100",
+				"indent-heuristic",
+			}	
+
+			vim.keymap.set({ "n", "v" }, '<leader>G', '<cmd>DiffviewOpen origin/master... --imply-local<cr>')
 
 			require("diffview").setup({
 				diff_binaries = false,    -- Show diffs for binaries

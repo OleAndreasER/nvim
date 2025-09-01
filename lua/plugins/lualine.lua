@@ -1,3 +1,4 @@
+local n = 0
 return {
 	"nvim-lualine/lualine.nvim",
 	dependencies = "chrisgrieser/nvim-recorder",
@@ -105,10 +106,13 @@ return {
 		-- Hack
 		vim.api.nvim_create_autocmd("WinEnter", {
 			callback = function()
+				if n > 5 then return end
+				n = n + 1
 				vim.api.nvim_set_hl(0, "lualine_transitional_lualine_a_inactive_to_StatusLineNC", { link = "Normal" })
 				vim.api.nvim_set_hl(0, "lualine_a_inactive", { link = "Title" })
 			end
 		})
+
 	end,
 
 }
