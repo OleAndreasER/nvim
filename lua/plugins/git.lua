@@ -28,6 +28,9 @@ return {
 				actions.goto_file_edit()
 				vim.cmd('tabonly')
 			end
+			local close = function()
+				vim.cmd('tabclose')
+			end
 
 			require("diffview").setup({
 				diff_binaries = false,    -- Show diffs for binaries
@@ -127,7 +130,7 @@ return {
 						{ "n", "[F",          actions.select_first_entry,             { desc = "Open the diff for the first file" } },
 						{ "n", "]F",          actions.select_last_entry,              { desc = "Open the diff for the last file" } },
 						{ "n", "gf",          goto_file,                              { desc = "" } },
-						{ "n", "<leader>g",   goto_file,							  { desc = "" } },
+						{ "n", "<leader>g",   close,							      { desc = "" } },
 						{ "n", "<cr>",        goto_file,							  { desc = "" } },
 						{ "n", "<C-w><C-f>",  actions.goto_file_split,                { desc = "Open the file in a new split" } },
 						{ "n", "<C-w>gf",     actions.goto_file_tab,                  { desc = "Open the file in a new tabpage" } },
@@ -201,7 +204,7 @@ return {
 						{ "n", "[F",             actions.select_first_entry,             { desc = "Open the diff for the first file" } },
 						{ "n", "]F",             actions.select_last_entry,              { desc = "Open the diff for the last file" } },
 						{ "n", "gf",             goto_file,                              { desc = "" } },
-						{ "n", "<leader>g",      goto_file,							     { desc = "" } },
+						{ "n", "<leader>g",      close,							         { desc = "" } },
 						{ "n", "<C-w><C-f>",     actions.goto_file_split,                { desc = "Open the file in a new split" } },
 						{ "n", "<C-w>gf",        actions.goto_file_tab,                  { desc = "Open the file in a new tabpage" } },
 						{ "n", "i",              actions.listing_style,                  { desc = "Toggle between 'list' and 'tree' views" } },
@@ -246,7 +249,7 @@ return {
 						{ "n", "[F",            actions.select_first_entry,          { desc = "Open the diff for the first file" } },
 						{ "n", "]F",            actions.select_last_entry,           { desc = "Open the diff for the last file" } },
 						{ "n", "gf",            goto_file,                           { desc = "" } },
-						{ "n", "<leader>g",     goto_file,							 { desc = "" } },
+						{ "n", "<leader>g",     close,							     { desc = "" } },
 						{ "n", "<C-w><C-f>",    actions.goto_file_split,             { desc = "Open the file in a new split" } },
 						{ "n", "<C-w>gf",       actions.goto_file_tab,               { desc = "Open the file in a new tabpage" } },
 						{ "n", "<leader>e",     actions.focus_files,                 { desc = "Bring focus to the file panel" } },
