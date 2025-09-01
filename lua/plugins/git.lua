@@ -2,19 +2,7 @@ return {
 	{
 		"tpope/vim-fugitive",
 		config = function()
-			-- vim.keymap.set({ "n", "v" }, "<leader>g", "<cmd>Ge :<cr>5j", { silent = true })
 			vim.keymap.set({ "n", "v" }, "<leader>c", "<cmd>G commit<cr>", { silent = true })
-			--
-			-- vim.api.nvim_create_augroup("FugitiveRemoveBinds", { clear = true })
-			-- vim.api.nvim_create_autocmd("FileType", {
-			-- 	group = "FugitiveRemoveBinds",
-			-- 	pattern = "fugitive",
-			-- 	callback = function()
-			-- 		vim.api.nvim_buf_del_keymap(0, "n", "(")
-			-- 		vim.api.nvim_buf_del_keymap(0, "n", ")")
-			-- 	end,
-			-- })
-			--
 		end,
 	},
 	{
@@ -22,7 +10,6 @@ return {
 		config = function()
 			-- Lua
 			local actions = require("diffview.actions")
-			vim.keymap.set({ "n", "v" }, "<leader>g", "<cmd>DiffviewOpen<cr>", { silent = true })
 
 			local goto_file = function()
 				actions.goto_file_edit()
@@ -31,6 +18,14 @@ return {
 			local close = function()
 				vim.cmd('tabclose')
 			end
+
+			vim.keymap.set({ "n", "v" }, '<leader>g', function()
+				if next(require("diffview.lib").views) == nil then
+					vim.cmd('DiffviewOpen')
+				else
+					vim.cmd('DiffviewClose')
+				end
+			end)
 
 			require("diffview").setup({
 				diff_binaries = false,    -- Show diffs for binaries
@@ -130,7 +125,6 @@ return {
 						{ "n", "[F",          actions.select_first_entry,             { desc = "Open the diff for the first file" } },
 						{ "n", "]F",          actions.select_last_entry,              { desc = "Open the diff for the last file" } },
 						{ "n", "gf",          goto_file,                              { desc = "" } },
-						{ "n", "<leader>g",   close,							      { desc = "" } },
 						{ "n", "<cr>",        goto_file,							  { desc = "" } },
 						{ "n", "<C-w><C-f>",  actions.goto_file_split,                { desc = "Open the file in a new split" } },
 						{ "n", "<C-w>gf",     actions.goto_file_tab,                  { desc = "Open the file in a new tabpage" } },
@@ -204,7 +198,6 @@ return {
 						{ "n", "[F",             actions.select_first_entry,             { desc = "Open the diff for the first file" } },
 						{ "n", "]F",             actions.select_last_entry,              { desc = "Open the diff for the last file" } },
 						{ "n", "gf",             goto_file,                              { desc = "" } },
-						{ "n", "<leader>g",      close,							         { desc = "" } },
 						{ "n", "<C-w><C-f>",     actions.goto_file_split,                { desc = "Open the file in a new split" } },
 						{ "n", "<C-w>gf",        actions.goto_file_tab,                  { desc = "Open the file in a new tabpage" } },
 						{ "n", "i",              actions.listing_style,                  { desc = "Toggle between 'list' and 'tree' views" } },
@@ -249,7 +242,6 @@ return {
 						{ "n", "[F",            actions.select_first_entry,          { desc = "Open the diff for the first file" } },
 						{ "n", "]F",            actions.select_last_entry,           { desc = "Open the diff for the last file" } },
 						{ "n", "gf",            goto_file,                           { desc = "" } },
-						{ "n", "<leader>g",     close,							     { desc = "" } },
 						{ "n", "<C-w><C-f>",    actions.goto_file_split,             { desc = "Open the file in a new split" } },
 						{ "n", "<C-w>gf",       actions.goto_file_tab,               { desc = "Open the file in a new tabpage" } },
 						{ "n", "<leader>e",     actions.focus_files,                 { desc = "Bring focus to the file panel" } },
