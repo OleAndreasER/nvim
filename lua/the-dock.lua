@@ -69,7 +69,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
 		vim.api.nvim_buf_set_lines(recent_files_buffer, 0, -1, false, lines)
 		vim.api.nvim_buf_add_highlight(recent_files_buffer, ns, "Underlined", file_current_index, 6, -1)
-		vim.api.nvim_buf_add_highlight(recent_files_buffer, ns, "Special", file_current_index, 6, -1)
+		vim.api.nvim_buf_add_highlight(recent_files_buffer, ns, "Function", file_current_index, 6, -1)
 
 		for i, hl in ipairs(icon_hls) do
 			vim.api.nvim_buf_add_highlight(recent_files_buffer, ns, hl, i - 1, 1, 2)

@@ -4,16 +4,16 @@ return {
 		lazy = false,
 		priority = 1000,
 		config = function()
-			vim.cmd('colorscheme oxocarbon')
-			vim.api.nvim_set_hl(0, "@constant", { link = "@variable" })
-			vim.api.nvim_set_hl(0, "@property", { link = "@variable" })
-			vim.api.nvim_set_hl(0, "@keyword.function", { link = "Keyword" })
-			vim.api.nvim_set_hl(0, "@keyword.operator", { link = "Keyword" })
-			vim.api.nvim_set_hl(0, "@method", { link = "@function" })
-			vim.api.nvim_set_hl(0, "@punctuation", { link = "@keyword" })
-			vim.api.nvim_set_hl(0, "@punctuation.bracket", { link = "@keyword" })
-			vim.api.nvim_set_hl(0, "@punctuation.delimiter", { link = "@keyword" })
-			vim.api.nvim_set_hl(0, "@punctuation.special", { link = "@keyword" })
+			-- vim.cmd('colorscheme oxocarbon')
+			-- vim.api.nvim_set_hl(0, "@constant", { link = "@variable" })
+			-- vim.api.nvim_set_hl(0, "@property", { link = "@variable" })
+			-- vim.api.nvim_set_hl(0, "@keyword.function", { link = "Keyword" })
+			-- vim.api.nvim_set_hl(0, "@keyword.operator", { link = "Keyword" })
+			-- vim.api.nvim_set_hl(0, "@method", { link = "@function" })
+			-- vim.api.nvim_set_hl(0, "@punctuation", { link = "@keyword" })
+			-- vim.api.nvim_set_hl(0, "@punctuation.bracket", { link = "@keyword" })
+			-- vim.api.nvim_set_hl(0, "@punctuation.delimiter", { link = "@keyword" })
+			-- vim.api.nvim_set_hl(0, "@punctuation.special", { link = "@keyword" })
 		end,
 	},
 	{
