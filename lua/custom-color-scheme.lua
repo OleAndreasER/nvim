@@ -149,10 +149,11 @@ function M.colorscheme()
 	set('DiffAdd', { bg = colors.green_dark });
 	set('DiffChange', { bg = colors.cyan_dark });
 	set('DiffText', { bg = colors.cyan });
+
 end
 
-M.colorscheme()
-vim.diagnostic.enable()
-vim.keymap.set('n', '<leader>l', ':lua Snacks.picker.highlights()<cr>')
+-- M.colorscheme()
+-- vim.diagnostic.enable()
+-- vim.keymap.set('n', '<leader>l', ':lua Snacks.picker.highlights()<cr>')
 
 return M
