@@ -5,36 +5,22 @@ vim.opt.shiftwidth = tab_spaces
 vim.opt.softtabstop = tab_spaces
 vim.opt.smartindent = true
 vim.opt.autoindent = true
-
--- Left side
 vim.opt.number = false
 vim.opt.relativenumber = false
 vim.opt.signcolumn = "yes:1"
-
--- Split
 vim.opt.splitbelow = true
 vim.opt.splitright = true
-
--- Wrap
 vim.opt.wrap = false
-
--- Use system clipboard
 vim.opt.clipboard = "unnamedplus"
-
--- Stay in the middle of the screen
 vim.opt.scrolloff = 9
-
--- Show in a split search and replace
 vim.opt.inccommand = "split"
-
--- Better colors (?)
 vim.opt.termguicolors = true
-
--- Annoying swapfile stuff
 vim.opt.swapfile = false
 vim.opt.backup = false
-
 vim.opt.shell = 'powershell'
+vim.opt.cmdheight = 0
+vim.opt.laststatus = 0
+
 
 -- Keymaps
 --
