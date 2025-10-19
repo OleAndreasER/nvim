@@ -4,7 +4,7 @@ local colors = {
 	darker = '#191919',
 	bg = '#1C1C1C',
 	grey1 = "#1F1F1F",
-	grey2 = "#3B3B3B",
+	grey2 = "#4B4B4B",
 	string = "#8DBEE8",
 	visual = "#2F2F2F",
 	fg = '#F5E8D8',
@@ -153,7 +153,7 @@ function M.colorscheme()
 end
 
 -- M.colorscheme()
--- vim.diagnostic.enable()
+-- vim.diagnostic.disable()
 -- vim.keymap.set('n', '<leader>l', ':lua Snacks.picker.highlights()<cr>')
 
 return M
