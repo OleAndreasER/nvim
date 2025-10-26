@@ -72,34 +72,45 @@ vim.keymap.set("n", "<c-d>", function() vim.diagnostic.jump({
 }) end)
 -- Jump to next buffer with an error.
 vim.keymap.set("n", "<leader>e", function ()
-	local buffers = vim.api.nvim_list_bufs()
+	local diagnostics = vim.diagnostic.get(nil, {
+		severity = vim.diagnostic.severity.ERROR,
+	})
+
+	-- Unique bufnrs
+	local buffers_by_bufnr = {}
+	for _, diagnostic in ipairs(diagnostics) do
+		buffers_by_bufnr[diagnostic.bufnr] = diagnostic.bufnr
+	end
+
+	-- Find next buffer after current buffer then wrap around.
 	local current_buffer = vim.api.nvim_get_current_buf()
-
-	local current_index = 1
-	for i, buffer in ipairs(buffers) do
-		if buffer == current_buffer then
-			current_index = i
-			break
+	local smallest_after = math.huge
+	local smallest_before = math.huge
+	local current_buffer_has_errors = false
+	for bufnr, _ in pairs(buffers_by_bufnr) do
+		if (bufnr ~= current_buffer) then
+			if (bufnr > current_buffer) then
+				smallest_after = math.min(smallest_after, bufnr)
+			else
+				smallest_before = math.min(smallest_before, bufnr)
+			end
+		else
+			current_buffer_has_errors = true
 		end
 	end
 
-	-- From current to the end.
-	for i = current_index + 1, #buffers do
-		if #vim.diagnostic.get(buffers[i], { severity = vim.diagnostic.severity.ERROR }) > 0 then
-			vim.api.nvim_set_current_buf(buffers[i])
-			return
-		end
-	end
+	if (smallest_after ~= math.huge) then
+		vim.api.nvim_set_current_buf(smallest_after)
 
-	-- From first to current.
-	for i = 1, current_index - 1 do
-		if #vim.diagnostic.get(buffers[i], { severity = vim.diagnostic.severity.ERROR }) > 0 then
-			vim.api.nvim_set_current_buf(buffers[i])
-			return
-		end
-	end
+	elseif (smallest_before ~= math.huge) then
+		vim.api.nvim_set_current_buf(smallest_before)
 
-	print("No other buffers with errors")
+	elseif (current_buffer_has_errors) then
+		print("Current buffer is the only one with errors.")
+
+	else
+		print("Found no errors.")
+	end
 end )
 
 -- Qflist
