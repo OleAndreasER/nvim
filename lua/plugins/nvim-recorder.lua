@@ -11,7 +11,7 @@ return {
 				playMacro = "Q",
 				switchSlot = nil,
 				editMacro = "cq",
-				deleteAllMacros = nil,
+				deleteAllMacros = "Dq",
 				yankMacro = nil,
 				addBreakPoint = nil,
 			},

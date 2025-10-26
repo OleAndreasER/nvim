@@ -84,16 +84,16 @@ vim.api.nvim_buf_set_name(qf_buffer, "Quickfix")
 local nsqfbuffer = vim.api.nvim_create_namespace("qfbuffer")
 
 local scrolloff = 20
-function update_quickfix_display()
+function update_quickfix_display(title_overide)
 	local icon_hls = {}
 	local qflist = vim.fn.getqflist()
 
-	local title = vim.fn.getqflist({ title = 1 }).title
+	local title = title_overide or vim.fn.getqflist({ title = 1 }).title
 	if title == "" then
-		title = "Quickfix"
+		vim.api.nvim_buf_set_name(qf_buffer, "")
+	else
+		vim.api.nvim_buf_set_name(qf_buffer, "[" .. table.getn(qflist) .. "] " .. title )
 	end
-
-	vim.api.nvim_buf_set_name(qf_buffer, "[" .. table.getn(qflist) .. "] " .. title )
 
 	local filenames = { }
 
@@ -136,6 +136,7 @@ Snacks.win({
 	position = "left",
 	width = 0.12,
 	enter = false,
+	stack = true,
 })
 
 Snacks.win({
@@ -143,6 +144,7 @@ Snacks.win({
 	position = "left",
 	width = 0.12,
 	enter = false,
+	stack = true,
 })
 
 vim.schedule(function()

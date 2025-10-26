@@ -138,10 +138,11 @@ return {
 							pattern = item.search,
 							valid = true,
 						}
-						vim.fn.setqflist(qf)
-						update_quickfix_display()
-						vim.cmd("cfirst")
 					end
+
+					vim.fn.setqflist(qf)
+					update_quickfix_display()
+					vim.cmd("cfirst", { silent = true })
 				end,
 				-- Override to always open help in vertical split
 				help = function(picker, item, action)
