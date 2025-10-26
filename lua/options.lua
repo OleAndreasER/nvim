@@ -40,6 +40,8 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "*", "*zzzv")
 vim.keymap.set("n", "#", "#zzzv")
 vim.keymap.set("n", "G", "Gzzzv")
+vim.keymap.set({"n", "v"}, "<c-u>", "<c-u>zz")
+vim.keymap.set({"n", "v"}, "<c-d>", "<c-d>zz")
 
 vim.keymap.set("c", "<cr>", function()
 	return vim.fn.getcmdtype() == "/" and "<cr>zzzv" or "<cr>"
@@ -83,7 +85,7 @@ vim.keymap.set("c", '<C-m>', '<C-r>+')
 -- Diagnostics
 --
 -- Jump to next error in buffer
-vim.keymap.set("n", "<c-d>", function() 
+vim.keymap.set("n", "<c-t>", function() 
 	vim.diagnostic.jump({
 		count = 1,
 		float = false,
