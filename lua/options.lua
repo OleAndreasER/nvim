@@ -65,13 +65,43 @@ vim.keymap.set("n", "dh", ":noh<cr>", { silent = true })
 -- Macro commands
 vim.keymap.set("n", "<leader>pc", "oconsole.log( `<esc>pA`, <esc>pA );<esc>0")
 -- Diagnostics
-vim.keymap.set({ "v", "n" }, "<leader>e", function()
-	vim.diagnostic.setqflist({
-		open = false,
-		severity = vim.diagnostic.severity.ERROR,
-	})
-	update_quickfix_display()
-end, { silent = true })
+vim.keymap.set("n", "<c-d>", function() vim.diagnostic.jump({
+	count = 1,
+	float = false,
+	severity = vim.diagnostic.severity.ERROR 
+}) end)
+-- Jump to next buffer with an error.
+vim.keymap.set("n", "<leader>e", function ()
+	local buffers = vim.api.nvim_list_bufs()
+	local current_buffer = vim.api.nvim_get_current_buf()
+
+	local current_index = 1
+	for i, buffer in ipairs(buffers) do
+		if buffer == current_buffer then
+			current_index = i
+			break
+		end
+	end
+
+	-- From current to the end.
+	for i = current_index + 1, #buffers do
+		if #vim.diagnostic.get(buffers[i], { severity = vim.diagnostic.severity.ERROR }) > 0 then
+			vim.api.nvim_set_current_buf(buffers[i])
+			return
+		end
+	end
+
+	-- From first to current.
+	for i = 1, current_index - 1 do
+		if #vim.diagnostic.get(buffers[i], { severity = vim.diagnostic.severity.ERROR }) > 0 then
+			vim.api.nvim_set_current_buf(buffers[i])
+			return
+		end
+	end
+
+	print("No other buffers with errors")
+end )
+
 -- Qflist
 vim.keymap.set({ "n", "v" }, "<C-'>", "<cmd>cnext<cr><cmd>lua update_quickfix_display()<cr>")
 vim.keymap.set({ "n", "v" }, "<C-x>", "<cmd>cprevious<cr><cmd>lua update_quickfix_display()<cr>")
@@ -86,4 +116,5 @@ vim.keymap.set('t', '<esc>', "<C-\\><C-n>", { silent = true })
 -- Ctrl-V paste
 vim.keymap.set('i' , '<C-m>', '<C-r>+')
 vim.keymap.set("c", '<C-m>', '<C-r>+')
+
 

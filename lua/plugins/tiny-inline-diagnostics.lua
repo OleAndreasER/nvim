@@ -10,6 +10,7 @@ return {
 					vim.diagnostic.severity.ERROR,
 					vim.diagnostic.severity.WARN,
 				},
+				multiline = { enabled = true, },
 			},
 		})
 		vim.diagnostic.config({
