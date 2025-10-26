@@ -76,18 +76,17 @@ vim.keymap.set("n", "<leader>e", function ()
 		severity = vim.diagnostic.severity.ERROR,
 	})
 
-	-- Unique bufnrs
-	local buffers_by_bufnr = {}
+	-- Gather unique bufnrs
+	local last_diagnostic_of_buffer = {}
 	for _, diagnostic in ipairs(diagnostics) do
-		buffers_by_bufnr[diagnostic.bufnr] = diagnostic.bufnr
+		last_diagnostic_of_buffer[diagnostic.bufnr] = diagnostic
 	end
 
-	-- Find next buffer after current buffer then wrap around.
 	local current_buffer = vim.api.nvim_get_current_buf()
 	local smallest_after = math.huge
 	local smallest_before = math.huge
 	local current_buffer_has_errors = false
-	for bufnr, _ in pairs(buffers_by_bufnr) do
+	for bufnr, _ in pairs(last_diagnostic_of_buffer) do
 		if (bufnr ~= current_buffer) then
 			if (bufnr > current_buffer) then
 				smallest_after = math.min(smallest_after, bufnr)
@@ -99,11 +98,21 @@ vim.keymap.set("n", "<leader>e", function ()
 		end
 	end
 
+	-- Next after current.
 	if (smallest_after ~= math.huge) then
 		vim.api.nvim_set_current_buf(smallest_after)
+		vim.api.nvim_win_set_cursor(0, {
+			last_diagnostic_of_buffer[smallest_after].lnum + 1,
+			last_diagnostic_of_buffer[smallest_after].col,
+		})
 
+	-- First before current (wrapping)
 	elseif (smallest_before ~= math.huge) then
 		vim.api.nvim_set_current_buf(smallest_before)
+		vim.api.nvim_win_set_cursor(0, {
+			last_diagnostic_of_buffer[smallest_before].lnum + 1,
+			last_diagnostic_of_buffer[smallest_before].col,
+		})
 
 	elseif (current_buffer_has_errors) then
 		print("Current buffer is the only one with errors.")
