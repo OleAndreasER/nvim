@@ -1,6 +1,6 @@
 require("options")
 require("lazy-plugins")
-require("the-dock")
+require("sidebar")
 require("neovide")
 require("custom-color-scheme").colorscheme()
 vim.keymap.set("n", "<C-j>", "<C-w>j")

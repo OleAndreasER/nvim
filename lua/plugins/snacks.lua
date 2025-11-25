@@ -87,27 +87,6 @@ return {
 						},
 					},
 				},
-				wide_dropdown_main_preview = {
-					preview = "main",
-					layout = {
-						backdrop = false,
-						row = 1,
-						width = 0.2,
-						min_width = 80,
-						height = 0.6,
-						border = "none",
-						box = "vertical",
-						{
-							win = "input",
-							height = 1,
-							border = "rounded",
-							title = "{title} {live} {flags}",
-							title_pos = "center",
-						},
-						{ win = "list", border = "hpad" },
-						{ win = "preview", title = "{preview}", border = "rounded" },
-					},
-				},
 			},
 			main = {
 				file = false,
@@ -192,7 +171,24 @@ return {
 				})
 			end,
 		},
-
+		{
+			"<leader>t", -- Typescript grep
+			function()
+				Snacks.picker.grep({
+					layout = "ivy_split",
+					finder = "grep",
+					regex = false,
+					format = "file",
+					show_empty = true,
+					live = true,
+					supports_live = true,
+					hidden = true,
+					ignored = true,
+					exclude = exclude,
+					ft = "ts",
+				})
+			end,
+		},
 		{
 			"<leader>f",
 			function()
@@ -208,17 +204,14 @@ return {
 				})
 			end,
 		},
-
-		{
-			"<leader>G",
-			function()
-				Snacks.picker.git_status({ focus = "list" })
-			end,
-		},
 		{
 			"<leader>b",
 			function()
-				Snacks.picker.git_branches({ layout = "wide_dropdown_main_preview" })
+				vim.cmd("silent! G fetch")
+				Snacks.picker.git_branches({
+					layout = "ivy_split",
+					all = false,
+				})
 			end,
 		},
 		{
@@ -249,12 +242,6 @@ return {
 			"<leader>r",
 			function()
 				Snacks.picker.lsp_references({ focus = "list" })
-			end,
-		},
-		{
-			"<leader>l",
-			function()
-				Snacks.picker.lazy()
 			end,
 		},
 	},
