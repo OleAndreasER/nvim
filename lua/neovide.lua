@@ -12,7 +12,6 @@ if vim.g.neovide then
 	vim.g.neovide_position_animation_length = 0
 	vim.g.neovide_cursor_animate_command_line = false
 
-
 	-- Silly transparent toggle
 	local is_transparent = false
 	vim.keymap.set("n", "<leader>o", function ()
