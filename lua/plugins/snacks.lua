@@ -61,7 +61,7 @@ return {
 							win = "input",
 							height = 1,
 							border = "rounded",
-							title = "{title} {live} {flags}",
+							title = "{title}",
 							title_pos = "center",
 						},
 						{ win = "list", border = "hpad" },
@@ -77,13 +77,25 @@ return {
 						height = 0.6,
 						position = "bottom",
 						border = "top",
-						title = " {title} {live} {flags}",
+						title = " {title}",
 						title_pos = "left",
 						{ win = "input", height = 1, border = "bottom" },
 						{
 							box = "horizontal",
 							{ win = "list", border = "none" },
 							{ win = "preview", title = "{preview}", width = 0.6, border = "left" },
+						},
+					},
+				},
+				full_screen_preview = {
+					layout = {
+						box = "horizontal",
+						{ win = "preview", width = 0.25 },
+						{
+							box = "vertical",
+							width = 0.75,
+							{ win = "input", height = 2 },
+							{ win = "list" },
 						},
 					},
 				},
@@ -193,6 +205,7 @@ return {
 			"<leader>f",
 			function()
 				Snacks.picker.files({
+					layout = "dropdown_main_preview",
 					finder = "files",
 					format = "file",
 					show_empty = true,
@@ -209,7 +222,7 @@ return {
 			function()
 				vim.cmd("silent! G fetch")
 				Snacks.picker.git_branches({
-					layout = "ivy_split",
+					layout = "full_screen_preview",
 					all = false,
 				})
 			end,
@@ -235,13 +248,19 @@ return {
 		{
 			"<leader>d",
 			function()
-				Snacks.picker.lsp_definitions({ focus = "list" })
+				Snacks.picker.lsp_definitions({
+					focus = "list",
+					layout = "ivy_split",
+				})
 			end,
 		},
 		{
 			"<leader>r",
 			function()
-				Snacks.picker.lsp_references({ focus = "list" })
+				Snacks.picker.lsp_references({
+					focus = "list",
+					layout = "ivy_split",
+				})
 			end,
 		},
 	},
