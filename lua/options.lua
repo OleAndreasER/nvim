@@ -37,6 +37,7 @@ vim.keymap.set("n", "<LeftMouse>", ":let temp=&so<cr>:let &so=0<cr><LeftMouse>:l
 vim.keymap.set("n", "<C-n>", "<C-d>zz")
 vim.keymap.set("n", "<C-w>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("n", "*", "*zzzv")
 vim.keymap.set("n", "#", "#zzzv")
 vim.keymap.set("n", "G", "Gzzzv")
