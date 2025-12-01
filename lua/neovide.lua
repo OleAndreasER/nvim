@@ -8,7 +8,7 @@ if vim.g.neovide then
 	-- Animation
 	vim.g.neovide_cursor_animation_length = 0
 	vim.g.neovide_scroll_animation_far_lines = 0
-	vim.g.neovide_scroll_animation_length = 0
+	vim.g.neovide_scroll_animation_length = 0.3
 	vim.g.neovide_position_animation_length = 0
 	vim.g.neovide_cursor_animate_command_line = false
 

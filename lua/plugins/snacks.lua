@@ -51,21 +51,19 @@ return {
 					preview = "main",
 					layout = {
 						backdrop = false,
-						row = 1,
+						row = 0,
 						width = 0.2,
 						min_width = 40,
 						height = 0.4,
-						border = "none",
 						box = "vertical",
 						{
 							win = "input",
 							height = 1,
-							border = "rounded",
-							title = "{title} {live} {flags}",
+							title = "{title}",
 							title_pos = "center",
 						},
-						{ win = "list", border = "hpad" },
-						{ win = "preview", title = "{preview}", border = "rounded" },
+						{ win = "list" },
+						{ win = "preview" },
 					},
 				},
 				ivy_split = {
@@ -74,38 +72,29 @@ return {
 						box = "vertical",
 						backdrop = false,
 						width = 0,
-						height = 0.6,
+						height = 0.5,
 						position = "bottom",
 						border = "top",
-						title = " {title} {live} {flags}",
+						title = " {title}",
 						title_pos = "left",
-						{ win = "input", height = 1, border = "bottom" },
+						{ win = "input", height = 1 },
 						{
 							box = "horizontal",
-							{ win = "list", border = "none" },
+							{ win = "list", border = "top" },
 							{ win = "preview", title = "{preview}", width = 0.6, border = "left" },
 						},
 					},
 				},
-				wide_dropdown_main_preview = {
-					preview = "main",
+				full_screen_preview = {
 					layout = {
-						backdrop = false,
-						row = 1,
-						width = 0.2,
-						min_width = 80,
-						height = 0.6,
-						border = "none",
-						box = "vertical",
+						box = "horizontal",
+						{ win = "preview", width = 0.25 },
 						{
-							win = "input",
-							height = 1,
-							border = "rounded",
-							title = "{title} {live} {flags}",
-							title_pos = "center",
+							box = "vertical",
+							width = 0.75,
+							{ win = "input", height = 2 },
+							{ win = "list" },
 						},
-						{ win = "list", border = "hpad" },
-						{ win = "preview", title = "{preview}", border = "rounded" },
 					},
 				},
 			},
@@ -192,11 +181,29 @@ return {
 				})
 			end,
 		},
-
+		{
+			"<leader>t", -- Typescript grep
+			function()
+				Snacks.picker.grep({
+					layout = "ivy_split",
+					finder = "grep",
+					regex = false,
+					format = "file",
+					show_empty = true,
+					live = true,
+					supports_live = true,
+					hidden = true,
+					ignored = true,
+					exclude = exclude,
+					ft = "ts",
+				})
+			end,
+		},
 		{
 			"<leader>f",
 			function()
 				Snacks.picker.files({
+					layout = "dropdown_main_preview",
 					finder = "files",
 					format = "file",
 					show_empty = true,
@@ -208,17 +215,14 @@ return {
 				})
 			end,
 		},
-
-		{
-			"<leader>G",
-			function()
-				Snacks.picker.git_status({ focus = "list" })
-			end,
-		},
 		{
 			"<leader>b",
 			function()
-				Snacks.picker.git_branches({ layout = "wide_dropdown_main_preview" })
+				vim.cmd("silent! G fetch")
+				Snacks.picker.git_branches({
+					layout = "full_screen_preview",
+					all = false,
+				})
 			end,
 		},
 		{
@@ -242,19 +246,19 @@ return {
 		{
 			"<leader>d",
 			function()
-				Snacks.picker.lsp_definitions({ focus = "list" })
+				Snacks.picker.lsp_definitions({
+					focus = "list",
+					layout = "ivy_split",
+				})
 			end,
 		},
 		{
 			"<leader>r",
 			function()
-				Snacks.picker.lsp_references({ focus = "list" })
-			end,
-		},
-		{
-			"<leader>l",
-			function()
-				Snacks.picker.lazy()
+				Snacks.picker.lsp_references({
+					focus = "list",
+					layout = "ivy_split",
+				})
 			end,
 		},
 	},
