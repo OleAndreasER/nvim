@@ -1,4 +1,3 @@
-local n = 0
 return {
 	"nvim-lualine/lualine.nvim",
 	dependencies = "chrisgrieser/nvim-recorder",

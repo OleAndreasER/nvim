@@ -34,8 +34,6 @@ vim.g.mapleader = " "
 -- Don't use scrolloff on mouse clicks
 vim.keymap.set("n", "<LeftMouse>", ":let temp=&so<cr>:let &so=0<cr><LeftMouse>:let &so=temp<cr>", { silent = true })
 -- Center
-vim.keymap.set("n", "<C-n>", "<C-d>zz")
-vim.keymap.set("n", "<C-w>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("n", "*", "*zzzv")
