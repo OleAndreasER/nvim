@@ -38,6 +38,7 @@ vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("n", "*", "*zzzv")
 vim.keymap.set("n", "#", "#zzzv")
 vim.keymap.set("n", "G", "Gzzzv")
+vim.keymap.set("n", "%", "%zzzv")
 vim.keymap.set({"n", "v"}, "<c-u>", "<c-u>zz")
 vim.keymap.set({"n", "v"}, "<c-d>", "<c-d>zz")
 
