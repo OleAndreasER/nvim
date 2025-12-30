@@ -26,7 +26,6 @@ vim.opt.laststatus = 0
 --
 -- Available:
 -- s
--- H
 -- L
 -- X
 
