@@ -27,13 +27,5 @@ return {
 				{ name = "path" },
 			}),
 		})
-		require("cmp").setup.cmdline(":", {
-			mapping = require("cmp").mapping.preset.cmdline(),
-			sources = require("cmp").config.sources({
-				{ name = "path" },
-			}, {
-				{ name = "cmdline" },
-			}),
-		})
 	end,
 }
