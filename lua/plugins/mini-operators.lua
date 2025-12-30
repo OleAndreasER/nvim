@@ -10,7 +10,7 @@ return {
 				func = nil,
 			},
 
-			-- Replace text with register
+			-- Replace text with yanked
 			replace = {
 				prefix = "R",
 				reindent_linewise = true,

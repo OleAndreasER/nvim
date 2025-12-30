@@ -19,20 +19,8 @@ vim.api.nvim_create_autocmd("BufEnter", {
 		end
 
 		local lines = {}
-
 		local icon_hls = {}
-
 		local current_index = #jumplist[1] - jumplist[2]
-
-		-- TODO ?
-
-		-- local current_file = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":t")
-		-- if current_index == 0 then
-		-- 	local current_icon, current_hl  = MiniIcons.get('file', current_file)
-		-- 	local current_formatted_line = ' ' .. current_icon .. ' ' .. current_file
-		-- 	table.insert(lines, current_formatted_line)
-		-- 	table.insert(icon_hls, current_hl)
-		-- end
 
 		local previous_bufnr = -1
 		local file_current_index = 0
