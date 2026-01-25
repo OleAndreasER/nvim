@@ -41,6 +41,8 @@ vim.keymap.set("n", "G", "Gzzzv")
 vim.keymap.set("n", "%", "%zzzv")
 vim.keymap.set({"n", "v"}, "<c-u>", "<c-u>zz")
 vim.keymap.set({"n", "v"}, "<c-d>", "<c-d>zz")
+vim.keymap.set({"n", "v"}, "<c-o>", "<c-o>zz")
+vim.keymap.set({"n", "v"}, "<c-i>", "<c-i>zz")
 
 vim.keymap.set("c", "<cr>", function()
 	return vim.fn.getcmdtype() == "/" and "<cr>zzzv" or "<cr>"
