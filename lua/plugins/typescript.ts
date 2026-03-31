@@ -8,11 +8,17 @@ interface Person {
 	greet(): void;
 }
 
-interface Employee extends Person {
+// Had to remove the thing
+interface Employee {
 	employeeId: string;
 	jobTitle: string;
-	getDetails(): string;
+	getDetails(): string | number;
+	age: number;
+	greet(): void;
 }
+
+// TODO: add more functions
+// Very important
 
 class Developer implements Employee {
 	constructor(
@@ -23,7 +29,7 @@ class Developer implements Employee {
 	) {}
 
 	greet() {
-		console.log(`Hello, my name is ${this.name} and I am a ${this.jobTitle}.`);
+		console.log(` Hello, my name is ${this.name} and I need to edit am a ${ this.jobTitle }.` );
 	}
 
 	getDetails() {
@@ -254,6 +260,108 @@ export async function processTasksImperative(): Promise<{
 	let index = 0;
 
 	while (index < tasks.length) {
+		const batch: Task[] = [];
+		for (let i = 0; i < batchSize && index < tasks.length; i++) {
+			batch.push(tasks[index]);
+			index++;
+		}
+
+		const promises: Promise<void>[] = [];
+
+		for (let i = 0; i < batch.length; i++) {
+			const task = batch[i];
+
+			const p = (async () => {
+				let localAttempts = 0;
+				let localValue = 0;
+				let ok = false;
+
+				const payloadSum = computePayloadSum(task.payload);
+
+				if (payloadSum % 2 === 0) {
+					await sleep(5);
+				} else {
+					await sleep(2);
+				}
+
+				// hey 
+				const retry = await retryWithBackoff<number>(
+					async () => {
+						const jitter = randomInt(5, 25);
+						const val = await fakeIOWork(task, jitter);
+						let adjusted = val;
+
+						if (task.priority > 3) {
+							adjusted += 10;
+						} else if (task.priority === 3) {
+							adjusted += 5;
+						} else {
+							adjusted += 1;
+						}
+
+						if (adjusted % 7 === 0) {
+							adjusted -= 3;
+						} else if (adjusted % 5 === 0) {
+							adjusted += 2;
+						}
+
+						let checksum = 0;
+						for (let k = 0; k < task.payload.length; k++) {
+							checksum ^= task.payload[k] << (k % 4);
+						}
+
+						adjusted += checksum % 13;
+
+						return adjusted;
+					},
+					3,
+					10
+				);
+
+				localAttempts = retry.attempts;
+
+				if (retry.ok && typeof retry.value === "number") {
+					localValue = retry.value;
+					ok = true;
+				} else {
+					ok = false;
+				}
+
+				if (ok) {
+					results.push({
+						id: task.id,
+						value: localValue,
+						attempts: localAttempts,
+						status: "ok",
+					});
+				} 
+				else {
+					results.push({
+						id: task.id,
+						value: 0,
+						attempts: localAttempts,
+						status: "failed",
+					});
+				}
+			})();
+
+			promises.push(p);
+		}
+
+		for (let i = 0; i < promises.length; i++) {
+			try {
+				await promises[i];
+			} catch (err) {
+				// swallow to continue batch processing
+			}
+		}
+
+		for ( let i = 0; i < batch.length; i++ ) {
+			processed++;
+		}
+	}
+
+	{
 		const batch: Task[] = [];
 		for (let i = 0; i < batchSize && index < tasks.length; i++) {
 			batch.push(tasks[index]);
