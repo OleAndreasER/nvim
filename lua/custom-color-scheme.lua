@@ -1,27 +1,37 @@
 local M = {}
 
 local colors = {
-	darker = '#191919',
-	bg = '#1C1C1C',
-	grey1 = "#1F1F1F",
-	grey2 = "#4B4B4B",
-	string = "#8DBEE8",
-	visual = "#2F2F2F",
-	fg = '#F5E8D8',
-	fn = '#EF767A',      -- REDish
-	type = '#70AD47',    -- GREEN
-	keyword = '#4D7EA8', -- BLUE
-	light_keyword = "#ADBEE8",
-	search = '#3E2F5B',
-	curSearch = '#5E4F7B',
-	warn = '#ECA400',
-	error = '#923141',
-    info = '#B3FFFC',
-    hint = '#B3FFFC',
-    ok = '#232E21',
-	green_dark = '#1F301F',
-	cyan = '#1C5C5C',
-	cyan_dark = '#152525'
+	fg = '#E8E6E3',
+
+	bg = '#1A1816',
+	window_separator = "#1E1C1A",
+	floating_window = "#171513",
+
+	type = '#E0C070',
+	func = '#D16969',
+
+	keyword = '#476B8A',
+	-- keyword = '#4E5F7A',
+	light_keyword = '#6285A6',
+	string = '#86B3D1',
+
+	comment = '#484848',
+
+	search = '#4A3F5F',
+	current_search = '#62567A',
+
+	visual = "#34302C",
+
+	-- diagnostics
+	error = '#F44747',
+	warn = '#FFCC66',
+	info_and_hint = '#4FC1FF',
+	ok = '#324232',
+
+	-- git diffs
+	green_dark = '#18231B',
+	cyan = '#254545',
+	cyan_dark = '#1A2E2E'
 }
 
 local function set(a, b) vim.api.nvim_set_hl(0, a, b) end
@@ -36,30 +46,29 @@ function M.colorscheme()
 	set('Normal', { bg = colors.bg, fg = colors.fg })
 	set('Cursor', { bg = colors.fg, fg = colors.bg })
 	set('Visual', { bg = colors.visual })
-	set('Comment', { fg = colors.grey2, italic = true })
+	set('Comment', { fg = colors.comment, italic = true })
 	set('Constant', { link = "Identifier" })
 	set('Identifier', { fg = colors.fg })
 	set('String', { fg = colors.string })
-	set('Function', {  fg = colors.fn })
+	set('Function', {  fg = colors.func })
 	set('Statement', {  fg = colors.keyword })
 	set('Type', {  fg = colors.type })
 	set('Special', {  fg = colors.fg })
-	set('Error', {  fg = colors.fn })
+	set('Error', {  fg = colors.func })
 	set('Special', { fg = colors.type })
 	set('Boolean', {  fg = colors.type })
 	set('Number', {  fg = colors.type })
 	set('Operator', { fg = colors.keyword })
     set('Title', { fg = colors.string })
-    set('WinSeparator', { fg = colors.grey1 })
-    set('NonText', { fg = colors.grey1 })
+    set('WinSeparator', { fg = colors.window_separator })
+    set('NonText', { fg = colors.window_separator })
 	set('Delimiter', { fg = colors.keyword })
 	set('MatchParen', { fg = colors.light_keyword, bold = true })
 	set('StatusLine', { link = 'Normal' })
 	set('StatusLineNC', { link = 'Normal' })
 	set('Search', { bg = colors.search })
-	set('CurSearch', { bg = colors.curSearch })
+	set('CurSearch', { bg = colors.current_search })
 
-    -- set('NormalFloat', { bg = colors.darker });
     set('NormalFloat', { link = 'Normal' });
 
     set('@tag', { link = 'Statement' });
@@ -127,7 +136,7 @@ function M.colorscheme()
 
     set('lualine_transparent', { link = 'Normal' });
     set('Folded', { link = 'Normal' });
-    set('SnacksPicker', { bg = colors.darker });
+    set('SnacksPicker', { bg = colors.floating_window });
 
     set('DiagnosticUnderlineError', { undercurl = true, sp = colors.error });
     set('DiagnosticUnderlineWarn', {  undercurl = true, sp = colors.warn });
@@ -137,23 +146,41 @@ function M.colorscheme()
 
 	set('DiagnosticError', { fg = colors.error });
 	set('DiagnosticWarn', { fg = colors.warn });
-	set('DiagnosticInfo', { fg = colors.info });
-	set('DiagnosticHint', { fg = colors.hint });
+	set('DiagnosticInfo', { fg = colors.info_and_hint });
+	set('DiagnosticHint', { fg = colors.info_and_hint });
 	set('DiagnosticOk', { fg = colors.ok });
 
 	set('MiniIconsAzure', { fg = colors.string });
 	set('MiniIconsGreen', { fg = colors.type });
-	set('MiniIconsPurple', { fg = colors.curSearch });
+	set('MiniIconsPurple', { fg = colors.current_search });
 	set('MiniIconsBlue', { fg = colors.keyword });
 
 	set('DiffAdd', { bg = colors.green_dark });
 	set('DiffChange', { bg = colors.cyan_dark });
 	set('DiffText', { bg = colors.cyan });
 
+	-- Terminal
+	vim.g.terminal_color_0  = '#1A1816'
+	vim.g.terminal_color_1  = colors.error
+	vim.g.terminal_color_2  = colors.type
+	vim.g.terminal_color_3  = colors.warn
+	vim.g.terminal_color_4  = colors.keyword
+	vim.g.terminal_color_5  = colors.func
+	vim.g.terminal_color_6  = colors.cyan
+	vim.g.terminal_color_7  = colors.fg
+	vim.g.terminal_color_8  = '#484848'
+	vim.g.terminal_color_9  = colors.error
+	vim.g.terminal_color_10 = colors.type
+	vim.g.terminal_color_11 = colors.warn
+	vim.g.terminal_color_12 = colors.light_keyword
+	vim.g.terminal_color_13 = colors.func
+	vim.g.terminal_color_14 = colors.cyan
+	vim.g.terminal_color_15 = '#FFFFFF'
+
 end
 
--- M.colorscheme()
+M.colorscheme()
 -- vim.diagnostic.disable()
--- vim.keymap.set('n', '<leader>l', ':lua Snacks.picker.highlights()<cr>')
+vim.keymap.set('n', '<leader>l', ':lua Snacks.picker.highlights()<cr>')
 
 return M
