@@ -30,8 +30,8 @@ local colors = {
 
 	-- git diffs
 	green_dark = '#18231B',
-	cyan = '#254545',
-	cyan_dark = '#1A2E2E'
+	cyan = '#224040',
+	cyan_dark = '#101B1C',
 }
 
 local function set(a, b) vim.api.nvim_set_hl(0, a, b) end
