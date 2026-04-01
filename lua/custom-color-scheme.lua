@@ -179,8 +179,8 @@ function M.colorscheme()
 
 end
 
-M.colorscheme()
+-- M.colorscheme()
 -- vim.diagnostic.disable()
-vim.keymap.set('n', '<leader>l', ':lua Snacks.picker.highlights()<cr>')
+-- vim.keymap.set('n', '<leader>l', ':lua Snacks.picker.highlights()<cr>')
 
 return M

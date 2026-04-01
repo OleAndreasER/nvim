@@ -39,10 +39,36 @@ return {
 				current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
 				update_debounce = 100,
 			})
+
+			-- Delete diff highlight
 			vim.keymap.set({ "n" }, 'dn', function()
 				require('gitsigns').toggle_linehl(false)
 			end)
-			vim.keymap.set({ "n", "v" }, '<leader>l', '<cmd>Gitsigns stage_buffer<cr>')
+		
+			-- Stage buffer
+			vim.keymap.set({ "n", "v" }, '<leader>l', function()
+				vim.cmd('Gitsigns stage_buffer')
+
+				local title = vim.fn.getqflist({ idx = 0, title = 1 }).title or ""
+				if title ~= "Hunks" then return end
+
+				-- Remove all entries in current buffer from quickfix
+				local bufnr = vim.api.nvim_get_current_buf()
+				local qf = vim.fn.getqflist()
+				if #qf == 0 then return end
+				local filtered = {}
+				for _, item in ipairs(qf) do
+					if item.bufnr ~= bufnr then
+						table.insert(filtered, item)
+					end
+				end
+
+				vim.fn.setqflist({}, 'r', { items = filtered })
+
+				update_quickfix_display()
+			end)
+
+			-- Enable diff highlight and add to quickfix.
 			vim.keymap.set({ "n", "v" }, '<leader>n', function()
 				require('gitsigns').toggle_linehl(true)
 				require('gitsigns').setqflist(
@@ -57,6 +83,7 @@ return {
 						end
 					end)
 			end)
+
 		end,
 	},
 	{

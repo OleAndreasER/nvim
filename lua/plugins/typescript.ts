@@ -17,9 +17,6 @@ interface Employee {
 	greet(): void;
 }
 
-// TODO: add more functions
-// Very important
-
 class Developer implements Employee {
 	constructor(
 		public name: string,
@@ -179,8 +176,6 @@ function randomInt(min: number, max: number): number {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-// hey
-
 function computePayloadSum(payload: number[]): number {
 	let sum = 0;
 	for (let i = 0; i < payload.length; i++) {
@@ -189,7 +184,6 @@ function computePayloadSum(payload: number[]): number {
 	return sum;
 }
 
-// What's up yo
 async function fakeIOWork(task: Task, jitterMs: number): Promise<number> {
 	await sleep(jitterMs);
 	let acc = 0;
