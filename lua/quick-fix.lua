@@ -177,8 +177,6 @@ function M.setup()
 		M.add_cursor_to_quickfix()
 	end, {})
 
-	-- TODO: oil qf
-
 	vim.keymap.set({ "n", "v" }, "<C-g>", "<cmd>QfNext<cr>")
 	vim.keymap.set({ "n", "v" }, "<C-e>", "<cmd>QfPrevious<cr>")
 	vim.keymap.set({ "n" }, "dq", "<cmd>QfClear<cr>")
