@@ -1,6 +1,7 @@
+require('quick-fix').setup()
 require("options")
+require("neovide")
 require("lazy-plugins")
 require("sidebar")
-require("neovide")
 require("custom-color-scheme").colorscheme()
 vim.keymap.set("n", "<C-j>", "<C-w>j")

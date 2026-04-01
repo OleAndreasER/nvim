@@ -130,8 +130,7 @@ return {
 					end
 
 					vim.fn.setqflist(qf)
-					update_quickfix_display()
-					vim.cmd("cfirst", { silent = true })
+					vim.cmd('QfFirst')
 				end,
 				-- Override to always open help in vertical split
 				help = function(picker, item, action)
