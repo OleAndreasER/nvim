@@ -40,19 +40,20 @@ return {
 				update_debounce = 100,
 			})
 			vim.keymap.set({ "n" }, 'dn', function()
-				require('gitsigns').toggle_signs(false)
 				require('gitsigns').toggle_linehl(false)
 			end)
+			vim.keymap.set({ "n", "v" }, '<leader>l', '<cmd>Gitsigns stage_buffer<cr>')
 			vim.keymap.set({ "n", "v" }, '<leader>n', function()
-				require('gitsigns').toggle_signs(true)
 				require('gitsigns').toggle_linehl(true)
 				require('gitsigns').setqflist(
 					'all',
 					{ open = false, }, 
 					function (err)
-						if err == nil then
+						if not err then
 							update_quickfix_display()
-							vim.cmd("cfirst", { silent = true })
+							if #vim.fn.getqflist() > 0 then
+								vim.cmd("cfirst", { silent = true })
+							end
 						end
 					end)
 			end)

@@ -6,7 +6,7 @@ return {
 	keys = {
 		{
 			mode = { 'n', 't', 'i' },
-			'<C-i>',
+			'<C-w>',
 			function()
 				if vim.bo.ft == 'better_term' then
 					require('betterTerm').open(vim.fn.bufname())
