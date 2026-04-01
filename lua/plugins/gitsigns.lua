@@ -44,7 +44,8 @@ return {
 
 			local qf_title = vim.fn.getqflist({ idx = 0, title = 1 }).title or ''
 			if qf_title == 'Hunks' then 
-				vim.cmd('QfRemoveCurrentBuffer')	
+				local bufnr = vim.api.nvim_get_current_buf()
+				require('quick-fix').remove_buffer_entries(bufnr)
 			end
 		end)
 
@@ -57,7 +58,7 @@ return {
 				{ open = false, }, 
 				function (err)
 					if not err then
-						vim.cmd('QfFirst')
+						require('quick-fix').go_to_first()
 					end
 				end)
 			end)
