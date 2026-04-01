@@ -1,5 +1,5 @@
-require('quick-fix').setup()
 require("options")
+require('quick-fix').setup()
 require("neovide")
 require("lazy-plugins")
 require("sidebar")

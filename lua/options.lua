@@ -65,10 +65,6 @@ vim.keymap.set({ "v", "n" }, "<leader>x", "<cmd>wa<cr><cmd>qa<cr>", { silent = t
 vim.keymap.set("n", "dh", ":noh<cr>", { silent = true })
 -- Macro commands
 vim.keymap.set("n", "<leader>pc", "oconsole.log( `<esc>pA`, <esc>pA );<esc>0")
--- Qflist
-vim.keymap.set({ "n", "v" }, "<C-g>", "<cmd>QfNext<cr>")
-vim.keymap.set({ "n", "v" }, "<C-e>", "<cmd>QfPrevious<cr>")
-vim.keymap.set({ "n" }, "dq", "<cmd>QfClear<cr>")
 --Buffer g "textobject"
 vim.keymap.set("n", "yag", ":%y<cr>", { silent = true })
 vim.keymap.set("n", "cag", ":%d<cr>i", { silent = true })

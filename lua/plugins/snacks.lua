@@ -225,12 +225,6 @@ return {
 			end,
 		},
 		{
-			"<leader>/",
-			function()
-				Snacks.picker.lines()
-			end,
-		},
-		{
 			"<leader>h",
 			function()
 				Snacks.picker.help()
