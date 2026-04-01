@@ -7,6 +7,58 @@ return {
 		end,
 	},
 	{
+		"lewis6991/gitsigns.nvim",
+		config = function()
+			require('gitsigns').setup({
+				signs = {
+					add          = { text = ' ' },
+					change       = { text = ' ' },
+					delete       = { text = ' ' },
+					topdelete    = { text = ' ' },
+					changedelete = { text = ' ' },
+					untracked    = { text = ' ' },
+				},
+				signs_staged = {
+					add          = { text = ' ' },
+					change       = { text = ' ' },
+					delete       = { text = ' ' },
+					topdelete    = { text = ' ' },
+					changedelete = { text = ' ' },
+					untracked    = { text = ' ' },
+				},
+				signs_staged_enable = true,
+				signcolumn = false,  -- Toggle with `:Gitsigns toggle_signs`
+				numhl      = false, -- Toggle with `:Gitsigns toggle_numhl`
+				linehl     = false, -- Toggle with `:Gitsigns toggle_linehl`
+				word_diff  = false, -- Toggle with `:Gitsigns toggle_word_diff`
+				watch_gitdir = {
+					follow_files = true
+				},
+				auto_attach = true,
+				attach_to_untracked = false,
+				current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
+				update_debounce = 100,
+			})
+			vim.keymap.set({ "n" }, 'dn', function()
+				require('gitsigns').toggle_signs(false)
+				require('gitsigns').toggle_linehl(false)
+			end)
+			vim.keymap.set({ "n", "v" }, '<leader>n', function()
+				require('gitsigns').toggle_signs(true)
+				require('gitsigns').toggle_linehl(true)
+				require('gitsigns').setqflist(
+					'all',
+					{ open = false, }, 
+					function (err)
+						if err == nil then
+							update_quickfix_display()
+							vim.cmd("cfirst", { silent = true })
+						end
+					end)
+			end)
+		end,
+	},
+	{
 		"sindrets/diffview.nvim",
 		config = function()
 			-- Lua
