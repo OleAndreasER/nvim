@@ -48,7 +48,7 @@ vim.keymap.set("c", "<cr>", function()
 	return vim.fn.getcmdtype() == "/" and "<cr>zzzv" or "<cr>"
 end, { expr = true })
 -- LSP Hover
--- vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end)
+vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end)
 -- Split Window Movement
 vim.keymap.set("n", "ø", "<C-w>l")
 vim.keymap.set("n", "å", "<C-w>h")
