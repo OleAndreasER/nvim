@@ -20,7 +20,7 @@ vim.opt.backup = false
 vim.opt.shell = 'powershell'
 vim.opt.cmdheight = 0
 vim.opt.laststatus = 0
-
+vim.opt.showtabline = 0
 
 -- Keymaps
 --

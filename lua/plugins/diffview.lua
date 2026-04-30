@@ -1,22 +1,13 @@
 return {
-	"sindrets/diffview.nvim",
+	"dlyongemallo/diffview.nvim",
 	config = function()
 		-- Lua
 		local actions = require("diffview.actions")
 
 		local goto_file = function()
 			actions.goto_file_edit()
-			vim.cmd('tabonly')
 		end
 
-		-- Toggle diffview
-		vim.keymap.set({ "n", "v" }, '<leader>g', function()
-			if next(require("diffview.lib").views) == nil then
-				vim.cmd('DiffviewOpen')
-			else
-				vim.cmd('DiffviewClose')
-			end
-		end)
 
 		vim.opt.diffopt = {
 			"internal",
@@ -28,7 +19,6 @@ return {
 			"indent-heuristic",
 		}	
 
-		vim.keymap.set({ "n", "v" }, '<leader>G', '<cmd>DiffviewOpen origin/master... --imply-local<cr>')
 
 		require("diffview").setup({
 			diff_binaries = false,    -- Show diffs for binaries

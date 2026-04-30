@@ -1,6 +1,7 @@
 require("options")
 require('quick-fix').setup()
 require("neovide")
+require("tab-management")
 require("lazy-plugins")
 require("sidebar")
 require("custom-color-scheme").colorscheme()
