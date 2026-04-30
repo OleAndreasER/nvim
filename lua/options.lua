@@ -54,6 +54,13 @@ vim.keymap.set("n", "ø", "<C-w>l")
 vim.keymap.set("n", "å", "<C-w>h")
 vim.keymap.set("n", "<C-k>", "<C-w>k")
 vim.keymap.set({ "v", "n" }, "<leader>v", ":vs<cr>", { silent = true })
+vim.api.nvim_create_autocmd("TermOpen", {
+	group = vim.api.nvim_create_augroup("TerminalLocalKeymaps", { clear = true }),
+	pattern = "term://*",
+	callback = function()
+		vim.keymap.set('n', '<leader>v', '<cmd>vs | te<cr>',{ buffer = 0, })
+	end,
+})
 --vim.keymap.set('n', '<C-b>', '<C-w>j')
 -- Write
 vim.keymap.set({ "v", "n" }, "<leader>w", ":w<cr>", { silent = true })

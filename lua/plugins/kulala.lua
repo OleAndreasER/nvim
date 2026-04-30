@@ -35,5 +35,6 @@ return {
 				vim.keymap.set("n", "<c-r>", require('kulala').run, { buffer = buf, silent = true, })
 			end,
 		})
+
 	end,
 }
