@@ -19,20 +19,29 @@ local tabs = {
 			vim.cmd('tabnew')
 			local dir = vim.fn.expand("~/http")
 			vim.fn.mkdir(dir, "p")
-			vim.cmd("tcd " .. vim.fn.fnameescape(dir))
+			-- vim.cmd("tcd " .. vim.fn.fnameescape(dir))
 			vim.cmd("edit " .. vim.fn.fnameescape(dir .. "/main.http"))
+		end,
+	},
+	terminals = {
+		spawn_tab = function()
+			vim.cmd('tabnew')
+			vim.cmd('term')
 		end,
 	},
 }
 
-vim.keymap.set({ "n", "v" }, '<leader>g', function()
+vim.keymap.set({ 'n', 't', 'i' }, '<c-g>', function()
 	M.toggle_tab('diffview')
 end)
-vim.keymap.set({ "n", "v" }, '<leader>G', function()
+vim.keymap.set({ 'n', 't', 'i' }, '<leader-g>', function()
 	M.toggle_tab('diffview_origin_master')
 end)
-vim.keymap.set({ "n", "v" }, '<leader>,', function()
+vim.keymap.set({ 'n', 't', 'i' }, '<c-,>', function()
 	M.toggle_tab('http')
+end)
+vim.keymap.set({ 'n', 't', 'i' }, '<c-.>', function()
+	M.toggle_tab('terminals')
 end)
 
 local function tab_name(tabnr)
