@@ -1,7 +1,6 @@
-return {
-	"smjonas/inc-rename.nvim",
-	config = function()
-		require("inc_rename").setup({})
-		vim.keymap.set("n", "<leader>rn", ":IncRename ")
-	end,
-}
+
+vim.pack.add({ { src = "https://github.com/smjonas/inc-rename.nvim" }  })
+
+require("inc_rename").setup({})
+
+vim.keymap.set("n", "<leader>rn", ":IncRename ")

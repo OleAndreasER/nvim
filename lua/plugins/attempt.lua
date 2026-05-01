@@ -1,11 +1,12 @@
-return {
-	"m-demare/attempt.nvim",
-	config = function()
-		local attempt = require("attempt")
-		attempt.setup({
-			ext_options = { "", "js", "ts" },
-			format_opts = { [""] = "Note" },
-		})
-		vim.keymap.set("n", "<leader>a", attempt.new_input_ext)
-	end,
-}
+
+vim.pack.add({ { src = "https://github.com/nvim-lua/plenary.nvim" } })
+
+vim.pack.add({ { src = "https://github.com/m-demare/attempt.nvim" } })
+
+require("attempt").setup({
+	ext_options = { "", "js", "ts" },
+	format_opts = { [""] = "Note" },
+})
+
+vim.keymap.set("n", "<leader>a", require("attempt").new_input_ext)
+

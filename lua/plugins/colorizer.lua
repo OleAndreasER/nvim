@@ -1,9 +1,7 @@
-return {
-	"catgoose/nvim-colorizer.lua",
-	config = function()
-		require("colorizer").setup({
-			"css",
-			"scss",
-		})
-	end,
-}
+
+vim.pack.add({ { src = "https://github.com/catgoose/nvim-colorizer.lua" } })
+
+require("colorizer").setup({
+	"css",
+	"scss",
+})

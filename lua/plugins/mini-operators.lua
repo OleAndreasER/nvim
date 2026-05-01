@@ -1,20 +1,17 @@
-return {
-	"echasnovski/mini.operators",
-	version = false,
-	config = function()
-		require("mini.operators").setup({
 
-			-- Multiply (duplicate) text
-			multiply = {
-				prefix = "M",
-				func = nil,
-			},
+vim.pack.add({ { src = "https://github.com/echasnovski/mini.operators" }  })
 
-			-- Replace text with yanked
-			replace = {
-				prefix = "R",
-				reindent_linewise = true,
-			},
-		})
-	end,
-}
+require("mini.operators").setup({
+
+	-- Multiply (duplicate) text
+	multiply = {
+		prefix = "M",
+		func = nil,
+	},
+
+	-- Replace text with yanked
+	replace = {
+		prefix = "R",
+		reindent_linewise = true,
+	},
+})

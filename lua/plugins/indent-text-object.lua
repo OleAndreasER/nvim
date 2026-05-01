@@ -1,21 +1,11 @@
-return {
-	"kiyoon/treesitter-indent-object.nvim",
-	keys = {
-		{
-			"ai",
-			function()
-				require("treesitter_indent_object.textobj").select_indent_outer(true)
-			end,
-			mode = { "x", "o" },
-			desc = "",
-		},
-		{
-			"ii",
-			function()
-				require("treesitter_indent_object.textobj").select_indent_inner(true)
-			end,
-			mode = { "x", "o" },
-			desc = "",
-		},
-	},
-}
+
+vim.pack.add({ { src = "https://github.com/kiyoon/treesitter-indent-object.nvim" }  })
+
+vim.keymap.set({ "x", "o" }, 'ai', function()
+	require("treesitter_indent_object.textobj").select_indent_outer(true)
+end)
+
+vim.keymap.set({ "x", "o" }, 'ii', function()
+	require("treesitter_indent_object.textobj").select_indent_inner(true)
+end)
+
