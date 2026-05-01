@@ -1,4 +1,3 @@
-
 vim.pack.add({ { src = "https://github.com/skyppex/bellows.nvim" } })
 
 require("bellows").setup({
