@@ -21,6 +21,7 @@ vim.opt.shell = 'powershell'
 vim.opt.cmdheight = 0
 vim.opt.laststatus = 0
 vim.opt.showtabline = 0
+require('vim._core.ui2').enable({})
 
 -- Keymaps
 --
