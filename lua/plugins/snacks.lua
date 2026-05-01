@@ -17,7 +17,7 @@ local exclude = {
 	"reports/*.html"
 }
 
-vim.pack.add({ { src = "https://github.com/folke/snacks.nvim" } })
+vim.pack.add({ "https://github.com/folke/snacks.nvim" })
 require('snacks').setup({
 	bigfile = { enabled = true },
 	dashboard = { enabled = false },

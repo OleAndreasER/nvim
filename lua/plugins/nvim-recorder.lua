@@ -1,5 +1,5 @@
 
-vim.pack.add({ { src = "https://github.com/chrisgrieser/nvim-recorder" }  })
+vim.pack.add({ "https://github.com/chrisgrieser/nvim-recorder" })
 
 require("recorder").setup({
 	mapping = {

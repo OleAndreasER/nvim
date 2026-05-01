@@ -1,5 +1,5 @@
 
-vim.pack.add({ { src = "https://github.com/mistweaverco/kulala.nvim" }  })
+vim.pack.add({ "https://github.com/mistweaverco/kulala.nvim" })
 
 require('kulala').setup({
 	default_env = "local",

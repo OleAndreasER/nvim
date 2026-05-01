@@ -1,5 +1,5 @@
 
-vim.pack.add({ { src = "https://github.com/kiyoon/treesitter-indent-object.nvim" }  })
+vim.pack.add({ "https://github.com/kiyoon/treesitter-indent-object.nvim" })
 
 vim.keymap.set({ "x", "o" }, 'ai', function()
 	require("treesitter_indent_object.textobj").select_indent_outer(true)

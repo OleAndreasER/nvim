@@ -1,6 +1,6 @@
 
-vim.pack.add({ { src = "https://github.com/nvim-treesitter/nvim-treesitter" } })
-vim.pack.add({ { src = "https://github.com/Wansmer/treesj" } })
+vim.pack.add({ "https://github.com/nvim-treesitter/nvim-treesitter" })
+vim.pack.add({ "https://github.com/Wansmer/treesj" })
 
 local treesj = require("treesj")
 treesj.setup({

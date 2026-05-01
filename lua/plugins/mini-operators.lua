@@ -1,5 +1,5 @@
 
-vim.pack.add({ { src = "https://github.com/echasnovski/mini.operators" }  })
+vim.pack.add({ "https://github.com/echasnovski/mini.operators" })
 
 require("mini.operators").setup({
 

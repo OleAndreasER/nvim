@@ -1,4 +1,4 @@
-vim.pack.add({ { src = "https://github.com/skyppex/bellows.nvim" } })
+vim.pack.add({ "https://github.com/skyppex/bellows.nvim" })
 
 require("bellows").setup({
 	line_count = true,

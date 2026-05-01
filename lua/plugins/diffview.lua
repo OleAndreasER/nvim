@@ -1,4 +1,4 @@
-vim.pack.add({ { src = "https://github.com/dlyongemallo/diffview.nvim" }  })
+vim.pack.add({ "https://github.com/dlyongemallo/diffview.nvim" })
 
 local actions = require("diffview.actions")
 
@@ -170,6 +170,7 @@ require("diffview").setup({
 			{ "n", "<2-LeftMouse>",  actions.select_entry,                   { desc = "Open the diff for the selected entry" } },
 			{ "n", "-",              actions.toggle_stage_entry,             { desc = "Stage / unstage the selected entry" } },
 			{ "n", "s",              actions.toggle_stage_entry,             { desc = "Stage / unstage the selected entry" } },
+			{ "n", "<leader>l",      actions.toggle_stage_entry,             { desc = "Stage / unstage the selected entry" } },
 			{ "n", "S",              actions.stage_all,                      { desc = "Stage all entries" } },
 			{ "n", "U",              actions.unstage_all,                    { desc = "Unstage all entries" } },
 			{ "n", "X",              actions.restore_entry,                  { desc = "Restore entry to the state on the left side" } },

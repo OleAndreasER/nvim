@@ -1,5 +1,5 @@
 
-vim.pack.add({ { src = "https://github.com/kwkarlwang/bufjump.nvim" }  })
+vim.pack.add({ "https://github.com/kwkarlwang/bufjump.nvim" })
 
 require("bufjump").setup({
 	on_success = nil,

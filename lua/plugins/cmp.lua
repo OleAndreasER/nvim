@@ -1,11 +1,11 @@
 
-vim.pack.add({ { src = "https://github.com/hrsh7th/cmp-nvim-lsp" }  })
-vim.pack.add({ { src = "https://github.com/hrsh7th/cmp-nvim-lua" }  })
-vim.pack.add({ { src = "https://github.com/hrsh7th/cmp-buffer" }  })
-vim.pack.add({ { src = "https://github.com/hrsh7th/cmp-path" }  })
-vim.pack.add({ { src = "https://github.com/hrsh7th/cmp-cmdline" }  })
+vim.pack.add({ "https://github.com/hrsh7th/cmp-nvim-lsp" })
+vim.pack.add({ "https://github.com/hrsh7th/cmp-nvim-lua" })
+vim.pack.add({ "https://github.com/hrsh7th/cmp-buffer" })
+vim.pack.add({ "https://github.com/hrsh7th/cmp-path" })
+vim.pack.add({ "https://github.com/hrsh7th/cmp-cmdline" })
 
-vim.pack.add({ { src = "https://github.com/hrsh7th/nvim-cmp" } })
+vim.pack.add({ "https://github.com/hrsh7th/nvim-cmp" })
 
 require("cmp").setup({
 	snippet = {},

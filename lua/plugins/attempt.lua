@@ -1,7 +1,7 @@
 
-vim.pack.add({ { src = "https://github.com/nvim-lua/plenary.nvim" } })
+vim.pack.add({ "https://github.com/nvim-lua/plenary.nvim" })
 
-vim.pack.add({ { src = "https://github.com/m-demare/attempt.nvim" } })
+vim.pack.add({ "https://github.com/m-demare/attempt.nvim" })
 
 require("attempt").setup({
 	ext_options = { "", "js", "ts" },

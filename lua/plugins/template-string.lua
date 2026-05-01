@@ -1,5 +1,5 @@
 
-vim.pack.add({ { src = "https://github.com/axelvc/template-string.nvim" } })
+vim.pack.add({ "https://github.com/axelvc/template-string.nvim" })
 
 require('template-string').setup({
 	filetypes = { 'html', 'typescript', 'javascript', 'typescriptreact', 'javascriptreact', 'vue', 'svelte', 'python', 'cs' },
