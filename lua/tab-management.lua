@@ -15,6 +15,7 @@ local tabs = {
 		spawn_tab = function()
 			vim.cmd('tabnew')
 			vim.cmd('term')
+			vim.cmd('normal! i')
 		end,
 	},
 	http = {
