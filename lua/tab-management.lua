@@ -34,7 +34,7 @@ local tabs = {
 }
 
 
-vim.keymap.set({ 'n', 't', 'i' }, '<leader>g', function()
+vim.keymap.set({ 'n', }, '<leader>g', function()
 	M.toggle_tab('diffview')
 end)
 vim.keymap.set({ 'n', 't', 'i' }, '<c-8>', function()
@@ -47,7 +47,7 @@ vim.keymap.set({ 'n', 't', 'i' }, '<c-.>', function()
 	M.toggle_tab('main')
 end)
 
-vim.keymap.set({ 'n', 't', 'i' }, '<leader>G', function()
+vim.keymap.set({ 'n', }, '<leader>G', function()
 	M.toggle_tab('diffview_origin_master')
 end)
 
