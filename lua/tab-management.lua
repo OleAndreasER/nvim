@@ -10,6 +10,7 @@ local tabs = {
 		spawn_tab = function() 
 			vim.cmd("DiffviewOpen") 
 		end,
+		hl = 'TabManagementDiffview',
 	},
 	terminals = {
 		spawn_tab = function()
@@ -17,6 +18,7 @@ local tabs = {
 			vim.cmd('term')
 			vim.cmd('normal! i')
 		end,
+		hl = 'TabManagementTerminals',
 	},
 	http = {
 		spawn_tab = function()
@@ -25,11 +27,13 @@ local tabs = {
 			vim.fn.mkdir(dir, "p")
 			vim.cmd("edit " .. vim.fn.fnameescape(dir .. "/main.http"))
 		end,
+		hl = 'TabManagementHttp',
 	},
 	diffview_origin_master = {
 		spawn_tab = function() 
 			vim.cmd('DiffviewOpen origin/master... --imply-local')
 		end,
+		hl = 'TabManagementDiffviewOriginMaster',
 	},
 }
 
@@ -50,6 +54,18 @@ end)
 vim.keymap.set({ 'n', }, '<leader>G', function()
 	M.toggle_tab('diffview_origin_master')
 end)
+
+local function set_tab_color(hl)
+	hl = hl or 'TabManagementDefault'
+	function get_hex(group, attribute)
+		local hl = vim.api.nvim_get_hl(0, { name = group })
+		local color = hl[attribute]
+		if not color then return nil end
+		return string.format("#%06x", color)
+	end
+	vim.g.neovide_title_background_color = get_hex(hl, 'bg') or "#171513"
+	vim.g.neovide_title_text_color = get_hex(hl, 'fg') or "#171513"
+end
 
 local function tab_name(tab_number)
 	local ok, name = pcall(vim.api.nvim_tabpage_get_var, tab_number, "tab_name")
@@ -72,16 +88,19 @@ function M.toggle_tab(name)
 		name = previous_tab
 	end
 
+	-- Spawn tab if not exists.
+	local tab = tabs[name] or {}
+
 	local target = find_tabpage(name)
 	if target then
 		vim.api.nvim_set_current_tabpage(target)
+		set_tab_color(tab.hl)
 		return
 	end
 
-	-- Spawn tab if not exists.
-	local tab = tabs[name] or {}
 	if tab.spawn_tab then
 		tab.spawn_tab()
+		set_tab_color(tab.hl)
 	end
 	vim.api.nvim_tabpage_set_var(vim.api.nvim_get_current_tabpage(), "tab_name", name)
 end

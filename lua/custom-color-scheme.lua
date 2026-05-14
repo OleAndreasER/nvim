@@ -159,6 +159,27 @@ function M.colorscheme()
 	set('DiffChange', { bg = colors.cyan_dark });
 	set('DiffText', { bg = colors.cyan });
 
+	set('TabManagementDefault', {
+		fg = colors.floating_window,
+		bg = colors.floating_window,
+	});
+	set('TabManagementDiffview', {
+		fg = colors.cyan,
+		bg = colors.cyan,
+	});
+	set('TabManagementDiffviewOriginMaster', {
+		fg = colors.cyan_dark,
+		bg = colors.cyan_dark,
+	});
+	set('TabManagementTerminals', {
+		fg = colors.keyword,
+		bg = colors.keyword,
+	});
+	set('TabManagementHttp', {
+		fg = colors.func,
+		bg = colors.func,
+	});
+
 	-- Terminal
 	vim.g.terminal_color_0  = '#1A1816'
 	vim.g.terminal_color_1  = colors.error
