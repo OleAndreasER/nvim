@@ -94,15 +94,14 @@ function M.toggle_tab(name)
 	local target = find_tabpage(name)
 	if target then
 		vim.api.nvim_set_current_tabpage(target)
-		set_tab_color(tab.hl)
 		return
 	end
 
 	if tab.spawn_tab then
 		tab.spawn_tab()
-		set_tab_color(tab.hl)
 	end
 	vim.api.nvim_tabpage_set_var(vim.api.nvim_get_current_tabpage(), "tab_name", name)
+	set_tab_color(tab.hl)
 end
 
 -- Tag the initial tab as "main"
@@ -121,6 +120,18 @@ vim.api.nvim_create_autocmd("TabLeave", {
 		local name = tab_name(vim.api.nvim_get_current_tabpage())
 		if name then previous_tab = name end
 	end,
+})
+
+vim.api.nvim_create_autocmd("TabEnter", {
+  callback = function()
+		local name = tab_name(vim.api.nvim_get_current_tabpage())
+		if name then
+			local tab = tabs[name] or {}
+			set_tab_color(tab.hl)
+		else
+			set_tab_color(nil)
+		end
+  end,
 })
 
 return M
