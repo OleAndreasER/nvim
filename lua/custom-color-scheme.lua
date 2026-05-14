@@ -15,7 +15,7 @@ local colors = {
 	light_keyword = '#6285A6',
 	string = '#86B3D1',
 
-	comment = '#484848',
+	comment = '#585858',
 
 	search = '#4A3F5F',
 	current_search = '#62567A',
@@ -200,8 +200,8 @@ function M.colorscheme()
 
 end
 
--- M.colorscheme()
--- vim.diagnostic.disable()
--- vim.keymap.set('n', '<leader>l', ':lua Snacks.picker.highlights()<cr>')
+M.colorscheme()
+vim.diagnostic.disable()
+vim.keymap.set('n', '<leader>l', ':lua Snacks.picker.highlights()<cr>')
 
 return M
