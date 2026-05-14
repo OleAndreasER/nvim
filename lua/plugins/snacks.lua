@@ -172,22 +172,10 @@ vim.keymap.set({'n'}, '<leader>s', function()
 		hidden = true,
 		ignored = true,
 		exclude = exclude,
-	})
-end)
-
-vim.keymap.set({'n'}, '<leader>t', function()
-	Snacks.picker.grep({
-		layout = "ivy_split",
-		finder = "grep",
-		regex = false,
-		format = "file",
-		show_empty = true,
-		live = true,
-		supports_live = true,
-		hidden = true,
-		ignored = true,
-		exclude = exclude,
-		ft = "ts",
+		confirm = function(picker)
+			require('tab-management').set_tab('main')
+			picker:action('jump')
+		end,
 	})
 end)
 
@@ -202,6 +190,10 @@ vim.keymap.set({'n'}, '<leader>f', function()
 		follow = false,
 		supports_live = true,
 		exclude = exclude,
+		confirm = function(picker)
+			require('tab-management').set_tab('main')
+			picker:action('jump')
+		end,
 	})
 end)
 
@@ -221,14 +213,14 @@ vim.keymap.set({'n'}, '<leader><space>', function()
 	Snacks.picker.resume()
 end)
 
-vim.keymap.set({'n'}, '<leader><space>', function()
-	Snacks.picker.resume()
-end)
-
 vim.keymap.set({'n'}, '<leader>d', function()
 	Snacks.picker.lsp_definitions({
 		focus = "list",
 		layout = "ivy_split",
+		confirm = function(picker)
+			require('tab-management').set_tab('main')
+			picker:action('jump')
+		end,
 	})
 end)
 
@@ -236,5 +228,9 @@ vim.keymap.set({'n'}, '<leader>r', function()
 	Snacks.picker.lsp_references({
 		focus = "list",
 		layout = "ivy_split",
+		confirm = function(picker)
+			require('tab-management').set_tab('main')
+			picker:action('jump')
+		end,
 	})
 end)

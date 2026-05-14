@@ -78,18 +78,9 @@ local function find_tabpage(name)
 	end
 end
 
-function M.toggle_tab(name)
+function M.set_tab(name)
 	local current_tab_name = tab_name(vim.api.nvim_get_current_tabpage())
-
-	-- If already on the tab, go to previous tab.
-	if current_tab_name == name then
-		if not previous_tab then return end
-		if previous_tab == name then return end
-		name = previous_tab
-	end
-
-	-- Spawn tab if not exists.
-	local tab = tabs[name] or {}
+	if current_tab_name == name then return end
 
 	local target = find_tabpage(name)
 	if target then
@@ -97,11 +88,26 @@ function M.toggle_tab(name)
 		return
 	end
 
+	-- Spawn tab if not exists.
+	local tab = tabs[name] or {}
 	if tab.spawn_tab then
 		tab.spawn_tab()
 	end
 	vim.api.nvim_tabpage_set_var(vim.api.nvim_get_current_tabpage(), "tab_name", name)
 	set_tab_color(tab.hl)
+end
+
+function M.toggle_tab(name)
+	local current_tab_name = tab_name(vim.api.nvim_get_current_tabpage())
+
+	-- If already on the tab, use previous tab.
+	if current_tab_name == name then
+		if not previous_tab then return end
+		if previous_tab == name then return end
+		name = previous_tab
+	end
+
+	M.set_tab(name)
 end
 
 -- Tag the initial tab as "main"
