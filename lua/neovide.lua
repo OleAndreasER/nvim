@@ -14,18 +14,4 @@ if vim.g.neovide then
 
 	vim.g.neovide_title_background_color = "#171513"
 	vim.g.neovide_title_text_color = "#171513"
-
-	-- Silly transparent toggle
-	local is_transparent = false
-	vim.keymap.set("n", "<leader>o", function ()
-		is_transparent = not is_transparent
-		if is_transparent then
-			vim.g.neovide_opacity = 1
-			vim.g.neovide_normal_opacity = 1
-		else 
-			vim.g.neovide_opacity = 0.6
-			vim.g.neovide_normal_opacity = 0.6
-		end
-	end)
-
 end
