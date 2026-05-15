@@ -69,7 +69,7 @@ function M.colorscheme()
 	set('Search', { bg = colors.search })
 	set('CurSearch', { bg = colors.current_search })
 
-    set('NormalFloat', { bg = colors.floating_window });
+    set('NormalFloat', { link = 'Normal' });
     set('FloatBorder', { link = 'WinSeparator' });
 
     set('@tag', { link = 'Statement' });
@@ -201,7 +201,7 @@ function M.colorscheme()
 
 end
 
-M.colorscheme()
-vim.keymap.set('n', '<leader>o', ':lua Snacks.picker.highlights()<cr>')
+-- M.colorscheme()
+-- vim.keymap.set('n', '<leader>o', ':lua Snacks.picker.highlights()<cr>')
 
 return M
