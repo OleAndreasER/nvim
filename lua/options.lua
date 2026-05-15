@@ -83,6 +83,8 @@ vim.keymap.set('t', '<esc>', "<C-\\><C-n>", { silent = true })
 -- Ctrl-V paste
 vim.keymap.set('i' , '<C-m>', '<C-r>+')
 vim.keymap.set("c", '<C-m>', '<C-r>+')
+-- Delete word insert mode
+vim.keymap.set({'i','c'} , '<C-BS>', '<C-w>')
 
 
 --

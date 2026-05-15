@@ -160,7 +160,8 @@ require('snacks').setup({
 	},
 })
 
-vim.keymap.set({'n'}, '<leader>s', function()
+-- Temp fallback. Replaced by FFF
+vim.keymap.set({'n'}, '<leader>S', function()
 	Snacks.picker.grep({
 		layout = "ivy_split",
 		finder = "grep",
@@ -179,7 +180,8 @@ vim.keymap.set({'n'}, '<leader>s', function()
 	})
 end)
 
-vim.keymap.set({'n'}, '<leader>f', function()
+-- Temp fallback. Replaced by FFF
+vim.keymap.set({'n'}, '<leader>F', function()
 	Snacks.picker.files({
 		layout = "dropdown_main_preview",
 		finder = "files",
@@ -234,3 +236,4 @@ vim.keymap.set({'n'}, '<leader>r', function()
 		end,
 	})
 end)
+
