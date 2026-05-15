@@ -26,14 +26,14 @@ require('fff').setup({
 local original_select = require('fff.picker_ui').select
 require('fff.picker_ui').select = function(input)
 	require('tab-management').set_tab('main')
-	original_select(input)
+	return original_select(input)
 end
 
 vim.keymap.set('n', '<leader>f', function()
 	require('fff').find_files({ 
 		layout = {
 			height = 1,
-			width = 0.80,
+			width = 0.76,
 			prompt_position = 'bottom',
 			preview_position = 'bottom',
 			preview_size = 0.7,
@@ -48,7 +48,7 @@ vim.keymap.set('n', '<leader>s', function()
 	require('fff').live_grep({
 		layout = {
 			height = 1,
-			width = 0.80,
+			width = 0.76,
 			prompt_position = 'top',
 			preview_position = 'top',
 			preview_size = 0.5,
