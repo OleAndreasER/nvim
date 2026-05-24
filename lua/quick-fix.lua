@@ -182,6 +182,34 @@ function M.setup()
 	vim.keymap.set({ "n" }, "dq", "<cmd>QfClear<cr>")
 	vim.keymap.set({ "n" }, "m", '<cmd>QfAddCursor<cr>' )
 	vim.keymap.set({ "n" }, "<leader>/", "<cmd>QfAddFromSearch<cr>")
+
+	-- Current word grep to quickfix
+	vim.keymap.set("n", "<c-f>", function()
+		local word = vim.fn.expand("<cword>")
+		vim.cmd("silent vimgrep /\\V" .. vim.fn.escape(word, "/\\") .. "/gj **/*")
+		vim.fn.setqflist({}, "r", {
+			title = word or 'Grep',
+		})
+		require('quick-fix').go_to_initial_entry()
+	end)
+	-- Grep visual (current line only)
+	vim.keymap.set('x', '<c-f>', function()
+		local start_col = vim.fn.col("v")
+		local end_col = vim.fn.col(".")
+		if start_col > end_col then
+			start_col, end_col = end_col, start_col
+		end
+		local text = vim.fn.getline("."):sub(start_col, end_col)
+
+		-- Exit visual mode
+		vim.api.nvim_feedkeys( vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", false)
+
+		vim.cmd("silent vimgrep /\\V" .. vim.fn.escape(text, "/\\") .. "/gj **/*")
+		vim.fn.setqflist({}, "r", {
+			title = text or 'Grep',
+		})
+		require('quick-fix').go_to_initial_entry()
+	end)
 end
 
 return M

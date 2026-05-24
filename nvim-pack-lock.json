@@ -32,6 +32,14 @@
       "rev": "c642487086dbd9a93160e1679a1327be111cbc25",
       "src": "https://github.com/hrsh7th/cmp-path"
     },
+    "delta.lua": {
+      "rev": "840fb6c9e5bf957915ddbeafffa4c0f839f1f8c2",
+      "src": "https://github.com/kokusenz/delta.lua"
+    },
+    "deltaview.nvim": {
+      "rev": "8940ac8340987ca4efafd386521c2c21b3ca79ae",
+      "src": "https://github.com/kokusenz/deltaview.nvim"
+    },
     "diffview.nvim": {
       "rev": "0d11b19f2ce0141d6d67b3f64ac99079068b5b9a",
       "src": "https://github.com/dlyongemallo/diffview.nvim"

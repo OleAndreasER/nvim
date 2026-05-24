@@ -160,59 +160,8 @@ require('snacks').setup({
 	},
 })
 
--- Temp fallback. Replaced by FFF
-vim.keymap.set({'n'}, '<leader>S', function()
-	Snacks.picker.grep({
-		layout = "ivy_split",
-		finder = "grep",
-		regex = false,
-		format = "file",
-		show_empty = true,
-		live = true,
-		supports_live = true,
-		hidden = true,
-		ignored = true,
-		exclude = exclude,
-		confirm = function(picker)
-			require('tab-management').set_tab('main')
-			picker:action('jump')
-		end,
-	})
-end)
-
--- Temp fallback. Replaced by FFF
-vim.keymap.set({'n'}, '<leader>F', function()
-	Snacks.picker.files({
-		layout = "dropdown_main_preview",
-		finder = "files",
-		format = "file",
-		show_empty = true,
-		hidden = true,
-		ignored = true,
-		follow = false,
-		supports_live = true,
-		exclude = exclude,
-		confirm = function(picker)
-			require('tab-management').set_tab('main')
-			picker:action('jump')
-		end,
-	})
-end)
-
-vim.keymap.set({'n'}, '<leader>b', function()
-	vim.cmd("silent! G fetch")
-	Snacks.picker.git_branches({
-		layout = "full_screen_preview",
-		all = false,
-	})
-end)
-
-vim.keymap.set({'n'}, '<leader>h', function()
+vim.keymap.set({'n'}, '<leader>H', function()
 	Snacks.picker.help()
-end)
-
-vim.keymap.set({'n'}, '<leader><space>', function()
-	Snacks.picker.resume()
 end)
 
 vim.keymap.set({'n'}, '<leader>d', function()

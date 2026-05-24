@@ -151,3 +151,20 @@ vim.keymap.set('n', '<leader>s', function()
 		}
 	}) 
 end)
+-- Grep current word
+vim.keymap.set('n', '<leader>S', function()
+	require('fff').live_grep({
+		query = vim.fn.expand("<cword>"),
+		layout = {
+			height = 1,
+			width = 0.76,
+			prompt_position = 'top',
+			preview_position = 'top',
+			preview_size = 0.5,
+			flex = { size = 130, wrap = 'top' },
+			show_scrollbar = false,
+			path_shorten_strategy = 'middle_number',
+			anchor = 'top',
+		}
+	}) 
+end)
