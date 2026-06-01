@@ -3,4 +3,4 @@ vim.pack.add({ "https://github.com/smjonas/inc-rename.nvim" })
 
 require("inc_rename").setup({})
 
-vim.keymap.set("n", "<leader>rn", ":IncRename ")
+vim.keymap.set("n", "grn", ":IncRename ")

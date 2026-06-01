@@ -222,9 +222,30 @@ local function flash_highlight(row, start_col, end_col)
 		end_col = end_col,
 		hl_group = "IncSearch",
 	})
+	vim.cmd('redraw')
+
 	vim.defer_fn(function()
 		vim.api.nvim_buf_clear_namespace(bufnr, flash_ns, 0, -1)
 	end, 80)
+end
+
+-- Briefly highlight cword
+local function flash_cword()
+	local word = vim.fn.expand("<cword>")
+	if word == "" then return end
+	local cursor = vim.api.nvim_win_get_cursor(0)
+	local row, col = cursor[1] - 1, cursor[2]
+	local line = vim.api.nvim_get_current_line()
+	local from = 1
+	while true do
+		local s, e = line:find(word, from, true)
+		if not s then break end
+		if (s - 1) <= col and col < e then
+			flash_highlight(row, s - 1, e)
+			break
+		end
+		from = e + 1
+	end
 end
 
 local function on_lsp_list_response(jump_when_single)
@@ -239,8 +260,6 @@ local function on_lsp_list_response(jump_when_single)
 		if jump_when_single and #options.items == 1 then
 			-- Single-result jump
 			local item = options.items[1]
-
-			vim.cmd.edit(item.filename)
 
 			local target = vim.fn.fnamemodify(item.filename, ':p')
 			local current = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ':p')
@@ -303,23 +322,8 @@ function M.setup()
 
 	vim.keymap.set("n", "<c-f>", function()
 		local word = vim.fn.expand("<cword>")
-
-		-- Flash cword
 		if word == "" then return end
-		local cursor = vim.api.nvim_win_get_cursor(0)
-		local row, col = cursor[1] - 1, cursor[2]
-		local line = vim.api.nvim_get_current_line()
-		local from = 1
-		while true do
-			local s, e = line:find(word, from, true)
-			if not s then break end
-			if (s - 1) <= col and col < e then
-				flash_highlight(row, s - 1, e)
-				break
-			end
-			from = e + 1
-		end
-
+		flash_cword()
 		grep_to_quickfix(word)
 	end)
 	-- Grep visual (current line only)
@@ -347,6 +351,7 @@ function M.setup()
 	end)
 
 	vim.keymap.set({'n'}, '<leader>r', function()
+		flash_cword()
 		M.add_lsp_references_to_quickfix()
 	end)
 end
