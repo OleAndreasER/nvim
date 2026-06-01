@@ -55,10 +55,9 @@ function M.navigate(offset)
 end
 
 -- Clear quickfix and remove from display.
-function M.clear()
-	if #vim.fn.getqflist() == 0 then return end
+function M.clear(title_override)
 	vim.cmd('silent! cexpr []')
-	M.update_displays('') -- Empty title makes display go away
+	M.update_displays(title_override or '') -- Empty title makes display go away
 end
 
 -- Remove entries in `bufnr` and go to an entry before the removed entries entries.
@@ -172,11 +171,13 @@ local rg_excludes = {
 	"!**/pnpm-lock.yaml",
 	"!**/yarn.lock",
 }
+local currently_grepping = false -- Only allow one search at a time.
 local function grep_to_quickfix(term)
+	if currently_grepping then return end
 	if term == nil or term == "" then return end
 
-	-- Responsiveness
-	M.clear()
+	-- Loading indicator
+	M.clear('[...] '..term)
 
 	local cmd = { "rg", "-uu", "--vimgrep", "--case-sensitive", "--color=never", "--fixed-strings" }
 	for _, glob in ipairs(rg_excludes) do
@@ -187,7 +188,9 @@ local function grep_to_quickfix(term)
 	table.insert(cmd, term)
 
 	-- Async grep
-	vim.system(cmd, { text = true }, function(result)
+	currently_grepping = true
+	local ok = pcall(vim.system, cmd, { text = true }, function(result)
+		currently_grepping = false
 		local lines = vim.split(result.stdout or "", "\n", { trimempty = true })
 		vim.schedule(function()
 			vim.fn.setqflist({}, "r", {
@@ -198,6 +201,10 @@ local function grep_to_quickfix(term)
 			M.update_displays()
 		end)
 	end)
+	if not ok then
+		currently_grepping = false
+		M.clear('rg failed: is it installed?')
+	end
 end
 
 -- Briefly highlight chars [start_col, end_col) on row
@@ -217,7 +224,7 @@ local function flash_highlight(row, start_col, end_col)
 	})
 	vim.defer_fn(function()
 		vim.api.nvim_buf_clear_namespace(bufnr, flash_ns, 0, -1)
-	end, 250)
+	end, 80)
 end
 
 function M.setup()
@@ -254,7 +261,7 @@ function M.setup()
 		local word = vim.fn.expand("<cword>")
 
 		-- Flash cword
-		if word == "" then return word end
+		if word == "" then return end
 		local cursor = vim.api.nvim_win_get_cursor(0)
 		local row, col = cursor[1] - 1, cursor[2]
 		local line = vim.api.nvim_get_current_line()
