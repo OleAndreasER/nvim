@@ -260,7 +260,7 @@ function M.setup()
 		local line = vim.api.nvim_get_current_line()
 		local from = 1
 		while true do
-			local s, e = line:find(word, from, true) -- plain (literal) find
+			local s, e = line:find(word, from, true)
 			if not s then break end
 			if (s - 1) <= col and col < e then
 				flash_highlight(row, s - 1, e)
@@ -281,11 +281,11 @@ function M.setup()
 		local row = vim.api.nvim_win_get_cursor(0)[1] - 1
 		local text = vim.fn.getline("."):sub(start_col, end_col)
 
-		-- Exit visual mode
-		vim.api.nvim_feedkeys( vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", false)
-
 		-- Flash selection
 		flash_highlight(row, start_col - 1, end_col)
+
+		-- Exit visual mode
+		vim.api.nvim_feedkeys( vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", false)
 
 		grep_to_quickfix(text)
 	end)
