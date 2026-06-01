@@ -155,6 +155,71 @@ function M.add_cursor_to_quickfix()
 	M.update_displays()
 end
 
+local rg_excludes = {
+	"!**/node_modules/**",
+	"!**/dist/**",
+	"!**/build/**",
+	"!**/target/**",
+	"!**/.next/**",
+	"!**/.vite/**",
+	"!**/.git/**",
+	"!**/.yarn/**",
+	"!**/.gitlab/**",
+	"!**/.pnpm-store/**",
+	"!**/translations.json",
+	"!**/reports/*.html",
+	"!**/package-lock.json",
+	"!**/pnpm-lock.yaml",
+	"!**/yarn.lock",
+}
+local function grep_to_quickfix(term)
+	if term == nil or term == "" then return end
+
+	-- Responsiveness
+	M.clear()
+
+	local cmd = { "rg", "-uu", "--vimgrep", "--case-sensitive", "--color=never", "--fixed-strings" }
+	for _, glob in ipairs(rg_excludes) do
+		table.insert(cmd, "--glob")
+		table.insert(cmd, glob)
+	end
+	table.insert(cmd, "--")
+	table.insert(cmd, term)
+
+	-- Async grep
+	vim.system(cmd, { text = true }, function(result)
+		local lines = vim.split(result.stdout or "", "\n", { trimempty = true })
+		vim.schedule(function()
+			vim.fn.setqflist({}, "r", {
+				title = term,
+				lines = lines,
+				efm = "%f:%l:%c:%m",
+			})
+			M.update_displays()
+		end)
+	end)
+end
+
+-- Briefly highlight chars [start_col, end_col) on row
+local flash_ns = vim.api.nvim_create_namespace("qf_flash")
+local function flash_highlight(row, start_col, end_col)
+	local bufnr = vim.api.nvim_get_current_buf()
+	local line = vim.api.nvim_buf_get_lines(bufnr, row, row + 1, false)[1]
+	if line == nil then return end
+	start_col = math.max(start_col, 0)
+	end_col = math.min(end_col, #line)
+	if end_col <= start_col then return end
+
+	vim.api.nvim_buf_set_extmark(bufnr, flash_ns, row, start_col, {
+		end_row = row,
+		end_col = end_col,
+		hl_group = "IncSearch",
+	})
+	vim.defer_fn(function()
+		vim.api.nvim_buf_clear_namespace(bufnr, flash_ns, 0, -1)
+	end, 250)
+end
+
 function M.setup()
 
 	vim.api.nvim_create_user_command('QfNext', function(opts)
@@ -184,13 +249,27 @@ function M.setup()
 	vim.keymap.set({ "n" }, "<leader>/", "<cmd>QfAddFromSearch<cr>")
 
 	-- Current word grep to quickfix
+
 	vim.keymap.set("n", "<c-f>", function()
 		local word = vim.fn.expand("<cword>")
-		vim.cmd("silent vimgrep /\\V" .. vim.fn.escape(word, "/\\") .. "/gj **/*")
-		vim.fn.setqflist({}, "r", {
-			title = word or 'Grep',
-		})
-		require('quick-fix').go_to_initial_entry()
+
+		-- Flash cword
+		if word == "" then return word end
+		local cursor = vim.api.nvim_win_get_cursor(0)
+		local row, col = cursor[1] - 1, cursor[2]
+		local line = vim.api.nvim_get_current_line()
+		local from = 1
+		while true do
+			local s, e = line:find(word, from, true) -- plain (literal) find
+			if not s then break end
+			if (s - 1) <= col and col < e then
+				flash_highlight(row, s - 1, e)
+				break
+			end
+			from = e + 1
+		end
+
+		grep_to_quickfix(word)
 	end)
 	-- Grep visual (current line only)
 	vim.keymap.set('x', '<c-f>', function()
@@ -199,16 +278,16 @@ function M.setup()
 		if start_col > end_col then
 			start_col, end_col = end_col, start_col
 		end
+		local row = vim.api.nvim_win_get_cursor(0)[1] - 1
 		local text = vim.fn.getline("."):sub(start_col, end_col)
 
 		-- Exit visual mode
 		vim.api.nvim_feedkeys( vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", false)
 
-		vim.cmd("silent vimgrep /\\V" .. vim.fn.escape(text, "/\\") .. "/gj **/*")
-		vim.fn.setqflist({}, "r", {
-			title = text or 'Grep',
-		})
-		require('quick-fix').go_to_initial_entry()
+		-- Flash selection
+		flash_highlight(row, start_col - 1, end_col)
+
+		grep_to_quickfix(text)
 	end)
 end
 
