@@ -3,8 +3,8 @@ vim.pack.add({ "https://github.com/chrisgrieser/nvim-recorder" })
 
 require("recorder").setup({
 	mapping = {
-		startStopRecording = "q",
-		playMacro = "Q",
+		startStopRecording = [[']],
+		playMacro = [["]],
 		switchSlot = nil,
 		editMacro = "cq",
 		deleteAllMacros = "<leader>Dq",
