@@ -227,6 +227,50 @@ local function flash_highlight(row, start_col, end_col)
 	end, 80)
 end
 
+local function on_lsp_list_response(jump_when_single)
+	return function(options)
+		if not options or #options.items == 0 then 
+			vim.notify('No results')
+			return
+		end
+
+		require('tab-management').set_tab('main')
+
+		if jump_when_single and #options.items == 1 then
+			-- Single-result jump
+			local item = options.items[1]
+
+			vim.cmd.edit(item.filename)
+
+			local target = vim.fn.fnamemodify(item.filename, ':p')
+			local current = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ':p')
+
+			if target ~= current then
+				vim.cmd.edit(item.filename)
+			end
+
+			vim.fn.setcursorcharpos(item.lnum, item.col)
+			vim.cmd('normal! zz')
+			return
+		else
+			-- Multi-result quickfix
+			vim.fn.setqflist({}, 'r', {
+				title = options.title,
+				items = options.items,
+			})
+			M.update_displays()
+		end
+	end
+end
+
+function M.go_to_lsp_definitions()
+	vim.lsp.buf.definition({ on_list = on_lsp_list_response(true) })
+end
+
+function M.add_lsp_references_to_quickfix()
+	vim.lsp.buf.references(nil, { on_list = on_lsp_list_response(false) })
+end
+
 function M.setup()
 
 	vim.api.nvim_create_user_command('QfNext', function(opts)
@@ -295,6 +339,15 @@ function M.setup()
 		vim.api.nvim_feedkeys( vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", false)
 
 		grep_to_quickfix(text)
+	end)
+
+
+	vim.keymap.set({'n'}, '<leader>d', function()
+		M.go_to_lsp_definitions()
+	end)
+
+	vim.keymap.set({'n'}, '<leader>r', function()
+		M.add_lsp_references_to_quickfix()
 	end)
 end
 
