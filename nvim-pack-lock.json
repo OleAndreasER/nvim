@@ -56,10 +56,6 @@
       "rev": "6d808f99bd63303646794406e270bd553ad7792e",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
-    "inc-rename.nvim": {
-      "rev": "0074b551a17338ccdcd299bd86687cc651bcb33d",
-      "src": "https://github.com/smjonas/inc-rename.nvim"
-    },
     "kulala.nvim": {
       "rev": "6656c9d332735ca6a27725e0fb45a1715c4372d9",
       "src": "https://github.com/mistweaverco/kulala.nvim"

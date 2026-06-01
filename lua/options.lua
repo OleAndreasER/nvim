@@ -85,7 +85,10 @@ vim.keymap.set('i' , '<C-m>', '<C-r>+')
 vim.keymap.set("c", '<C-m>', '<C-r>+')
 -- Delete word insert mode
 vim.keymap.set({'i','c'} , '<C-BS>', '<C-w>')
-
+-- Rename
+vim.keymap.set("n", "grn", function()
+	vim.lsp.buf.rename()
+end)
 
 --
 -- Diagnostics
