@@ -20,6 +20,8 @@ local colors = {
 	search = '#4A3F5F',
 	current_search = '#62567A',
 
+	qf_line = "#1E1C1A",
+
 	visual = "#34302C",
 
 	-- diagnostics
@@ -140,7 +142,7 @@ function M.colorscheme()
     set('SnacksPicker', { bg = colors.floating_window });
 
     set('DiagnosticUnderlineError', { undercurl = true, sp = colors.error });
-    set('DiagnosticUnderlineWarn', {  undercurl = true, sp = colors.warn });
+    set('DiagnosticUnderlineWarn', { undercurl = true, sp = colors.warn });
     set('DiagnosticUnderlineInfo', { });
     set('DiagnosticUnderlineHint', { });
     set('DiagnosticUnderlineOk', { });
@@ -155,6 +157,9 @@ function M.colorscheme()
 	set('MiniIconsGreen', { fg = colors.type });
 	set('MiniIconsPurple', { fg = colors.current_search });
 	set('MiniIconsBlue', { fg = colors.keyword });
+
+	set('QuickfixLine', { bg = colors.qf_line, });
+	set('QuickfixCol', { underline = true, });
 
 	set('DiffAdd', { bg = colors.green_dark });
 	set('DiffChange', { bg = colors.cyan_dark });

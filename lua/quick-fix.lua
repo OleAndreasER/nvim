@@ -1,34 +1,41 @@
 local M = {}
 
--- Signs
-vim.api.nvim_create_namespace("qf_signs")
-vim.fn.sign_define("QFSign", {
-  text = "-",
-  texthl = "Normal",
-})
-local function update_signs()
-	-- clear existing signs
-	vim.fn.sign_unplace("qf_signs")
+
+vim.api.nvim_set_hl(0, "QuickfixLine", { link = "Normal", default = true })
+vim.api.nvim_set_hl(0, "QuickfixCol", { underline = true, default = true })
+local qf_hl_ns = vim.api.nvim_create_namespace("qf_highlights")
+local function update_highlights()
+	-- clear existing highlights from every loaded buffer
+	for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+		if vim.api.nvim_buf_is_loaded(bufnr) then
+			vim.api.nvim_buf_clear_namespace(bufnr, qf_hl_ns, 0, -1)
+		end
+	end
 
 	local qf = vim.fn.getqflist()
 	if #qf == 0 then return end
 
-	for i, item in ipairs(qf) do
-		if item.bufnr and item.lnum then
-			vim.fn.sign_place(
-				i,                 -- unique id
-				"qf_signs",        -- group
-				"QFSign",          -- sign name
-				item.bufnr,
-				{ lnum = item.lnum, priority = 10 }
-			)
+	for _, item in ipairs(qf) do
+		if item.bufnr ~= 0 and item.lnum > 0 and vim.api.nvim_buf_is_loaded(item.bufnr) then
+			-- Whole-line background
+			vim.api.nvim_buf_set_extmark(item.bufnr, qf_hl_ns, item.lnum - 1, 0, {
+				line_hl_group = "QuickfixLine",
+			})
+			-- Underline on column
+			if item.col > 0 then
+				vim.api.nvim_buf_set_extmark(item.bufnr, qf_hl_ns, item.lnum - 1, item.col - 1, {
+					end_col = item.col,
+					hl_group = "QuickfixCol",
+					strict = false,
+				})
+			end
 		end
 	end
 end
 
 function M.update_displays(title_override)
 	update_quickfix_display(title_override)
-	update_signs()
+	update_highlights()
 end
 
 -- Navigate by offset. 
@@ -136,6 +143,7 @@ function M.add_search_to_quickfix()
 		title = "Quickfix",
 	})
 	M.update_displays()
+	vim.cmd('noh')
 end
 
 function M.add_cursor_to_quickfix()
