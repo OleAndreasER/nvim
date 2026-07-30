@@ -1,6 +1,5 @@
 require("options")
 require('quick-fix').setup()
-require('cursor-cmd').setup()
 require("neovide")
 require("tab-management")
 
