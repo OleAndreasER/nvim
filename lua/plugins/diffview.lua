@@ -109,8 +109,8 @@ require("diffview").setup({
 		view = {
 			-- The `view` bindings are active in the diff buffers, only when the current
 			-- tabpage is a Diffview.
-			{ "n", "<tab>",       actions.select_next_entry,              { desc = "Open the diff for the next file" } },
-			{ "n", "<s-tab>",     actions.select_prev_entry,              { desc = "Open the diff for the previous file" } },
+			{ "n", "<C-g>",       actions.select_next_entry,              { desc = "Open the diff for the next file" } },
+			{ "n", "<C-e>",     actions.select_prev_entry,              { desc = "Open the diff for the previous file" } },
 			["[F"] = false,
 			["]F"] = false,
 			["gf"] = false,
@@ -183,8 +183,8 @@ require("diffview").setup({
 			["zM"] = false,
 			["<c-b>"] = false,
 			["<c-f>"] = false,
-			{ "n", "<tab>",          actions.select_next_entry,              { desc = "Open the diff for the next file" } },
-			{ "n", "<s-tab>",        actions.select_prev_entry,              { desc = "Open the diff for the previous file" } },
+			{ "n", "<C-g>",          actions.select_next_entry,              { desc = "Open the diff for the next file" } },
+			{ "n", "<C-e>",        actions.select_prev_entry,              { desc = "Open the diff for the previous file" } },
 			["[F"] = false,
 			["]F"] = false,
 			["gf"] = false,
@@ -193,7 +193,10 @@ require("diffview").setup({
 			["i"] = false,
 			["f"] = false,
 			{ "n", "R",              actions.refresh_files,                  { desc = "Update stats and entries in the file list" } },
-			{ "n", "<leader>e",      actions.focus_files,                    { desc = "Bring focus to the file panel" } },
+			{ "n", "<leader>e", function() 
+				vim.cmd('norm ø')
+				vim.cmd('norm ø')
+			end, { desc = "" } },
 			["<leader>b"] = false,
 			["g<C-x>"] = false,
 			["[x"] = false,
@@ -227,8 +230,8 @@ require("diffview").setup({
 			{ "n", "<2-LeftMouse>", actions.select_entry,                { desc = "Open the diff for the selected entry" } },
 			{ "n", "<c-b>",         actions.scroll_view(-0.25),          { desc = "Scroll the view up" } },
 			{ "n", "<c-f>",         actions.scroll_view(0.25),           { desc = "Scroll the view down" } },
-			{ "n", "<tab>",         actions.select_next_entry,           { desc = "Open the diff for the next file" } },
-			{ "n", "<s-tab>",       actions.select_prev_entry,           { desc = "Open the diff for the previous file" } },
+			{ "n", "<C-g>",         actions.select_next_entry,           { desc = "Open the diff for the next file" } },
+			{ "n", "<C-e>",       actions.select_prev_entry,           { desc = "Open the diff for the previous file" } },
 			{ "n", "[F",            actions.select_first_entry,          { desc = "Open the diff for the first file" } },
 			{ "n", "]F",            actions.select_last_entry,           { desc = "Open the diff for the last file" } },
 			{ "n", "gf",            goto_file,                           { desc = "" } },
@@ -240,7 +243,7 @@ require("diffview").setup({
 			{ "n", "g?",            actions.help("file_history_panel"),  { desc = "Open the help panel" } },
 		},
 		option_panel = {
-			{ "n", "<tab>", actions.select_entry,          { desc = "Change the current option" } },
+			{ "n", "<C-g>", actions.select_entry,          { desc = "Change the current option" } },
 			{ "n", "q",     actions.close,                 { desc = "Close the panel" } },
 			{ "n", "g?",    actions.help("option_panel"),  { desc = "Open the help panel" } },
 		},
