@@ -22,6 +22,13 @@ vim.opt.cmdheight = 0
 vim.opt.laststatus = 0
 vim.opt.showtabline = 0
 require('vim._core.ui2').enable({})
+-- Magic words to make terminal cursor like insert mode cursor
+vim.opt.guicursor:append({
+	"n-v-c-sm:block",
+	"i-ci-ve:ver25",
+	"r-cr-o:hor20",
+	"t:ver25-blinkon500-blinkoff500-TermCursor"
+})
 
 -- Keymaps
 --
