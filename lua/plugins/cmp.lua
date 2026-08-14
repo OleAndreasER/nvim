@@ -44,7 +44,11 @@ vim.opt.pumheight = 7
 
 require("cmp").setup({
 	snippet = {},
-	window = {},
+	window = {
+		completion = {
+			col_offset = -2, 
+		},
+	},
 	mapping = require("cmp").mapping.preset.insert({
 		["<Tab>"] = require("cmp").mapping.select_next_item({
 			behavior = require("cmp").SelectBehavior.Select,
