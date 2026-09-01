@@ -2,8 +2,37 @@ vim.pack.add({ "https://github.com/dlyongemallo/diffview.nvim" })
 
 local actions = require("diffview.actions")
 
+-- Open the file from the diffview in the "main" tab.
 local goto_file = function()
-	actions.goto_file_edit()
+	local lib = require("diffview.lib")
+	local view = lib.get_current_view()
+	if not (view and view.infer_cur_file) then return end
+
+	local file = view:infer_cur_file()
+	if not file then return end
+
+	if vim.fn.filereadable(file.absolute_path) == 0 then
+		vim.notify("File does not exist on disk: " .. file.absolute_path, vim.log.levels.ERROR)
+		return
+	end
+
+	-- Only carry over the cursor position when we're in the diff of that same file.
+	local cursor
+	if file == view.cur_entry then
+		local ok, main_win = pcall(function() return view.cur_layout:get_main_win() end)
+		if ok and main_win then
+			cursor = vim.api.nvim_win_get_cursor(main_win.id)
+		end
+	end
+
+	require("tab-management").set_tab("main")
+	file.layout:restore_winopts()
+	vim.cmd("edit " .. vim.fn.fnameescape(file.absolute_path))
+
+	if cursor then
+		pcall(vim.api.nvim_win_set_cursor, 0, cursor)
+		vim.cmd("normal! zz")
+	end
 end
 
 vim.opt.diffopt = {
