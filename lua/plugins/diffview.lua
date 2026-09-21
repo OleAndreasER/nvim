@@ -2,6 +2,18 @@ vim.pack.add({ "https://github.com/dlyongemallo/diffview.nvim" })
 
 local actions = require("diffview.actions")
 
+-- Override module function to swap current and old windows so that current is left.
+do
+	local async = require("diffview.async")
+	local Diff2Hor = require("diffview.scene.layouts.diff_2_hor").Diff2Hor
+	Diff2Hor.create = async.void(function(self, pivot)
+		async.await(self:create_wins(pivot, {
+			{ "b", "aboveleft vsp" },
+			{ "a", "aboveleft vsp" },
+		}, { "b", "a" }))
+	end)
+end
+
 -- Open the file from the diffview in the "main" tab.
 local goto_file = function()
 	local lib = require("diffview.lib")
@@ -202,7 +214,7 @@ require("diffview").setup({
 			{ "n", "<leader>l",      actions.toggle_stage_entry,             { desc = "Stage / unstage the selected entry" } },
 			{ "n", "S",              actions.stage_all,                      { desc = "Stage all entries" } },
 			{ "n", "U",              actions.unstage_all,                    { desc = "Unstage all entries" } },
-			{ "n", "X",              actions.restore_entry,                  { desc = "Restore entry to the state on the left side" } },
+			{ "n", "X",              actions.restore_entry,                  { desc = "Restore entry to the state on the right side (old version)" } },
 			["L"] = false,
 			["zo"] = false,
 			["h"] = false,
