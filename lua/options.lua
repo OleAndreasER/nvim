@@ -5,6 +5,19 @@ vim.opt.shiftwidth = tab_spaces
 vim.opt.softtabstop = tab_spaces
 vim.opt.smartindent = true
 vim.opt.autoindent = true
+-- Indent guides
+vim.opt.list = true
+vim.opt.listchars = { leadmultispace = "│" .. string.rep(" ", tab_spaces - 1), tab = "│ ", nbsp = "+" }
+-- Big files: give them their own filetype so treesitter/LSP don't attach
+vim.filetype.add({
+	pattern = {
+		[".*"] = {
+			function(path, buf)
+				return vim.bo[buf].filetype ~= "bigfile" and path and vim.fn.getfsize(path) > 1.5 * 1024 * 1024 and "bigfile" or nil
+			end,
+		},
+	},
+})
 vim.opt.number = false
 vim.opt.relativenumber = false
 vim.opt.signcolumn = "yes:1"

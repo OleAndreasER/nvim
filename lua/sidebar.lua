@@ -119,21 +119,24 @@ end
 
 update_quickfix_display()
 
-Snacks.win({
-	buf = recent_files_buffer,
-	position = "left",
-	width = 0.12,
-	enter = false,
-	stack = true,
-})
+local sidebar_width = math.floor(vim.o.columns * 0.12)
+local function setup_sidebar_win(win)
+	vim.wo[win].winfixwidth = true
+	vim.wo[win].number = false
+	vim.wo[win].relativenumber = false
+	vim.wo[win].signcolumn = "no"
+	vim.wo[win].foldcolumn = "0"
+	vim.wo[win].statuscolumn = ""
+	vim.wo[win].cursorline = false
+	vim.wo[win].list = false
+	vim.wo[win].wrap = false
+	vim.wo[win].fillchars = "eob: "
+end
 
-Snacks.win({
-	buf = qf_buffer,
-	position = "left",
-	width = 0.12,
-	enter = false,
-	stack = true,
-})
+local recent_files_win = vim.api.nvim_open_win(recent_files_buffer, false, { split = "left", win = -1, width = sidebar_width })
+setup_sidebar_win(recent_files_win)
+local qf_win = vim.api.nvim_open_win(qf_buffer, false, { split = "below", win = recent_files_win })
+setup_sidebar_win(qf_win)
 
 vim.schedule(function()
 	vim.cmd("wincmd l")

@@ -139,7 +139,6 @@ function M.colorscheme()
 
     set('lualine_transparent', { link = 'Normal' });
     set('Folded', { link = 'Normal' });
-    set('SnacksPicker', { bg = colors.floating_window });
 
     set('DiagnosticUnderlineError', { undercurl = true, sp = colors.error });
     set('DiagnosticUnderlineWarn', { undercurl = true, sp = colors.warn });
@@ -207,6 +206,5 @@ function M.colorscheme()
 end
 
 -- M.colorscheme()
--- vim.keymap.set('n', '<leader>o', ':lua Snacks.picker.highlights()<cr>')
 
 return M
