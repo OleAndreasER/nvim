@@ -42,6 +42,13 @@ require('lspkind').init({
 
 vim.opt.pumheight = 7
 
+require("cmp").setup.cmdline({ '/', '?' }, {
+	mapping = require("cmp").mapping.preset.cmdline(),
+	sources = {
+		{ name = 'buffer' }
+	}
+})
+
 require("cmp").setup({
 	snippet = {},
 	window = {
